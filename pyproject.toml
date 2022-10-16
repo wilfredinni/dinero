@@ -14,9 +14,8 @@ pytest = "^7.1.3"
 black = "^22.10.0"
 flake8 = "^5.0.4"
 mypy = "^0.982"
-
-
-[tool.poetry.group.test.dependencies]
+ipykernel = "^6.16.0"
+pandas = "^1.5.0"
 
 [build-system]
 requires = ["poetry-core"]
