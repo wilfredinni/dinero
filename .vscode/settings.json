@@ -1,0 +1,18 @@
+{
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=88"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--show-column-numbers",
+        "--allow-untyped-defs",
+        "--allow-subclassing-any",
+        "--allow-untyped-calls",
+        "--strict"
+    ]
+}
