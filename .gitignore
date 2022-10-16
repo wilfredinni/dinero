@@ -774,3 +774,4 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,pycharm,visualstudio,windows,linux,macos,osx
 example.py
+dinero/currencies/script.ipynb
