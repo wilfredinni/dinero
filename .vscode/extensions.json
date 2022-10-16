@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "usernamehw.errorlens",
+        "bungcip.better-toml",
+        "streetsidesoftware.code-spell-checker",
+        "visualstudioexptteam.vscodeintellicode",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "njqdev.vscode-python-typehint",
+        "gruntfuggly.todo-tree",
+        "shardulm94.trailing-spaces"
+    ]
+}
