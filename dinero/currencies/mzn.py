@@ -5,4 +5,5 @@ MZN: Currency = {
     "code": "MZN",
     "base": 10,
     "exponent": 2,
+    "symbol": "Mt",
 }

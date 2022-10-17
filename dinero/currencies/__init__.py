@@ -10,7 +10,6 @@ from .bbd import BBD
 from .bdt import BDT
 from .bgn import BGN
 from .bhd import BHD
-from .gbp import GBP
 from .bif import BIF
 from .bmd import BMD
 from .bnd import BND
@@ -24,8 +23,10 @@ from .che import CHE
 from .chf import CHF
 from .chw import CHW
 from .clp import CLP
+from .cny import CNY
 from .cop import COP
 from .cou import COU
+from .crc import CRC
 from .cuc import CUC
 from .cve import CVE
 from .czk import CZK
@@ -38,6 +39,7 @@ from .etb import ETB
 from .eur import EUR
 from .fjd import FJD
 from .fkp import FKP
+from .gbp import GBP
 from .gtq import GTQ
 from .hrk import HRK
 from .htg import HTG
@@ -48,6 +50,7 @@ from .iqd import IQD
 from .irr import IRR
 from .isk import ISK
 from .jmd import JMD
+from .jpy import JPY
 from .kes import KES
 from .kgs import KGS
 from .khr import KHR
@@ -236,4 +239,7 @@ __all__ = [
     "BMD",
     "PEN",
     "GBP",
+    "CNY",
+    "CRC",
+    "JPY",
 ]

@@ -5,4 +5,5 @@ PGK: Currency = {
     "code": "PGK",
     "base": 10,
     "exponent": 2,
+    "symbol": "K",
 }

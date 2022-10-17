@@ -5,4 +5,5 @@ BRL: Currency = {
     "code": "BRL",
     "base": 10,
     "exponent": 2,
+    "symbol": "R$",
 }
