@@ -10,6 +10,7 @@ from .bbd import BBD
 from .bdt import BDT
 from .bgn import BGN
 from .bhd import BHD
+from .gbp import GBP
 from .bif import BIF
 from .bmd import BMD
 from .bnd import BND
@@ -234,4 +235,5 @@ __all__ = [
     "TWD",
     "BMD",
     "PEN",
+    "GBP",
 ]
