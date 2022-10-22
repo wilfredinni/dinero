@@ -39,5 +39,9 @@
         "titleBar.inactiveBackground": "#11182799",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.remoteColor": "#111827"
+    "peacock.remoteColor": "#111827",
+    "cSpell.words": [
+        "getcontext",
+        "prec"
+    ]
 }
