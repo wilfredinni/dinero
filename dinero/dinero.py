@@ -6,7 +6,7 @@ from ._types import Currency
 
 @dataclass
 class Dinero:
-    amount: int | float
+    amount: int | float | str
     currency: Currency
 
     @property
@@ -31,9 +31,20 @@ class Dinero:
 
     @property
     def normalized_amount(self):
+        return self.normalize(self.amount)
+
+    def normalize(self, amount):
         getcontext().prec = self.base
-        print(type(Decimal(self.amount).normalize()))
-        return Decimal(self.amount).normalize()
+        return Decimal(amount).normalize()
+
+    def add(self, amount: "str | int | float | Dinero") -> "Dinero":
+        if isinstance(amount, Dinero):
+            amount_to_add = amount
+        else:
+            amount_to_add = Dinero(str(amount), self.currency)
+
+        result = self.normalized_amount + amount_to_add.normalized_amount
+        return Dinero(result, self.currency)
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_format = f",.{self.exponent}f"
