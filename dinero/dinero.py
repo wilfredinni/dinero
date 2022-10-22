@@ -4,6 +4,10 @@ from decimal import Decimal, getcontext
 from ._types import Currency
 
 
+class DifferentCurrencyError(Exception):
+    """Operation could not be completed"""
+
+
 @dataclass
 class Dinero:
     amount: int | float | str
@@ -26,7 +30,7 @@ class Dinero:
         return self.currency.get("exponent")
 
     @property
-    def base(self):
+    def precision(self):
         return self.currency.get("base")
 
     @property
@@ -34,7 +38,7 @@ class Dinero:
         return self.normalize(self.amount)
 
     def normalize(self, amount):
-        getcontext().prec = self.base
+        getcontext().prec = self.precision
         return Decimal(amount).normalize()
 
     def add(self, amount: "str | int | float | Dinero") -> "Dinero":
@@ -42,6 +46,9 @@ class Dinero:
             amount_to_add = amount
         else:
             amount_to_add = Dinero(str(amount), self.currency)
+
+        if amount_to_add.code != self.code:
+            raise DifferentCurrencyError("Currencies can not be different")
 
         result = self.normalized_amount + amount_to_add.normalized_amount
         return Dinero(result, self.currency)
