@@ -35,7 +35,8 @@ class Dinero:
 
     @property
     def normalized_amount(self):
-        return self._normalize(self.amount)
+        getcontext().prec = self.precision
+        return Decimal(self.amount).normalize()
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_format = f",.{self.exponent}f"
@@ -59,10 +60,6 @@ class Dinero:
 
     def equals_to(self, amount: "OperationType | Dinero") -> bool:
         return self.__eq__(amount)
-
-    def _normalize(self, amount):
-        getcontext().prec = self.precision
-        return Decimal(amount).normalize()
 
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
