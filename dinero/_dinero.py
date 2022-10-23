@@ -37,10 +37,16 @@ class Dinero:
     def normalized_amount(self):
         return self._normalize(self.amount)
 
+    def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
+        currency_format = f",.{self.exponent}f"
+        normalized_amount = self.normalized_amount
+
+        currency_symbol = self.symbol if symbol else ""
+        currency_code = f" {self.code}" if currency else ""
+        return f"{currency_symbol}{normalized_amount:{currency_format}}{currency_code}"
+
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
-        addend = self._get_instance(amount)
-        result = self.normalized_amount + addend.normalized_amount
-        return Dinero(result, self.currency)
+        return self.__add__(amount)
 
     def subtract(self, amount: "OperationType | Dinero") -> "Dinero":
         subtrahend = self._get_instance(amount)
@@ -57,19 +63,14 @@ class Dinero:
         result = self.normalized_amount / divisor.normalized_amount
         return Dinero(result, self.currency)
 
-    def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
-        currency_format = f",.{self.exponent}f"
-        normalized_amount = self.normalized_amount
-
-        currency_symbol = self.symbol if symbol else ""
-        currency_code = f" {self.code}" if currency else ""
-        return f"{currency_symbol}{normalized_amount:{currency_format}}{currency_code}"
+    def equals_to(self, amount: "OperationType | Dinero") -> bool:
+        return self.__eq__(amount)
 
     def _normalize(self, amount):
         getcontext().prec = self.precision
         return Decimal(amount).normalize()
 
-    def _get_instance(self, amount: "OperationType | Dinero") -> "Dinero":
+    def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
             second_amount = amount
         else:
@@ -80,9 +81,9 @@ class Dinero:
 
         return second_amount
 
-    def __add__(self, addend: "Dinero") -> "Dinero":
-        self._get_instance(addend)
-        total = self.normalized_amount + addend.normalized_amount
+    def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
+        amount = self._get_instance(addend)
+        total = self.normalized_amount + amount.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __radd__(self, amount):
@@ -105,6 +106,14 @@ class Dinero:
         divisor = self._get_instance(amount)
         total = self.normalized_amount / divisor.normalized_amount
         return Dinero(str(total), self.currency)
+
+    def __eq__(self, amount: object) -> bool:
+        if isinstance(amount, Dinero):
+            if amount.code != self.code:
+                return False
+
+        amount_to_compare = self._get_instance(amount)
+        return bool(self.normalized_amount == amount_to_compare.normalized_amount)
 
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)
