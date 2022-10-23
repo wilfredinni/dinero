@@ -100,6 +100,17 @@ class Dinero:
         total = self.normalized_amount - amount.normalized_amount
         return Dinero(str(total), self.currency)
 
+    def __mul__(self, amount: "OperationType | Dinero") -> "Dinero":
+        if isinstance(amount, Dinero):
+            if amount.code != self.code:
+                raise DifferentCurrencyError("Currencies can not be different")
+
+            total = self.normalized_amount * amount.normalized_amount
+            return Dinero(str(total), self.currency)
+
+        total = Decimal(amount) * self.normalized_amount
+        return Dinero(str(total), self.currency)
+
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)
         return f"Dinero({self.raw_amount} -> {formatted_output})"
