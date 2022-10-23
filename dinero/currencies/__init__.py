@@ -118,7 +118,7 @@ from ._xpf import XPF
 from ._yer import YER
 from ._zar import ZAR
 from ._zmw import ZMW
-from .zwl import ZWL
+from ._zwl import ZWL
 
 __all__ = [
     "MZN",
