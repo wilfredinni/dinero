@@ -1,4 +1,4 @@
-from .dinero import Dinero
+from ._dinero import Dinero
 
 
 __version__ = "0.1.0"
