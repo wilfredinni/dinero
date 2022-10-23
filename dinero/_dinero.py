@@ -49,19 +49,13 @@ class Dinero:
         return self.__add__(amount)
 
     def subtract(self, amount: "OperationType | Dinero") -> "Dinero":
-        subtrahend = self._get_instance(amount)
-        result = self.normalized_amount - subtrahend.normalized_amount
-        return Dinero(result, self.currency)
+        return self.__sub__(amount)
 
     def multiply(self, amount: "OperationType | Dinero") -> "Dinero":
-        multiplicand = self._get_instance(amount)
-        result = self.normalized_amount * multiplicand.normalized_amount
-        return Dinero(result, self.currency)
+        return self.__mul__(amount)
 
     def divide(self, amount: "OperationType | Dinero") -> "Dinero":
-        divisor = self._get_instance(amount)
-        result = self.normalized_amount / divisor.normalized_amount
-        return Dinero(result, self.currency)
+        return self.__truediv__(amount)
 
     def equals_to(self, amount: "OperationType | Dinero") -> bool:
         return self.__eq__(amount)
@@ -82,8 +76,8 @@ class Dinero:
         return second_amount
 
     def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
-        amount = self._get_instance(addend)
-        total = self.normalized_amount + amount.normalized_amount
+        addend_obj = self._get_instance(addend)
+        total = self.normalized_amount + addend_obj.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __radd__(self, amount):
@@ -92,19 +86,19 @@ class Dinero:
         else:
             return self.__add__(amount)
 
-    def __sub__(self, subtrahend: "Dinero") -> "Dinero":
-        self._get_instance(subtrahend)
-        total = self.normalized_amount - subtrahend.normalized_amount
+    def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
+        subtrahend_obj = self._get_instance(subtrahend)
+        total = self.normalized_amount - subtrahend_obj.normalized_amount
         return Dinero(str(total), self.currency)
 
-    def __mul__(self, amount: "OperationType | Dinero") -> "Dinero":
-        multiplicand = self._get_instance(amount)
-        total = self.normalized_amount * multiplicand.normalized_amount
+    def __mul__(self, multiplicand: "OperationType | Dinero") -> "Dinero":
+        multiplicand_obj = self._get_instance(multiplicand)
+        total = self.normalized_amount * multiplicand_obj.normalized_amount
         return Dinero(str(total), self.currency)
 
-    def __truediv__(self, amount: "OperationType | Dinero") -> "Dinero":
-        divisor = self._get_instance(amount)
-        total = self.normalized_amount / divisor.normalized_amount
+    def __truediv__(self, divisor: "OperationType | Dinero") -> "Dinero":
+        divisor_obj = self._get_instance(divisor)
+        total = self.normalized_amount / divisor_obj.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __eq__(self, amount: object) -> bool:
