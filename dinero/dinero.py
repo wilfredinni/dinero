@@ -93,6 +93,13 @@ class Dinero:
         else:
             return self.__add__(amount)
 
+    def __sub__(self, amount: "Dinero") -> "Dinero":
+        if amount.code != self.code:
+            raise DifferentCurrencyError("Currencies can not be different")
+
+        total = self.normalized_amount - amount.normalized_amount
+        return Dinero(str(total), self.currency)
+
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)
         return f"Dinero({self.raw_amount} -> {formatted_output})"
