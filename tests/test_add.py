@@ -1,7 +1,7 @@
 import pytest
 
-from dinero import Dinero
-from dinero.currencies import USD
+from dinero import Dinero, DifferentCurrencyError
+from dinero.currencies import USD, EUR
 
 
 @pytest.mark.parametrize(
@@ -65,3 +65,20 @@ def test_add_amount_mixed(amount, addend, total):
     assert amount + addend == total
     assert amount.add(addend) == total
     assert amount.add(addend).equals_to(total)
+
+
+@pytest.mark.parametrize(
+    "amount, addend",
+    [
+        (Dinero(24.5, USD), Dinero(1, EUR)),
+        (Dinero(24.5, USD), Dinero("1", EUR)),
+        (Dinero("24.5", USD), Dinero("1", EUR)),
+        (Dinero("24.5", USD), Dinero(1, EUR)),
+    ],
+)
+def test_different_currencies_error(amount, addend):
+    with pytest.raises(DifferentCurrencyError):
+        amount + addend
+
+    with pytest.raises(DifferentCurrencyError):
+        amount.add(addend)
