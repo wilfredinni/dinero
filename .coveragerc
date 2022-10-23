@@ -1,0 +1,11 @@
+[run]
+branch = True
+source = dinero
+
+[report]
+omit =
+    tests/*
+    dinero/currencies/*
+exclude_lines =
+    def __repr__
+    def __str__

@@ -42,6 +42,7 @@
     "peacock.remoteColor": "#111827",
     "cSpell.words": [
         "getcontext",
-        "prec"
+        "prec",
+        "repr"
     ]
 }
