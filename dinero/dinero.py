@@ -108,7 +108,18 @@ class Dinero:
             total = self.normalized_amount * amount.normalized_amount
             return Dinero(str(total), self.currency)
 
-        total = Decimal(amount) * self.normalized_amount
+        total = Decimal(amount).normalize() * self.normalized_amount
+        return Dinero(str(total), self.currency)
+
+    def __truediv__(self, amount: "OperationType | Dinero") -> "Dinero":
+        if isinstance(amount, Dinero):
+            if amount.code != self.code:
+                raise DifferentCurrencyError("Currencies can not be different")
+
+            total = self.normalized_amount / amount.normalized_amount
+            return Dinero(str(total), self.currency)
+
+        total = self.normalized_amount / Decimal(amount).normalize()
         return Dinero(str(total), self.currency)
 
     def __repr__(self):
