@@ -35,30 +35,26 @@ class Dinero:
 
     @property
     def normalized_amount(self):
-        return self.normalize(self.amount)
-
-    def normalize(self, amount):
-        getcontext().prec = self.precision
-        return Decimal(amount).normalize()
+        return self._normalize(self.amount)
 
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
-        amount_to_add = self._get_instance(amount)
-        result = self.normalized_amount + amount_to_add.normalized_amount
+        addend = self._get_instance(amount)
+        result = self.normalized_amount + addend.normalized_amount
         return Dinero(result, self.currency)
 
     def subtract(self, amount: "OperationType | Dinero") -> "Dinero":
-        amount_to_subtract = self._get_instance(amount)
-        result = self.normalized_amount - amount_to_subtract.normalized_amount
+        subtrahend = self._get_instance(amount)
+        result = self.normalized_amount - subtrahend.normalized_amount
         return Dinero(result, self.currency)
 
     def multiply(self, amount: "OperationType | Dinero") -> "Dinero":
-        amount_to_multiply = self._get_instance(amount)
-        result = self.normalized_amount * amount_to_multiply.normalized_amount
+        multiplicand = self._get_instance(amount)
+        result = self.normalized_amount * multiplicand.normalized_amount
         return Dinero(result, self.currency)
 
     def divide(self, amount: "OperationType | Dinero") -> "Dinero":
-        amount_to_divide = self._get_instance(amount)
-        result = self.normalized_amount / amount_to_divide.normalized_amount
+        divisor = self._get_instance(amount)
+        result = self.normalized_amount / divisor.normalized_amount
         return Dinero(result, self.currency)
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
@@ -68,6 +64,10 @@ class Dinero:
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
         return f"{currency_symbol}{normalized_amount:{currency_format}}{currency_code}"
+
+    def _normalize(self, amount):
+        getcontext().prec = self.precision
+        return Decimal(amount).normalize()
 
     def _get_instance(self, amount: "OperationType | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
@@ -80,11 +80,9 @@ class Dinero:
 
         return second_amount
 
-    def __add__(self, amount: "Dinero") -> "Dinero":
-        if amount.code != self.code:
-            raise DifferentCurrencyError("Currencies can not be different")
-
-        total = self.normalized_amount + amount.normalized_amount
+    def __add__(self, addend: "Dinero") -> "Dinero":
+        self._get_instance(addend)
+        total = self.normalized_amount + addend.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __radd__(self, amount):
@@ -93,33 +91,19 @@ class Dinero:
         else:
             return self.__add__(amount)
 
-    def __sub__(self, amount: "Dinero") -> "Dinero":
-        if amount.code != self.code:
-            raise DifferentCurrencyError("Currencies can not be different")
-
-        total = self.normalized_amount - amount.normalized_amount
+    def __sub__(self, subtrahend: "Dinero") -> "Dinero":
+        self._get_instance(subtrahend)
+        total = self.normalized_amount - subtrahend.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __mul__(self, amount: "OperationType | Dinero") -> "Dinero":
-        if isinstance(amount, Dinero):
-            if amount.code != self.code:
-                raise DifferentCurrencyError("Currencies can not be different")
-
-            total = self.normalized_amount * amount.normalized_amount
-            return Dinero(str(total), self.currency)
-
-        total = Decimal(amount).normalize() * self.normalized_amount
+        multiplicand = self._get_instance(amount)
+        total = self.normalized_amount * multiplicand.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __truediv__(self, amount: "OperationType | Dinero") -> "Dinero":
-        if isinstance(amount, Dinero):
-            if amount.code != self.code:
-                raise DifferentCurrencyError("Currencies can not be different")
-
-            total = self.normalized_amount / amount.normalized_amount
-            return Dinero(str(total), self.currency)
-
-        total = self.normalized_amount / Decimal(amount).normalize()
+        divisor = self._get_instance(amount)
+        total = self.normalized_amount / divisor.normalized_amount
         return Dinero(str(total), self.currency)
 
     def __repr__(self):
