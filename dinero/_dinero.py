@@ -35,9 +35,9 @@ class Dinero:
 
     @property
     def normalized_amount(self):
-        two_places = Decimal(f"1e-{self.exponent}")
+        places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
-        return Decimal(self.amount).normalize().quantize(two_places)
+        return Decimal(self.amount).normalize().quantize(places)
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_format = f",.{self.exponent}f"
