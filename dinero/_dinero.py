@@ -103,8 +103,9 @@ class Dinero:
             if amount.code != self.code:
                 return False
 
-        amount_to_compare = self._get_instance(amount)
-        return bool(self.normalized_amount == amount_to_compare.normalized_amount)
+        amount_to_compare = self._get_instance(amount).normalized_amount
+        amount = self.normalized_amount.quantize(amount_to_compare)
+        return bool(amount == amount_to_compare)
 
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)
