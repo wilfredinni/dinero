@@ -93,7 +93,7 @@ def test_add_amount_mixed(amount, addend, total):
     ],
 )
 def test_sum_amount_mixed(amount, addend, total):
-    assert sum([amount, addend]) == total
+    assert sum([amount, addend, 0]) == total
 
 
 @pytest.mark.parametrize(

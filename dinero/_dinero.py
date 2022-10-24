@@ -35,8 +35,9 @@ class Dinero:
 
     @property
     def normalized_amount(self):
+        two_places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
-        return Decimal(self.amount).normalize()
+        return Decimal(self.amount).normalize().quantize(two_places)
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_format = f",.{self.exponent}f"
@@ -78,10 +79,7 @@ class Dinero:
         return Dinero(str(total), self.currency)
 
     def __radd__(self, amount):
-        if amount == 0:
-            return self
-        else:
-            return self.__add__(amount)
+        return self
 
     def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
         subtrahend_obj = self._get_instance(subtrahend)
@@ -103,9 +101,10 @@ class Dinero:
             if amount.code != self.code:
                 return False
 
-        amount_to_compare = self._get_instance(amount).normalized_amount
-        amount = self.normalized_amount.quantize(amount_to_compare)
-        return bool(amount == amount_to_compare)
+        num_1 = self.normalized_amount
+        num_2 = self._get_instance(amount).normalized_amount
+
+        return bool(num_1 == num_2)
 
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)

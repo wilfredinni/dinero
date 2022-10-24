@@ -53,3 +53,8 @@ def test_obj_formatted(obj, number, symbol, currency, full):
     assert obj.formatted_amount(symbol=True) == symbol
     assert obj.formatted_amount(currency=True) == currency
     assert obj.formatted_amount(symbol=True, currency=True) == full
+
+
+def test_not_equal():
+    assert Dinero(24.5, USD) != Dinero(24, EUR)
+    assert Dinero(24.5, USD) != Dinero(24, USD)
