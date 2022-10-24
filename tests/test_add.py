@@ -68,6 +68,35 @@ def test_add_amount_mixed(amount, addend, total):
 
 
 @pytest.mark.parametrize(
+    "amount, addend, total",
+    [
+        (Dinero(24.5, USD), Dinero("1", USD), Dinero("25.50", USD)),
+        (Dinero("24.5", USD), Dinero(1, USD), Dinero("25.50", USD)),
+        (Dinero("24.5", USD), Dinero("1", USD), Dinero(25.50, USD)),
+        (Dinero(24.5, USD), Dinero(1, USD), Dinero("25.50", USD)),
+        (Dinero("24.5", USD), Dinero(1, USD), Dinero(25.50, USD)),
+        (Dinero(24.5, USD), Dinero("1", USD), Dinero(25.50, USD)),
+        # ----
+        (Dinero(24.5, USD), Dinero("1", USD), "25.50"),
+        (Dinero("24.5", USD), Dinero(1, USD), "25.50"),
+        (Dinero("24.5", USD), Dinero("1", USD), 25.50),
+        (Dinero(24.5, USD), Dinero(1, USD), "25.50"),
+        (Dinero("24.5", USD), Dinero(1, USD), 25.50),
+        (Dinero(24.5, USD), Dinero("1", USD), 25.50),
+        # ----
+        (Dinero(24.5, USD), "1", Dinero("25.50", USD)),
+        (Dinero("24.5", USD), 1, Dinero("25.50", USD)),
+        (Dinero("24.5", USD), "1", Dinero(25.50, USD)),
+        (Dinero(24.5, USD), 1, Dinero("25.50", USD)),
+        (Dinero("24.5", USD), 1, Dinero(25.50, USD)),
+        (Dinero(24.5, USD), "1", Dinero(25.50, USD)),
+    ],
+)
+def test_sum_amount_mixed(amount, addend, total):
+    assert sum([amount, addend]) == total
+
+
+@pytest.mark.parametrize(
     "amount, addend",
     [
         (Dinero(24.5, USD), Dinero(1, EUR)),
