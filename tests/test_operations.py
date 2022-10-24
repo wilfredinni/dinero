@@ -52,3 +52,28 @@ def test_less_than(obj_1, obj_2):
 def test_less_than_or_equal(obj_1, obj_2):
     assert obj_1 <= obj_2
     assert obj_1.less_than_or_equal(obj_2)
+
+
+@pytest.mark.parametrize(
+    "obj_1, obj_2",
+    [
+        (Dinero(25, USD), Dinero(24, USD)),
+        (Dinero(24.6, USD), 24.5),
+    ],
+)
+def test_greater_than(obj_1, obj_2):
+    assert obj_1 > obj_2
+    assert obj_1.greater_than(obj_2)
+
+
+@pytest.mark.parametrize(
+    "obj_1, obj_2",
+    [
+        (Dinero(25, USD), Dinero(24, USD)),
+        (Dinero(24.6, USD), 24.5),
+        (Dinero(24.5, USD), 24.5),
+    ],
+)
+def test_greater_than_or_equal(obj_1, obj_2):
+    assert obj_1 >= obj_2
+    assert obj_1.greater_than_or_equal(obj_2)
