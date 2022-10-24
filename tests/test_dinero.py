@@ -38,3 +38,18 @@ def test_obj_properties(obj, symbol, code, exponent, precision):
     assert obj.code == code
     assert obj.exponent == exponent
     assert obj.precision == precision
+
+
+@pytest.mark.parametrize(
+    "obj, number, symbol, currency, full",
+    [
+        (usd_obj, "2.32", "$2.32", "2.32 USD", "$2.32 USD"),
+        (eur_obj, "2.32", "€2.32", "2.32 EUR", "€2.32 EUR"),
+        (gbp_obj, "2.32", "£2.32", "2.32 GBP", "£2.32 GBP"),
+    ],
+)
+def test_obj_formatted(obj, number, symbol, currency, full):
+    assert obj.formatted_amount() == number
+    assert obj.formatted_amount(symbol=True) == symbol
+    assert obj.formatted_amount(currency=True) == currency
+    assert obj.formatted_amount(symbol=True, currency=True) == full
