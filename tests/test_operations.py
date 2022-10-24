@@ -1,30 +1,54 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD
+from dinero.currencies import USD, EUR
 
 
 @pytest.mark.parametrize(
-    "unit_price, units_sold, money_received",
+    "obj_1, obj_2",
     [
-        (Dinero("2.32", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.32", USD), "5.38"),
-        (Dinero("2.32", USD), Dinero("2.32", USD), Dinero("5.38", USD)),
+        (Dinero(24.5, USD), Dinero(24.5, USD)),
+        (Dinero(24.5, USD), 24.5),
     ],
 )
-def test_balance_ok(unit_price, units_sold, money_received):
-    assert unit_price.multiply(units_sold).equals_to(money_received)
-    assert unit_price * units_sold == money_received
+def test_equal(obj_1, obj_2):
+    assert obj_1 == obj_2
+    assert obj_1.equals_to(obj_2)
 
 
 @pytest.mark.parametrize(
-    "unit_price, units_sold, money_received",
+    "obj_1, obj_2",
     [
-        (Dinero("2.38", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.31", USD), "5.38"),
-        (Dinero("2.32", USD), Dinero("2.33", USD), Dinero("5.38", USD)),
+        (Dinero(24.5, USD), Dinero(24, USD)),
+        (Dinero(24.5, USD), Dinero(24.5, EUR)),
+        (Dinero(24.5, USD), 24.4),
     ],
 )
-def test_balance_wrong(unit_price, units_sold, money_received):
-    assert unit_price.multiply(units_sold).equals_to(money_received) is False
-    assert unit_price * units_sold != money_received
+def test_not_equal(obj_1, obj_2):
+    assert obj_1 != obj_2
+    assert obj_1.equals_to(obj_2) is False
+
+
+@pytest.mark.parametrize(
+    "obj_1, obj_2",
+    [
+        (Dinero(24, USD), Dinero(25, USD)),
+        (Dinero(24.5, USD), 24.6),
+    ],
+)
+def test_less_than(obj_1, obj_2):
+    assert obj_1 < obj_2
+    assert obj_1.less_than(obj_2)
+
+
+@pytest.mark.parametrize(
+    "obj_1, obj_2",
+    [
+        (Dinero(24, USD), Dinero(25, USD)),
+        (Dinero(24.5, USD), 24.6),
+        (Dinero(24.5, USD), 24.5),
+    ],
+)
+def test_less_than_or_equal(obj_1, obj_2):
+    assert obj_1 <= obj_2
+    assert obj_1.less_than_or_equal(obj_2)

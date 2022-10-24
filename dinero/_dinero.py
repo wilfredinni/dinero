@@ -62,6 +62,12 @@ class Dinero:
     def equals_to(self, amount: "OperationType | Dinero") -> bool:
         return self.__eq__(amount)
 
+    def less_than(self, amount: "OperationType | Dinero") -> bool:
+        return self.__lt__(amount)
+
+    def less_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
+        return self.__le__(amount)
+
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
             second_amount = amount
@@ -105,6 +111,16 @@ class Dinero:
         num_2 = self._get_instance(amount).normalized_amount
 
         return bool(num_1 == num_2)
+
+    def __lt__(self, amount: object) -> bool:
+        num_1 = self.normalized_amount
+        num_2 = self._get_instance(amount).normalized_amount
+        return bool(num_1 < num_2)
+
+    def __le__(self, amount: object) -> bool:
+        num_1 = self.normalized_amount
+        num_2 = self._get_instance(amount).normalized_amount
+        return bool(num_1 <= num_2)
 
     def __repr__(self):
         formatted_output = self.formatted_amount(symbol=True, currency=True)
