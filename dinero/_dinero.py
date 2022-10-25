@@ -1,5 +1,4 @@
 import json
-from dataclasses import dataclass
 from decimal import Decimal, getcontext
 from typing import Any
 
@@ -11,10 +10,10 @@ class DifferentCurrencyError(Exception):
     """Operation could not be completed"""
 
 
-@dataclass
 class Dinero:
-    amount: int | float | str
-    currency: Currency
+    def __init__(self, amount: int | float | str, currency: Currency):
+        self.amount = amount
+        self.currency = currency
 
     @property
     def raw_amount(self):
