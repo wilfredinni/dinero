@@ -162,7 +162,7 @@ class Dinero:
         return bool(num_1 >= num_2)
 
     def __repr__(self):
-        formatted_output = self.formatted_amount(symbol=True, currency=True)
+        formatted_output = self.get_amount(symbol=True, currency=True)
         return f"Dinero({self.raw_amount} -> {formatted_output})"
 
     def __str__(self):
