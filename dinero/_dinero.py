@@ -160,5 +160,5 @@ class Dinero:
         return f"Dinero({self.raw_amount} -> {formatted_output})"
 
     def __str__(self):
-        formatted_output = self.formatted_amount(symbol=True, currency=True)
+        formatted_output = self.formatted_amount()
         return f"{formatted_output}"
