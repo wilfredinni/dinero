@@ -1,9 +1,10 @@
-# import json
+import json
 from dataclasses import dataclass
 from decimal import Decimal, getcontext
+from typing import Any
 
 from ._types import Currency, OperationType
-from ._utils import amount_formatter
+from ._utils import amount_formatter, DecimalEncoder
 
 
 class DifferentCurrencyError(Exception):
@@ -36,7 +37,7 @@ class Dinero:
         return self.currency.get("base")
 
     @property
-    def normalized_amount(self):
+    def normalized_amount(self) -> Decimal:
         places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
         return Decimal(self.amount).normalize().quantize(places)
@@ -75,15 +76,20 @@ class Dinero:
     def greater_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
         return self.__ge__(amount)
 
-    # def to_dict(self) -> str:
-    #     return {
-    #         "amount": self.normalized_amount,
-    #         "currency": self.code,
-    #         "symbol": self.symbol,
-    #     }
+    def to_dict(self, amount_with_format: bool = False) -> dict[str, Any]:
+        if amount_with_format:
+            amount = amount_formatter(self.normalized_amount, self.exponent)
+        else:
+            amount = str(self.normalized_amount)
 
-    # def to_json(self) -> str:
-    #     return json.dumps(self.to_dict(), cls=DecimalEncoder)
+        _dict = self.__dict__
+        _dict["amount"] = amount
+        _dict["currency"].setdefault("symbol", "$")
+        return _dict
+
+    def to_json(self, amount_with_format: bool = False) -> str:
+        dict_representation = self.to_dict(amount_with_format)
+        return json.dumps(dict_representation, cls=DecimalEncoder)
 
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
