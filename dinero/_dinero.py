@@ -1,7 +1,9 @@
+# import json
 from dataclasses import dataclass
 from decimal import Decimal, getcontext
 
 from ._types import Currency, OperationType
+from ._utils import amount_formatter
 
 
 class DifferentCurrencyError(Exception):
@@ -40,12 +42,11 @@ class Dinero:
         return Decimal(self.amount).normalize().quantize(places)
 
     def formatted_amount(self, symbol: bool = False, currency: bool = False) -> str:
-        currency_format = f",.{self.exponent}f"
-        normalized_amount = self.normalized_amount
-
+        formatted_amount = amount_formatter(self.normalized_amount, self.exponent)
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
-        return f"{currency_symbol}{normalized_amount:{currency_format}}{currency_code}"
+
+        return f"{currency_symbol}{formatted_amount}{currency_code}"
 
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
         return self.__add__(amount)
@@ -73,6 +74,16 @@ class Dinero:
 
     def greater_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
         return self.__ge__(amount)
+
+    # def to_dict(self) -> str:
+    #     return {
+    #         "amount": self.normalized_amount,
+    #         "currency": self.code,
+    #         "symbol": self.symbol,
+    #     }
+
+    # def to_json(self) -> str:
+    #     return json.dumps(self.to_dict(), cls=DecimalEncoder)
 
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
         if isinstance(amount, Dinero):
