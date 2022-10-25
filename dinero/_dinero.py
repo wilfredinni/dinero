@@ -10,7 +10,7 @@ class DifferentCurrencyError(Exception):
     """Operation could not be completed"""
 
 
-class Dinero:
+class Base:
     def __init__(self, amount: int | float | str, currency: Currency):
         self.amount = amount
         self.currency = currency
@@ -35,6 +35,19 @@ class Dinero:
     def precision(self):
         return self.currency.get("base")
 
+
+class Utils(Base):
+    def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
+        if isinstance(amount, Dinero):
+            second_amount = amount
+        else:
+            second_amount = Dinero(str(amount), self.currency)
+
+        if second_amount.code != self.code:
+            raise DifferentCurrencyError("Currencies can not be different")
+
+        return second_amount
+
     def _normalize(self, quantize: bool = False) -> Decimal:
         places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
@@ -44,6 +57,66 @@ class Dinero:
             return normalized_amount.quantize(places)
 
         return normalized_amount
+
+
+class Operations(Utils):
+    def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
+        addend_obj = self._get_instance(addend)
+        total = self._normalize() + addend_obj._normalize()
+        return Dinero(str(total), self.currency)
+
+    def __radd__(self, obj):
+        return self
+
+    def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
+        subtrahend_obj = self._get_instance(subtrahend)
+        total = self._normalize() - subtrahend_obj._normalize()
+        return Dinero(str(total), self.currency)
+
+    def __mul__(self, multiplicand: "OperationType | Dinero") -> "Dinero":
+        multiplicand_obj = self._get_instance(multiplicand)
+        total = self._normalize() * multiplicand_obj._normalize()
+        return Dinero(str(total), self.currency)
+
+    def __truediv__(self, divisor: "OperationType | Dinero") -> "Dinero":
+        divisor_obj = self._get_instance(divisor)
+        total = self._normalize() / divisor_obj._normalize()
+        return Dinero(str(total), self.currency)
+
+    def __eq__(self, amount: object) -> bool:
+        if isinstance(amount, Dinero):
+            if amount.code != self.code:
+                return False
+
+        num_1 = self._normalize(quantize=True)
+        num_2 = self._get_instance(amount)._normalize(quantize=True)
+
+        return bool(num_1 == num_2)
+
+    def __lt__(self, amount: object) -> bool:
+        num_1 = self._normalize(quantize=True)
+        num_2 = self._get_instance(amount)._normalize(quantize=True)
+        return bool(num_1 < num_2)
+
+    def __le__(self, amount: object) -> bool:
+        num_1 = self._normalize(quantize=True)
+        num_2 = self._get_instance(amount)._normalize(quantize=True)
+        return bool(num_1 <= num_2)
+
+    def __gt__(self, amount: object) -> bool:
+        num_1 = self._normalize(quantize=True)
+        num_2 = self._get_instance(amount)._normalize(quantize=True)
+        return bool(num_1 > num_2)
+
+    def __ge__(self, amount: object) -> bool:
+        num_1 = self._normalize(quantize=True)
+        num_2 = self._get_instance(amount)._normalize(quantize=True)
+        return bool(num_1 >= num_2)
+
+
+class Dinero(Operations):
+    def __init__(self, amount: int | float | str, currency: Currency):
+        super().__init__(amount, currency)
 
     def get_amount(self, symbol: bool = False, currency: bool = False) -> str:
         formatted_amount = amount_formatter(
@@ -97,74 +170,10 @@ class Dinero:
         dict_representation = self.to_dict(amount_with_format)
         return json.dumps(dict_representation, cls=DecimalEncoder)
 
-    def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
-        if isinstance(amount, Dinero):
-            second_amount = amount
-        else:
-            second_amount = Dinero(str(amount), self.currency)
-
-        if second_amount.code != self.code:
-            raise DifferentCurrencyError("Currencies can not be different")
-
-        return second_amount
-
-    def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
-        addend_obj = self._get_instance(addend)
-        total = self._normalize() + addend_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __radd__(self, amount):
-        return self
-
-    def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
-        subtrahend_obj = self._get_instance(subtrahend)
-        total = self._normalize() - subtrahend_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __mul__(self, multiplicand: "OperationType | Dinero") -> "Dinero":
-        multiplicand_obj = self._get_instance(multiplicand)
-        total = self._normalize() * multiplicand_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __truediv__(self, divisor: "OperationType | Dinero") -> "Dinero":
-        divisor_obj = self._get_instance(divisor)
-        total = self._normalize() / divisor_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __eq__(self, amount: object) -> bool:
-        if isinstance(amount, Dinero):
-            if amount.code != self.code:
-                return False
-
-        num_1 = self._normalize(quantize=True)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-
-        return bool(num_1 == num_2)
-
-    def __lt__(self, amount: object) -> bool:
-        num_1 = self._normalize()
-        num_2 = self._get_instance(amount)._normalize()
-        return bool(num_1 < num_2)
-
-    def __le__(self, amount: object) -> bool:
-        num_1 = self._normalize()
-        num_2 = self._get_instance(amount)._normalize()
-        return bool(num_1 <= num_2)
-
-    def __gt__(self, amount: object) -> bool:
-        num_1 = self._normalize()
-        num_2 = self._get_instance(amount)._normalize()
-        return bool(num_1 > num_2)
-
-    def __ge__(self, amount: object) -> bool:
-        num_1 = self._normalize()
-        num_2 = self._get_instance(amount)._normalize()
-        return bool(num_1 >= num_2)
-
     def __repr__(self):
         formatted_output = self.get_amount(symbol=True, currency=True)
         return f"Dinero({self.raw_amount} -> {formatted_output})"
 
     def __str__(self):
-        formatted_output = self.formatted_amount()
+        formatted_output = self.get_amount()
         return f"{formatted_output}"
