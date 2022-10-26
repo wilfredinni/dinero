@@ -4,10 +4,7 @@ from typing import Any
 
 from ._types import Currency, OperationType
 from ._utils import DecimalEncoder
-
-
-class DifferentCurrencyError(Exception):
-    """Operation could not be completed"""
+from .exceptions import DifferentCurrencyError, InvalidOperationError
 
 
 class Base:
@@ -38,15 +35,20 @@ class Base:
 
 class Utils(Base):
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
-        if isinstance(amount, Dinero):
-            second_amount = amount
-        else:
-            second_amount = Dinero(str(amount), self.currency)
 
-        if second_amount.code != self.code:
+        if not isinstance(amount, (int, float, str, Dinero)):
+            msg = "You can only work against int, float, str and Dinero"
+            raise InvalidOperationError(msg)
+
+        if isinstance(amount, Dinero):
+            amount_obj = amount
+        else:
+            amount_obj = Dinero(str(amount), self.currency)
+
+        if amount_obj.code != self.code:
             raise DifferentCurrencyError("Currencies can not be different")
 
-        return second_amount
+        return amount_obj
 
     def _normalize(self, quantize: bool = False) -> Decimal:
         places = Decimal(f"1e-{self.exponent}")
@@ -93,8 +95,8 @@ class Operations(Utils):
             if amount.code != self.code:
                 return False
 
-        num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
+        num_1 = self._normalize(quantize=True)
 
         return bool(num_1 == num_2)
 

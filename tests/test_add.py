@@ -1,7 +1,8 @@
 import pytest
 
-from dinero import Dinero, DifferentCurrencyError
+from dinero import Dinero
 from dinero.currencies import USD, EUR
+from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 
 
 @pytest.mark.parametrize(
@@ -110,4 +111,20 @@ def test_different_currencies_error(amount, addend):
         amount + addend
 
     with pytest.raises(DifferentCurrencyError):
+        amount.add(addend)
+
+
+@pytest.mark.parametrize(
+    "amount, addend",
+    [
+        (Dinero(24.5, USD), []),
+        (Dinero(24.5, USD), ()),
+        (Dinero("24.5", USD), {}),
+    ],
+)
+def test_invalid_operation_error(amount, addend):
+    with pytest.raises(InvalidOperationError):
+        amount + addend
+
+    with pytest.raises(InvalidOperationError):
         amount.add(addend)

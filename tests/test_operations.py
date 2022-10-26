@@ -2,6 +2,7 @@ import pytest
 
 from dinero import Dinero
 from dinero.currencies import USD, EUR
+from dinero.exceptions import InvalidOperationError
 
 
 @pytest.mark.parametrize(
@@ -77,3 +78,43 @@ def test_greater_than(obj_1, obj_2):
 def test_greater_than_or_equal(obj_1, obj_2):
     assert obj_1 >= obj_2
     assert obj_1.greater_than_or_equal(obj_2)
+
+
+@pytest.mark.parametrize(
+    "amount, addend",
+    [
+        (Dinero(24.5, USD), []),
+        (Dinero(24.5, USD), ()),
+        (Dinero("24.5", USD), {}),
+    ],
+)
+def test_invalid_operation_error(amount, addend):
+    with pytest.raises(InvalidOperationError):
+        amount == addend
+
+    with pytest.raises(InvalidOperationError):
+        amount.equals_to(addend)
+
+    with pytest.raises(InvalidOperationError):
+        amount < addend
+
+    with pytest.raises(InvalidOperationError):
+        amount.less_than(addend)
+
+    with pytest.raises(InvalidOperationError):
+        amount >= addend
+
+    with pytest.raises(InvalidOperationError):
+        amount.less_than_or_equal(addend)
+
+    with pytest.raises(InvalidOperationError):
+        amount > addend
+
+    with pytest.raises(InvalidOperationError):
+        amount.greater_than(addend)
+
+    with pytest.raises(InvalidOperationError):
+        amount >= addend
+
+    with pytest.raises(InvalidOperationError):
+        amount.greater_than_or_equal(addend)
