@@ -41,4 +41,4 @@ def test_decimal_encoder():
     ],
 )
 def test_amount_formatter(amount, formatted_amount):
-    assert amount._formatted_amount() == formatted_amount
+    assert amount._formatted_amount == formatted_amount

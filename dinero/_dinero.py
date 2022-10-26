@@ -58,6 +58,7 @@ class Utils(Base):
 
         return normalized_amount
 
+    @property
     def _formatted_amount(self) -> str:
         currency_format = f",.{self.exponent}f"
         return f"{self._normalize(quantize=True):{currency_format}}"
@@ -123,11 +124,10 @@ class Dinero(Operations):
         super().__init__(amount, currency)
 
     def get_amount(self, symbol: bool = False, currency: bool = False) -> str:
-        formatted_amount = self._formatted_amount()
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
 
-        return f"{currency_symbol}{formatted_amount}{currency_code}"
+        return f"{currency_symbol}{self._formatted_amount}{currency_code}"
 
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
         return self.__add__(amount)
@@ -159,7 +159,7 @@ class Dinero(Operations):
     def to_dict(self, amount_with_format: bool = False) -> dict[str, Any]:
         normalized_amount = self._normalize(quantize=True)
         if amount_with_format:
-            amount = self._formatted_amount()
+            amount = self._formatted_amount
         else:
             amount = str(normalized_amount)
 
