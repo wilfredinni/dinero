@@ -128,7 +128,6 @@ class Dinero(Operations):
     def get_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
-
         return f"{currency_symbol}{self._formatted_amount}{currency_code}"
 
     def add(self, amount: "OperationType | Dinero") -> "Dinero":

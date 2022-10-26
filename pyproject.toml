@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "dinero"
-version = "0.1.0"
-description = ""
-authors = ["Carlos Montecinos <carlos.w.montecinos@gmail.com>"]
+version = "0.1.1"
+description = "Dinero is a library for working with monetary values in Python."
+license = "MIT"
+authors = ["Carlos Montecinos Geisse <carlos@pythoncheatsheet.org>"]
 readme = "README.md"
+repository = "https://github.com/wilfredinni/dinero"
+keywords = ["python3", "money", "decimals", "calculations", "currency"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
