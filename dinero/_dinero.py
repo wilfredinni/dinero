@@ -3,7 +3,7 @@ from decimal import Decimal, getcontext
 from typing import Any
 
 from ._types import Currency, OperationType
-from ._utils import amount_formatter, DecimalEncoder
+from ._utils import DecimalEncoder
 
 
 class DifferentCurrencyError(Exception):
@@ -57,6 +57,10 @@ class Utils(Base):
             return normalized_amount.quantize(places)
 
         return normalized_amount
+
+    def _formatted_amount(self) -> str:
+        currency_format = f",.{self.exponent}f"
+        return f"{self._normalize(quantize=True):{currency_format}}"
 
 
 class Operations(Utils):
@@ -119,9 +123,7 @@ class Dinero(Operations):
         super().__init__(amount, currency)
 
     def get_amount(self, symbol: bool = False, currency: bool = False) -> str:
-        formatted_amount = amount_formatter(
-            self._normalize(quantize=True), self.exponent
-        )
+        formatted_amount = self._formatted_amount()
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
 
@@ -157,7 +159,7 @@ class Dinero(Operations):
     def to_dict(self, amount_with_format: bool = False) -> dict[str, Any]:
         normalized_amount = self._normalize(quantize=True)
         if amount_with_format:
-            amount = amount_formatter(normalized_amount, self.exponent)
+            amount = self._formatted_amount()
         else:
             amount = str(normalized_amount)
 

@@ -1,9 +1,8 @@
 import json
-from decimal import Decimal
 
 import pytest
 from dinero import Dinero
-from dinero._utils import DecimalEncoder, amount_formatter
+from dinero._utils import DecimalEncoder
 from dinero.currencies import EUR, USD
 
 
@@ -34,11 +33,12 @@ def test_decimal_encoder():
 
 
 @pytest.mark.parametrize(
-    "amount, exponent, formatted_amount",
+    "amount, formatted_amount",
     [
-        (Dinero("2444.5", USD)._normalize(quantize=True), USD["exponent"], "2,444.50"),
-        (Decimal("2444.5"), USD["exponent"], "2,444.50"),
+        (Dinero("2444.5", USD), "2,444.50"),
+        (Dinero("2444.56", USD), "2,444.56"),
+        (Dinero("2444.566", USD), "2,444.57"),
     ],
 )
-def test_amount_formatter(amount, exponent, formatted_amount):
-    assert amount_formatter(amount, exponent) == formatted_amount
+def test_amount_formatter(amount, formatted_amount):
+    assert amount._formatted_amount() == formatted_amount

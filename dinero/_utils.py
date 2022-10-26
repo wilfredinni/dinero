@@ -1,5 +1,4 @@
 import json
-
 from decimal import Decimal
 
 
@@ -13,8 +12,3 @@ class DecimalEncoder(json.JSONEncoder):
             if isinstance(obj, Decimal)
             else json.JSONEncoder.default(self, obj)
         )
-
-
-def amount_formatter(amount: Decimal, exponent: int) -> str:
-    currency_format = f",.{exponent}f"
-    return f"{amount:{currency_format}}"
