@@ -11,7 +11,7 @@ amount.raw_amount
 amount.symbol
 amount.code
 
-formatted = amount.get_amount(symbol=True, currency=True)
+formatted = amount.format_amount(symbol=True, currency=True)
 print(formatted)
 ```
 

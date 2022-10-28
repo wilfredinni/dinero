@@ -8,7 +8,7 @@ from .exceptions import DifferentCurrencyError, InvalidOperationError
 
 
 class Base:
-    def __init__(self, amount: int | float | str, currency: Currency):
+    def __init__(self, amount: int | float | str | Decimal, currency: Currency):
         self.amount = amount
         self.currency = currency
 
@@ -36,7 +36,7 @@ class Base:
 class Utils(Base):
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
 
-        if not isinstance(amount, (int, float, str, Dinero)):
+        if not isinstance(amount, (int, float, str, Decimal, Dinero)):
             msg = "You can only work against int, float, str and Dinero"
             raise InvalidOperationError(msg)
 
@@ -53,7 +53,11 @@ class Utils(Base):
     def _normalize(self, quantize: bool = False) -> Decimal:
         places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
-        normalized_amount = Decimal(self.amount).normalize()
+
+        if isinstance(self.amount, Dinero):
+            normalized_amount = self.amount._normalize()
+        else:
+            normalized_amount = Decimal(self.amount).normalize()
 
         if quantize:
             return normalized_amount.quantize(places)
@@ -125,7 +129,7 @@ class Dinero(Operations):
     def __init__(self, amount: int | float | str, currency: Currency):
         super().__init__(amount, currency)
 
-    def get_amount(self, symbol: bool = False, currency: bool = False) -> str:
+    def format_amount(self, symbol: bool = False, currency: bool = False) -> str:
         currency_symbol = self.symbol if symbol else ""
         currency_code = f" {self.code}" if currency else ""
         return f"{currency_symbol}{self._formatted_amount}{currency_code}"
@@ -174,9 +178,9 @@ class Dinero(Operations):
         return json.dumps(dict_representation, cls=DecimalEncoder)
 
     def __repr__(self):
-        formatted_output = self.get_amount(symbol=True, currency=True)
+        formatted_output = self.format_amount(symbol=True, currency=True)
         return f"Dinero({self.raw_amount} -> {formatted_output})"
 
     def __str__(self):
-        formatted_output = self.get_amount()
+        formatted_output = self.format_amount()
         return f"{formatted_output}"
