@@ -51,16 +51,17 @@ class Utils(Base):
         return amount_obj
 
     def _normalize(self, quantize: bool = False) -> Decimal:
-        places = Decimal(f"1e-{self.exponent}")
         getcontext().prec = self.precision
 
         if isinstance(self.amount, Dinero):
             normalized_amount = self.amount._normalize()
+
         else:
             normalized_amount = Decimal(self.amount).normalize()
 
         if quantize:
-            return normalized_amount.quantize(places)
+            places = Decimal(f"1e-{self.exponent}")
+            normalized_amount = normalized_amount.quantize(places)
 
         return normalized_amount
 
