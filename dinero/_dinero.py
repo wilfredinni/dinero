@@ -14,6 +14,8 @@ class Base:
         self.amount = amount
         self.currency = currency
 
+        _check_valid_amount(amount)
+
     @property
     def raw_amount(self):
         return self.amount
@@ -39,12 +41,15 @@ class Utils(Base):
     """Utility class with the most important methods to count money exactly."""
 
     def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
-        """Return a Dinero object after checking the amount is of a valid type
-        and transforming it to Dinero if needed.
-        """
+        """Return a Dinero object after checking the currency codes are equal and
+        transforming it to Dinero if needed.
 
-        if not isinstance(amount, (int, float, str, Decimal, Dinero)):
-            raise InvalidOperationError(InvalidOperationError.message)
+        Args:
+            amount (str, int, float, Decimal, Dinero)
+
+        Returns
+            DINERO: Dinero object.
+        """
 
         if isinstance(amount, Dinero):
             amount_obj = amount
@@ -57,21 +62,27 @@ class Utils(Base):
         return amount_obj
 
     def _normalize(self, quantize: bool = False) -> Decimal:
-        try:
-            getcontext().prec = self.precision
+        """Return a Decimal object, that can be quantize.
 
-            if isinstance(self.amount, Dinero):
-                normalized_amount = self.amount._normalize()
-            else:
-                normalized_amount = Decimal(self.amount).normalize()
+        Args:
+            quantize (bool): Only for the final result. Defaults to False.
 
-            if quantize:
-                places = Decimal(f"1e-{self.exponent}")
-                normalized_amount = normalized_amount.quantize(places)
+        Returns
+            DECIMAL: Decimal object.
+        """
 
-            return normalized_amount
-        except (ValueError, InvalidOperation):
-            raise InvalidOperationError(InvalidOperationError.message)
+        getcontext().prec = self.precision
+
+        if isinstance(self.amount, Dinero):
+            normalized_amount = self.amount._normalize()
+        else:
+            normalized_amount = Decimal(self.amount).normalize()
+
+        if quantize:
+            places = Decimal(f"1e-{self.exponent}")
+            normalized_amount = normalized_amount.quantize(places)
+
+        return normalized_amount
 
     @property
     def _formatted_amount(self) -> str:
@@ -182,7 +193,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__add__(amount)
@@ -205,7 +216,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__sub__(amount)
@@ -228,7 +239,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__mul__(amount)
@@ -250,7 +261,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__truediv__(amount)
@@ -272,7 +283,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__eq__(amount)
@@ -294,7 +305,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__lt__(amount)
@@ -316,7 +327,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__le__(amount)
@@ -338,7 +349,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__gt__(amount)
@@ -361,7 +372,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dinero: Dinero object.
+            DINERO: Dinero object.
         """
 
         return self.__ge__(amount)
@@ -381,7 +392,7 @@ class Dinero(Operations):
             InvalidOperationError: An operation between unsupported types was executed.
 
         return:
-            Dict: The object's data as a Python Dictionary.
+            DICT: The object's data as a Python Dictionary.
         """
 
         normalized_amount = self._normalize(quantize=True)
@@ -423,3 +434,22 @@ class Dinero(Operations):
     def __str__(self):
         formatted_output = self.format_amount()
         return f"{formatted_output}"
+
+
+def _check_valid_amount(amount: int | float | str | Decimal) -> None:
+    """Validate that the amount passed to Dinero is of valid type
+
+    Args:
+        amount (str, int, float, Decimal, Dinero)
+
+    Raises:
+        InvalidOperationError: An operation between unsupported types was executed.
+    """
+    try:
+        if not isinstance(amount, (int, float, str, Decimal, Dinero)):
+            raise InvalidOperationError(InvalidOperationError.message)
+
+        Decimal(amount)
+
+    except (ValueError, InvalidOperation):
+        raise InvalidOperationError(InvalidOperationError.message)
