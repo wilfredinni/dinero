@@ -41,6 +41,7 @@
     },
     "peacock.remoteColor": "#111827",
     "cSpell.words": [
+        "autorefs",
         "getcontext",
         "mkdocstrings",
         "prec",

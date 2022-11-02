@@ -4,6 +4,8 @@ repo_url: https://github.com/wilfredinni/dinero
 edit_uri: edit/master/docs/
 
 plugins:
+  - search
+  - autorefs
   - mkdocstrings
 
 theme:
