@@ -1,3 +1,21 @@
+"""This module allows the user to make exact monetary calculations.
+
+The module contains the following functions:
+
+- `format()` - Format a Dinero object with his decimals, symbol and/or code.
+- `add()` - Returns a new Dinero object that represents the sum two amounts.
+- `subtract()` - Returns a new Dinero object that represents the difference of two amounts.
+- `multiply()` - Returns a new Dinero object that represents the multiplied value by a factor.
+- `divide()` - Returns a new Dinero object that represents the divided value by a factor.
+- `equals_to()` - Checks whether the value represented by this object equals to the other.
+- `less_than()` - Checks whether the value represented by this object is less than the other.
+- `less_than_or_equal()` - Checks whether an object is less than or equal the other.
+- `greater_than()` - Checks whether an object is greater or equal the other.
+- `greater_than_or_equal()` - Checks whether an object is greater or equal the other.
+- `to_dict()` - Returns the object's data as a Python Dictionary.
+- `to_json()` - Returns the object's data as a JSON string.
+"""
+
 import json
 from decimal import Decimal, InvalidOperation, getcontext
 from typing import Any
@@ -147,13 +165,13 @@ class Operations(Utils):
         return bool(num_1 >= num_2)
 
 
-class Dinero(Operations):
+class Dinero(Operations, Base):
     """A Dinero object is an immutable data structure representing a specific monetary value.
     It comes with methods for creating, parsing, manipulating, testing and formatting them.
 
     Args:
-        amount (str, int, float, Decimal)
-        currency: (dict): Expressed as an ISO 4217 currency code.
+        amount (str, int, float, Decimal): The amount to work with.
+        currency (dict): Expressed as an ISO 4217 currency code.
     """
 
     def __init__(self, amount: int | float | str, currency: Currency):
@@ -162,8 +180,18 @@ class Dinero(Operations):
     def format_amount(self, symbol: bool = False, currency: bool = False) -> str:
         """Format a Dinero object with his decimals, symbol and/or code.
 
-        Example:
-            >>> Dinero('12,34', USD).format(symbol=True, currency=True)
+        Examples:
+            >>> Dinero('234342.3010', USD).format()
+            234,342.30
+
+            >>> Dinero('234342.3010', USD).format(symbol=True)
+            $234,342.30
+
+            >>> Dinero('234342.3010', USD).format(currency=True)
+            234,342.30 USD
+
+            >>> Dinero('234342.3010', USD).format(symbol=True, currency=True)
+            $234,342.30 USD
 
         Args:
             symbol (bool, optional): Add the country  currency symbol. Defaults to False.
@@ -179,11 +207,24 @@ class Dinero(Operations):
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
         """Returns a new Dinero object that represents the sum of this and an other object.
 
-        Example:
-            >>> Dinero('12,34', USD).add(Dinero("1.4", USD))
-            >>> Dinero('12,34', USD).add('1.4')
-            >>> Dinero('12,34', USD).add(1.4)
-            >>> Dinero('12,34', USD).add(14)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero("2.32", USD)
+            >>> amount_2 = Dinero("2.32", USD)
+            >>> amount_1.add(amount_2)
+            4.64
+
+            >>> amount = Dinero("2.32", USD)
+            >>> amount.add("2.32")
+            4.64
+
+            >>> Dinero("2.32", USD) + Dinero("2.32", USD)
+            4.64
+
+            >>> Dinero("2.32", USD) + "2.32"
+            4.64
 
         Args:
             amount (str, int, float, Decimal, Dinero): The addend.
@@ -192,7 +233,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             DINERO: Dinero object.
         """
 
@@ -202,11 +243,24 @@ class Dinero(Operations):
         """
         Returns a new Dinero object that represents the difference of this and an other object.
 
-        Example:
-            >>> Dinero('12,34', USD).subtract(Dinero("1.4", USD))
-            >>> Dinero('12,34', USD).subtract('1.4')
-            >>> Dinero('12,34', USD).subtract(1.4)
-            >>> Dinero('12,34', USD).subtract(14)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero("2.32", USD)
+            >>> amount_2 = Dinero("2", USD)
+            >>> amount_1.subtract(amount_2)
+            0.32
+
+            >>> amount = Dinero("2.32", USD)
+            >>> amount.subtract("2")
+            0.32
+
+            >>> Dinero("2.32", USD) - Dinero("2", USD)
+            0.32
+
+            >>> Dinero("2.32", USD) - "2"
+            0.32
 
         Args:
             amount (str, int, float, Decimal, Dinero): The subtrahend.
@@ -215,7 +269,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             DINERO: Dinero object.
         """
 
@@ -225,11 +279,21 @@ class Dinero(Operations):
         """
         Returns a new Dinero object that represents the multiplied value by the given factor.
 
-        Example:
-            >>> Dinero('12,34', USD).multiply(Dinero("2", USD))
-            >>> Dinero('12,34', USD).multiply('2')
-            >>> Dinero('12,34', USD).multiply(2.0)
-            >>> Dinero('12,34', USD).multiply(2)
+        Examples:
+            >>> amount_1 = Dinero("2.32", USD)
+            >>> amount_2 = Dinero("3", USD)
+            >>> amount_1.multiply(amount_2)
+            6.96
+
+            >>> amount = Dinero("2.32", USD)
+            >>> amount.multiply("3")
+            6.96
+
+            >>> Dinero("2.32", USD) * Dinero("3", USD)
+            6.96
+
+            >>> Dinero("2.32", USD) * "3"
+            6.96
 
         Args:
             amount (str, int, float, Decimal, Dinero): The multiplicand.
@@ -238,7 +302,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             DINERO: Dinero object.
         """
 
@@ -247,11 +311,21 @@ class Dinero(Operations):
     def divide(self, amount: "OperationType | Dinero") -> "Dinero":
         """Returns a new Dinero object that represents the divided value by the given factor.
 
-        Example:
-            >>> Dinero('12,34', USD).divide(Dinero("2", USD))
-            >>> Dinero('12,34', USD).divide('2')
-            >>> Dinero('12,34', USD).divide(2.0)
-            >>> Dinero('12,34', USD).divide(2)
+        Examples:
+            >>> amount_1 = Dinero("2.32", USD)
+            >>> amount_2 = Dinero("3", USD)
+            >>> amount_1.divide(amount_2)
+            0.77
+
+            >>> amount = Dinero("2.32", USD)
+            >>> amount.divide("3")
+            0.77
+
+            >>> Dinero("2.32", USD) / Dinero("3", USD)
+            0.77
+
+            >>> Dinero("2.32", USD) / "3"
+            0.77
 
         Args:
             amount (str, int, float, Decimal, Dinero): The divisor.
@@ -260,7 +334,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             DINERO: Dinero object.
         """
 
@@ -269,11 +343,24 @@ class Dinero(Operations):
     def equals_to(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object equals to the other.
 
-        Example:
-            >>> Dinero('2,00', USD).equals_to(Dinero("2", USD))
-            >>> Dinero('2,00', USD).equals_to('2')
-            >>> Dinero('2,00', USD).equals_to(2.0)
-            >>> Dinero('2,00', USD).equals_to(2)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero("2.32", USD)
+            >>> amount_2 = Dinero("2.32", USD)
+            >>> amount_1.equals_to(amount_2)
+            True
+
+            >>> amount = Dinero("2.32", USD)
+            >>> amount.equals_to("2.31")
+            False
+
+            >>> Dinero("2.32", USD) == Dinero("2.32", USD)
+            True
+
+            >>> Dinero("2.32", USD) == "2.31"
+            False
 
         Args:
             amount (str, int, float, Decimal, Dinero): The object to compare to.
@@ -282,8 +369,8 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
-            DINERO: Dinero object.
+        Returns:
+            BOOL: Whether the value represented is equals to the other.
         """
 
         return self.__eq__(amount)
@@ -291,11 +378,24 @@ class Dinero(Operations):
     def less_than(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is less than the other.
 
-        Example:
-            >>> Dinero('2,00', USD).less_than(Dinero("2", USD))
-            >>> Dinero('2,00', USD).less_than('2')
-            >>> Dinero('2,00', USD).less_than(2.0)
-            >>> Dinero('2,00', USD).less_than(2)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero(24, USD)
+            >>> amount_2 = Dinero(25, USD)
+            >>> amount_1.less_than(amount_2)
+            True
+
+            >>> amount = Dinero(24, USD)
+            >>> amount.less_than("25")
+            True
+
+            >>> Dinero(24, USD) < Dinero(25, USD)
+            True
+
+            >>> Dinero(24, USD) < "25"
+            True
 
         Args:
             amount (str, int, float, Decimal, Dinero): The object to compare to.
@@ -304,8 +404,8 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
-            DINERO: Dinero object.
+        Returns:
+            BOOL: Whether the value represented is less than to the other.
         """
 
         return self.__lt__(amount)
@@ -313,11 +413,24 @@ class Dinero(Operations):
     def less_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is less than or equal the other.
 
-        Example:
-            >>> Dinero('2,00', USD).less_than(Dinero("2", USD))
-            >>> Dinero('2,00', USD).less_than('2')
-            >>> Dinero('2,00', USD).less_than(2.0)
-            >>> Dinero('2,00', USD).less_than(2)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero(24, USD)
+            >>> amount_2 = Dinero(25, USD)
+            >>> amount_1.less_than_or_equal(amount_2)
+            True
+
+            >>> amount = Dinero(24, USD)
+            >>> amount.less_than_or_equal("25")
+            True
+
+            >>> Dinero(24, USD) <= Dinero(25, USD)
+            True
+
+            >>> Dinero(24, USD) <= "25"
+            True
 
         Args:
             amount (str, int, float, Decimal, Dinero): The object to compare to.
@@ -326,8 +439,8 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
-            DINERO: Dinero object.
+        Returns:
+            BOOL: Whether the value represented is less than or equal to the other.
         """
 
         return self.__le__(amount)
@@ -335,11 +448,24 @@ class Dinero(Operations):
     def greater_than(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is greater or equal the other.
 
-        Example:
-            >>> Dinero('2,00', USD).greater_than(Dinero("2", USD))
-            >>> Dinero('2,00', USD).greater_than('2')
-            >>> Dinero('2,00', USD).greater_than(2.0)
-            >>> Dinero('2,00', USD).greater_than(2)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero(25, USD)
+            >>> amount_2 = Dinero(24, USD)
+            >>> amount_1.greater_than(amount_2)
+            True
+
+            >>> amount = Dinero(25, USD)
+            >>> amount.greater_than("24")
+            True
+
+            >>> Dinero(25, USD) > Dinero(24, USD)
+            True
+
+            >>> Dinero(25, USD) > "24"
+            True
 
         Args:
             amount (str, int, float, Decimal, Dinero): The object to compare to.
@@ -348,8 +474,8 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
-            DINERO: Dinero object.
+        Returns:
+            BOOL: Whether the value represented is greater than to the other.
         """
 
         return self.__gt__(amount)
@@ -358,11 +484,24 @@ class Dinero(Operations):
         """
         Checks whether the value represented by this object is greater than or equal the other.
 
-        Example:
-            >>> Dinero('2,00', USD).greater_than_or_equal(Dinero("2", USD))
-            >>> Dinero('2,00', USD).greater_than_or_equal('2')
-            >>> Dinero('2,00', USD).greater_than_or_equal(2.0)
-            >>> Dinero('2,00', USD).greater_than_or_equal(2)
+        If the addend is not a Dinero object, it will be transformed to one using the
+        same currency.
+
+        Examples:
+            >>> amount_1 = Dinero(25, USD)
+            >>> amount_2 = Dinero(24, USD)
+            >>> amount_1.greater_than_or_equal(amount_2)
+            True
+
+            >>> amount = Dinero(25, USD)
+            >>> amount.greater_than_or_equal("24")
+            True
+
+            >>> Dinero(25, USD) >= Dinero(24, USD)
+            True
+
+            >>> Dinero(25, USD) >= "24"
+            True
 
         Args:
             amount (str, int, float, Decimal, Dinero): The object to compare to.
@@ -371,8 +510,8 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
-            DINERO: Dinero object.
+        Returns:
+            BOOL: Whether the value represented is greater than or equal to the other.
         """
 
         return self.__ge__(amount)
@@ -380,9 +519,30 @@ class Dinero(Operations):
     def to_dict(self, amount_with_format: bool = False) -> dict[str, Any]:
         """Returns the object's data as a Python Dictionary.
 
-        Example:
-            >>> Dinero('2,00', USD).to_dict()
-            >>> Dinero('2,00', USD).to_dict(amount_with_format=False)
+        Examples:
+            >>> Dinero("3333.259", USD).to_dict()
+            {
+                'amount': '3333.26',
+                'currency':
+                    {
+                        'code': 'USD',
+                        'base': 10,
+                        'exponent': 2,
+                        'symbol': '$'
+                    }
+            }
+
+            >>> Dinero('3333.26', USD).to_dict(amount_with_format=True)
+            {
+                'amount': '3,333.26',
+                'currency':
+                    {
+                        'code': 'USD',
+                        'base': 10,
+                        'exponent': 2,
+                        'symbol': '$'
+                    }
+            }
 
         Args:
             amount_with_format (bool): If the amount is formatted or not. Defaults to False.
@@ -391,7 +551,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             DICT: The object's data as a Python Dictionary.
         """
 
@@ -409,9 +569,12 @@ class Dinero(Operations):
     def to_json(self, amount_with_format: bool = False) -> str:
         """Returns the object's data as a JSON string.
 
-        Example:
+        Examples:
             >>> Dinero('2,00', USD).to_json()
-            >>> Dinero('2,00', USD).to_json(amount_with_format=False)
+            '{"amount": "3333.20", "currency": {"code": "USD", "base": 10...'
+
+            >>> Dinero('2,00', USD).to_json(amount_with_format=True)
+            '{"amount": "3,333.26", "currency": {"code": "USD", "base": 10...'
 
         Args:
             amount_with_format (bool): If the amount is formatted or not. Defaults to False.
@@ -420,7 +583,7 @@ class Dinero(Operations):
             DifferentCurrencyError: Different currencies where used.
             InvalidOperationError: An operation between unsupported types was executed.
 
-        return:
+        Returns:
             STR: The object's data as JSON.
         """
 
