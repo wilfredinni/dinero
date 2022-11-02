@@ -1,4 +1,7 @@
 site_name: Dinero
+site_url: https://wilfredinni.github.io/dinero/
+repo_url: https://github.com/wilfredinni/dinero
+edit_uri: edit/master/docs/
 
 plugins:
   - mkdocstrings
