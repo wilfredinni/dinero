@@ -77,11 +77,6 @@ And comparisons:
 ```python
 >>> Dinero(100, EUR) == Dinero(100, EUR)
 True
-```
-
-```python
->>> Dinero(100, EUR) == Dinero(100, EUR)
-True
 >>> Dinero(100, EUR) < Dinero(100, EUR)
 False
 >>> Dinero(100, EUR) <= Dinero(100, EUR)
