@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import pytest
 
 from dinero import Dinero
@@ -11,12 +13,14 @@ number_sold = 3
 @pytest.mark.parametrize(
     "obj, amount, raw_type",
     [
-        (Dinero(2.32, USD), 2.32, float),
-        (Dinero("6.96", USD), "6.96", str),
+        (Dinero(2.32, USD), Decimal(2.32), Decimal),
+        (Dinero("6.96", USD), Decimal(6.96), Decimal),
     ],
 )
 def test_raw_amount(obj, amount, raw_type):
-    assert obj.raw_amount == amount
+    places = Decimal(f"1e-{USD['exponent']}")
+
+    assert obj.raw_amount == amount.quantize(places)
     assert isinstance(obj.raw_amount, raw_type)
 
 

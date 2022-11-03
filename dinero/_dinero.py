@@ -35,10 +35,6 @@ class Base:
         _check_valid_amount(amount)
 
     @property
-    def raw_amount(self):
-        return self.amount
-
-    @property
     def symbol(self):
         return self.currency.get("symbol", "$")
 
@@ -106,6 +102,10 @@ class Utils(Base):
     def _formatted_amount(self) -> str:
         currency_format = f",.{self.exponent}f"
         return f"{self._normalize(quantize=True):{currency_format}}"
+
+    @property
+    def raw_amount(self) -> Decimal:
+        return self._normalize(quantize=True)
 
 
 class Operations(Utils):
@@ -591,8 +591,7 @@ class Dinero(Operations, Base):
         return json.dumps(dict_representation, cls=DecimalEncoder)
 
     def __repr__(self):
-        formatted_output = self.format_amount(symbol=True, currency=True)
-        return f"Dinero({self.raw_amount} -> {formatted_output})"
+        return f"Dinero(amount={self.amount}, currency={self.currency})"
 
     def __str__(self):
         formatted_output = self.format_amount()
