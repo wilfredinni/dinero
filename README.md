@@ -16,14 +16,14 @@ pip install dinero
 
 > Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.
 
-Read [How to Count Money Exactly in Python](https://learnpython.com/blog/count-money-python/) to get a better idea.
-
 ```python
 >>> 2.32 * 3 == 6.96
 False
 >>> 2.32 * 3
 6.959999999999999
 ```
+
+You can read [How to Count Money Exactly in Python](https://learnpython.com/blog/count-money-python/) to get a better idea.
 
 ## Why Dinero?
 
