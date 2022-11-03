@@ -46,5 +46,6 @@
         "mkdocstrings",
         "prec",
         "repr"
-    ]
+    ],
+    "editor.formatOnSave": false
 }

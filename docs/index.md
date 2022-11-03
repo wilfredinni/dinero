@@ -1,14 +1,10 @@
-# Getting started
+# Dinero: Make exact monetary calculations
+
+<p align="center">
+  <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
+</p>
 
 A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
-
-## Install
-
-Dinero is a dependency free project.
-
-```bash
-pip install dinero
-```
 
 ## The problem
 
@@ -35,10 +31,11 @@ Python `Decimal` instances are enough for basic cases but when you face more com
 True
 ```
 
+### Currencies
+
 Dinero give you access to more than 100 different currencies:
 
 ```python
->>> from dinero import Dinero
 >>> from dinero.currencies import USD, EUR, GBP, INR, CLP
 ```
 
@@ -57,7 +54,7 @@ Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol'
 Decimal('2.32')
 ```
 
-You can perform operations:
+### Operations
 
 ```python
 >>> total = Dinero(456.343567, USD) + 345.32 *  3
@@ -72,17 +69,45 @@ You can perform operations:
 # 1,492.30
 ```
 
-And comparisons:
+### Comparisons
 
 ```python
 >>> Dinero(100, EUR) == Dinero(100, EUR)
 True
->>> Dinero(100, EUR) < Dinero(100, EUR)
-False
->>> Dinero(100, EUR) <= Dinero(100, EUR)
+```
+
+```python
+>>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
 True
->>> Dinero(100, EUR) > Dinero(100, EUR)
-False
->>> Dinero(100, EUR) >= Dinero(100, EUR)
+```
+
+```python
+>>> Dinero(100, EUR) == 100
 True
+```
+
+```python
+>>> Dinero(100, EUR).equals_to(100)
+True
+```
+
+### Custom currencies
+
+You can easily create custom currencies:
+
+```python
+>>> from dinero import Dinero
+>>>
+>>> BTC = {
+...     "code": "BTC",
+...     "base": 10,
+...     "exponent": 2,
+...     "symbol": "₿",
+... }
+>>>
+>>> Dinero(1000.5, BTC)
+Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
+>>>
+>>> Dinero(1000.5, BTC).format(symbol=True, currency=True)
+'₿1,000.50 BTC'
 ```

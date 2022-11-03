@@ -59,9 +59,9 @@ class Utils(Base):
         transforming it to Dinero if needed.
 
         Args:
-            amount (str, int, float, Decimal, Dinero)
+            amount (str, int, float, Decimal, Dinero): amount to be instantiated
 
-        Returns
+        Returns:
             DINERO: Dinero object.
         """
 

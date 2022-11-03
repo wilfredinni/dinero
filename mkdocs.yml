@@ -6,26 +6,46 @@ edit_uri: edit/master/docs/
 plugins:
   - search
   - autorefs
-  - mkdocstrings
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
+
+markdown_extensions:
+    - toc:
+        permalink: "#"
+    - pymdownx.highlight:
+        use_pygments: True
+        linenums: True
 
 theme:
   name: "material"
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      accent: purple
+      primary: teal
+      accent: teal
       toggle:
-        icon: material/weather-sunny
+        icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
+      primary: teal
+      accent: teal
       toggle:
-        icon: material/weather-night
+        icon: material/brightness-4
         name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - content.code.annotate
 
 nav:
-  - index.md
+  - Home: index.md
+  - started.md
   - methods.md
   - currencies.md
   - exceptions.md
