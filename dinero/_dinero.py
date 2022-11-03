@@ -594,7 +594,7 @@ class Dinero(Operations, Base):
         return f"Dinero(amount={self.amount}, currency={self.currency})"
 
     def __str__(self):
-        formatted_output = self.format_amount()
+        formatted_output = self.format()
         return f"{formatted_output}"
 
 

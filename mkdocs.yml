@@ -27,3 +27,5 @@ theme:
 nav:
   - index.md
   - methods.md
+  - currencies.md
+  - exceptions.md
