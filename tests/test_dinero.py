@@ -53,10 +53,10 @@ def test_obj_properties(obj, symbol, code, exponent, precision):
     ],
 )
 def test_obj_formatted(obj, number, symbol, currency, full):
-    assert obj.format_amount() == number
-    assert obj.format_amount(symbol=True) == symbol
-    assert obj.format_amount(currency=True) == currency
-    assert obj.format_amount(symbol=True, currency=True) == full
+    assert obj.format() == number
+    assert obj.format(symbol=True) == symbol
+    assert obj.format(currency=True) == currency
+    assert obj.format(symbol=True, currency=True) == full
 
 
 @pytest.mark.parametrize(

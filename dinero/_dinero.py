@@ -177,7 +177,7 @@ class Dinero(Operations, Base):
     def __init__(self, amount: int | float | str, currency: Currency):
         super().__init__(amount, currency)
 
-    def format_amount(self, symbol: bool = False, currency: bool = False) -> str:
+    def format(self, symbol: bool = False, currency: bool = False) -> str:
         """Format a Dinero object with his decimals, symbol and/or code.
 
         Examples:
