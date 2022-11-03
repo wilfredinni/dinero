@@ -1,4 +1,8 @@
-# Dinero
+<p align="center">
+  <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
+</p>
+
+<h1 align="center">Dinero</h1>
 
 A Dinero object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
 
