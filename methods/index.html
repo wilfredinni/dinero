@@ -134,6 +134,39 @@
     
     
     
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
     
       <div class="md-header__source">
         <a href="https://github.com/wilfredinni/dinero" title="Go to repository" class="md-source" data-md-component="source">
@@ -203,7 +236,7 @@
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Getting Started
+        Getting started
       </a>
     </li>
   
@@ -279,8 +312,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dinero._dinero.Dinero.format_amount" class="md-nav__link">
-    format_amount()
+  <a href="#dinero._dinero.Dinero.format" class="md-nav__link">
+    format()
   </a>
   
 </li>
@@ -349,6 +382,36 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../currencies/" class="md-nav__link">
+        Currencies
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -404,8 +467,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dinero._dinero.Dinero.format_amount" class="md-nav__link">
-    format_amount()
+  <a href="#dinero._dinero.Dinero.format" class="md-nav__link">
+    format()
   </a>
   
 </li>
@@ -968,8 +1031,7 @@ It comes with methods for creating, parsing, manipulating, testing and formattin
 <span class="normal">595</span>
 <span class="normal">596</span>
 <span class="normal">597</span>
-<span class="normal">598</span>
-<span class="normal">599</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dinero</span><span class="p">(</span><span class="n">Operations</span><span class="p">,</span> <span class="n">Base</span><span class="p">):</span>
+<span class="normal">598</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dinero</span><span class="p">(</span><span class="n">Operations</span><span class="p">,</span> <span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A Dinero object is an immutable data structure representing a specific monetary value.</span>
 <span class="sd">    It comes with methods for creating, parsing, manipulating, testing and formatting them.</span>
 
@@ -981,7 +1043,7 @@ It comes with methods for creating, parsing, manipulating, testing and formattin
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">currency</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">format_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Format a Dinero object with his decimals, symbol and/or code.</span>
 
 <span class="sd">        Examples:</span>
@@ -1395,11 +1457,10 @@ It comes with methods for creating, parsing, manipulating, testing and formattin
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">dict_representation</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">DecimalEncoder</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">formatted_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_amount</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Dinero(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_amount</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">formatted_output</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Dinero(amount=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="si">}</span><span class="s2">, currency=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">currency</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">formatted_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_amount</span><span class="p">()</span>
+        <span class="n">formatted_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">()</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">formatted_output</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div></td></tr></table></div>
         </details>
@@ -1934,8 +1995,8 @@ same currency.</p>
 
 
 
-<h2 id="dinero._dinero.Dinero.format_amount" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">format_amount</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h2 id="dinero._dinero.Dinero.format" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">format</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h2>
 
@@ -2037,7 +2098,7 @@ same currency.</p>
 <span class="normal">202</span>
 <span class="normal">203</span>
 <span class="normal">204</span>
-<span class="normal">205</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">format_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">205</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Format a Dinero object with his decimals, symbol and/or code.</span>
 
 <span class="sd">    Examples:</span>
@@ -3490,7 +3551,7 @@ same currency.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started" rel="prev">
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting started" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3499,11 +3560,26 @@ same currency.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Getting Started
+              Getting started
             </div>
           </div>
         </a>
       
+      
+        
+        <a href="../currencies/" class="md-footer__link md-footer__link--next" aria-label="Next: Currencies" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Currencies
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
