@@ -419,12 +419,12 @@
 <blockquote>
 <p>Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.</p>
 </blockquote>
-<p>Read <a href="https://learnpython.com/blog/count-money-python/">How to Count Money Exactly in Python</a> to get a better idea.</p>
 <pre><code class="language-python">&gt;&gt;&gt; 2.32 * 3 == 6.96
 False
 &gt;&gt;&gt; 2.32 * 3
 6.959999999999999
 </code></pre>
+<p>You can read <a href="https://learnpython.com/blog/count-money-python/">How to Count Money Exactly in Python</a> to get a better idea.</p>
 <h2 id="why-dinero">Why Dinero?</h2>
 <p>Python <code>Decimal</code> instances are enough for basic cases but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and more easy to use API while still relying on the standard library. So it's still <code>Decimal</code> but easier.</p>
 <pre><code class="language-python">&gt;&gt;&gt; from dinero import Dinero
