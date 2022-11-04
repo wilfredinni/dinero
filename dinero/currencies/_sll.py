@@ -1,5 +1,5 @@
 """ Sierra Leonean leone. """
-from .._types import Currency
+from ..types import Currency
 
 SLL: Currency = {
     "code": "SLL",

@@ -1,5 +1,5 @@
 """ Somali shilling. """
-from .._types import Currency
+from ..types import Currency
 
 SOS: Currency = {
     "code": "SOS",

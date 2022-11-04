@@ -1,5 +1,5 @@
 """ Costa Rica """
-from .._types import Currency
+from ..types import Currency
 
 CRC: Currency = {
     "code": "CRC",

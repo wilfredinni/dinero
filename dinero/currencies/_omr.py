@@ -1,5 +1,5 @@
 """ Omani rial. """
-from .._types import Currency
+from ..types import Currency
 
 OMR: Currency = {
     "code": "OMR",

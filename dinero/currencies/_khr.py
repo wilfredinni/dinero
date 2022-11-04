@@ -1,5 +1,5 @@
 """ Cambodian riel. """
-from .._types import Currency
+from ..types import Currency
 
 KHR: Currency = {
     "code": "KHR",

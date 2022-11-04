@@ -1,5 +1,5 @@
 """ Vanuatu vatu. """
-from .._types import Currency
+from ..types import Currency
 
 VUV: Currency = {
     "code": "VUV",

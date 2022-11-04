@@ -1,5 +1,5 @@
 """ Moroccan dirham. """
-from .._types import Currency
+from ..types import Currency
 
 MAD: Currency = {
     "code": "MAD",

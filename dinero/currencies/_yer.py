@@ -1,5 +1,5 @@
 """ Yemeni rial. """
-from .._types import Currency
+from ..types import Currency
 
 YER: Currency = {
     "code": "YER",

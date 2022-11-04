@@ -1,5 +1,5 @@
 """ Mozambican metical. """
-from .._types import Currency
+from ..types import Currency
 
 MZN: Currency = {
     "code": "MZN",

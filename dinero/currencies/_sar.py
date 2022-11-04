@@ -1,5 +1,5 @@
 """ Saudi riyal. """
-from .._types import Currency
+from ..types import Currency
 
 SAR: Currency = {
     "code": "SAR",

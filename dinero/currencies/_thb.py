@@ -1,5 +1,5 @@
 """ Thai baht. """
-from .._types import Currency
+from ..types import Currency
 
 THB: Currency = {
     "code": "THB",

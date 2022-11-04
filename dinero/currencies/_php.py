@@ -1,5 +1,5 @@
 """ Philippine peso. """
-from .._types import Currency
+from ..types import Currency
 
 PHP: Currency = {
     "code": "PHP",

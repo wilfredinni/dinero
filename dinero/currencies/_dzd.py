@@ -1,5 +1,5 @@
 """ Algerian dinar. """
-from .._types import Currency
+from ..types import Currency
 
 DZD: Currency = {
     "code": "DZD",

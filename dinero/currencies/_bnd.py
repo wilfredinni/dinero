@@ -1,5 +1,5 @@
 """ Brunei dollar. """
-from .._types import Currency
+from ..types import Currency
 
 BND: Currency = {
     "code": "BND",

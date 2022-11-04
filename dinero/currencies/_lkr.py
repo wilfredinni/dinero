@@ -1,5 +1,5 @@
 """ Sri Lankan rupee. """
-from .._types import Currency
+from ..types import Currency
 
 LKR: Currency = {
     "code": "LKR",

@@ -1,5 +1,5 @@
 """ Maldivian rufiyaa. """
-from .._types import Currency
+from ..types import Currency
 
 MVR: Currency = {
     "code": "MVR",

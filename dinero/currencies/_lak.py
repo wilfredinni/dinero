@@ -1,5 +1,5 @@
 """ Lao kip. """
-from .._types import Currency
+from ..types import Currency
 
 LAK: Currency = {
     "code": "LAK",

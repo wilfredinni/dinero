@@ -1,5 +1,5 @@
 """ East Caribbean dollar. """
-from .._types import Currency
+from ..types import Currency
 
 XCD: Currency = {
     "code": "XCD",

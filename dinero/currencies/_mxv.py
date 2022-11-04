@@ -1,5 +1,5 @@
 """ Mexican Unidad de Inversion. """
-from .._types import Currency
+from ..types import Currency
 
 MXV: Currency = {
     "code": "MXV",

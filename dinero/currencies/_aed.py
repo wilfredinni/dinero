@@ -1,5 +1,5 @@
 """ United Arab Emirates dirham peso """
-from .._types import Currency
+from ..types import Currency
 
 AED: Currency = {
     "code": "AED",

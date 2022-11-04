@@ -1,5 +1,5 @@
 """ Liberian dollar. """
-from .._types import Currency
+from ..types import Currency
 
 LRD: Currency = {
     "code": "LRD",

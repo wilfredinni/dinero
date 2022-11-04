@@ -1,5 +1,5 @@
 """ Colombian peso. """
-from .._types import Currency
+from ..types import Currency
 
 COP: Currency = {
     "code": "COP",

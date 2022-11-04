@@ -1,5 +1,5 @@
 """ Djiboutian franc. """
-from .._types import Currency
+from ..types import Currency
 
 DJF: Currency = {
     "code": "DJF",

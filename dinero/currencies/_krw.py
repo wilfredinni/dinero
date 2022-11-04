@@ -1,5 +1,5 @@
 """ South Korean won. """
-from .._types import Currency
+from ..types import Currency
 
 KRW: Currency = {
     "code": "KRW",

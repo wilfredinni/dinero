@@ -1,5 +1,5 @@
 """ Romanian leu. """
-from .._types import Currency
+from ..types import Currency
 
 RON: Currency = {
     "code": "RON",

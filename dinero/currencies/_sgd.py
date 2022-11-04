@@ -1,5 +1,5 @@
 """ Singapore dollar. """
-from .._types import Currency
+from ..types import Currency
 
 SGD: Currency = {
     "code": "SGD",

@@ -1,5 +1,5 @@
 """ Iranian rial. """
-from .._types import Currency
+from ..types import Currency
 
 IRR: Currency = {
     "code": "IRR",

@@ -1,5 +1,5 @@
 """ Kuwaiti dinar. """
-from .._types import Currency
+from ..types import Currency
 
 KWD: Currency = {
     "code": "KWD",

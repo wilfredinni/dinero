@@ -1,5 +1,5 @@
 """ Trinidad and Tobago dollar. """
-from .._types import Currency
+from ..types import Currency
 
 TTD: Currency = {
     "code": "TTD",

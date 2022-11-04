@@ -20,7 +20,7 @@ import json
 from decimal import Decimal, InvalidOperation, getcontext
 from typing import Any
 
-from ._types import Currency, OperationType
+from .types import Currency, OperationType
 from ._utils import DecimalEncoder
 from .exceptions import DifferentCurrencyError, InvalidOperationError
 

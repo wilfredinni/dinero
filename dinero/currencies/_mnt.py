@@ -1,5 +1,5 @@
 """ Mongolian tögrög. """
-from .._types import Currency
+from ..types import Currency
 
 MNT: Currency = {
     "code": "MNT",

@@ -1,5 +1,5 @@
 """ Samoan tālā. """
-from .._types import Currency
+from ..types import Currency
 
 WST: Currency = {
     "code": "WST",

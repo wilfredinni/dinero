@@ -1,5 +1,5 @@
 """ Azerbaijani manat. """
-from .._types import Currency
+from ..types import Currency
 
 AZN: Currency = {
     "code": "AZN",

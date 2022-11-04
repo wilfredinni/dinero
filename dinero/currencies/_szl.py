@@ -1,5 +1,5 @@
 """ Swazi lilangeni. """
-from .._types import Currency
+from ..types import Currency
 
 SZL: Currency = {
     "code": "SZL",

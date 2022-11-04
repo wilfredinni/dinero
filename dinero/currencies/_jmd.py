@@ -1,5 +1,5 @@
 """ Jamaican dollar. """
-from .._types import Currency
+from ..types import Currency
 
 JMD: Currency = {
     "code": "JMD",

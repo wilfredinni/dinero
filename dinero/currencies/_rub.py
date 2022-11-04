@@ -1,5 +1,5 @@
 """ Russian RUBle. """
-from .._types import Currency
+from ..types import Currency
 
 RUB: Currency = {
     "code": "RUB",

@@ -1,5 +1,5 @@
 """ Euro. """
-from .._types import Currency
+from ..types import Currency
 
 EUR: Currency = {
     "code": "EUR",

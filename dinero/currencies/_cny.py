@@ -1,5 +1,5 @@
 """ Chinese Yuan """
-from .._types import Currency
+from ..types import Currency
 
 CNY: Currency = {
     "code": "CNY",

@@ -1,5 +1,5 @@
 """ Panamanian balboa. """
-from .._types import Currency
+from ..types import Currency
 
 PAB: Currency = {
     "code": "PAB",

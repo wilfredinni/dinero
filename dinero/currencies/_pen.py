@@ -1,5 +1,5 @@
 """ Peruvian sol. """
-from .._types import Currency
+from ..types import Currency
 
 PEN: Currency = {
     "code": "PEN",

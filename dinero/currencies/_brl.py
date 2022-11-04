@@ -1,5 +1,5 @@
 """ Brazilian real. """
-from .._types import Currency
+from ..types import Currency
 
 BRL: Currency = {
     "code": "BRL",

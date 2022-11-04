@@ -1,5 +1,5 @@
 """ Ugandan shilling. """
-from .._types import Currency
+from ..types import Currency
 
 UGX: Currency = {
     "code": "UGX",

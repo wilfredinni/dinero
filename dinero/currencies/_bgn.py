@@ -1,5 +1,5 @@
 """ Bulgarian lev. """
-from .._types import Currency
+from ..types import Currency
 
 BGN: Currency = {
     "code": "BGN",

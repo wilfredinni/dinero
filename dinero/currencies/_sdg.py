@@ -1,5 +1,5 @@
 """ Sudanese pound. """
-from .._types import Currency
+from ..types import Currency
 
 SDG: Currency = {
     "code": "SDG",

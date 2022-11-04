@@ -1,5 +1,5 @@
 """ Syrian pound. """
-from .._types import Currency
+from ..types import Currency
 
 SYP: Currency = {
     "code": "SYP",

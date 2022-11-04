@@ -1,5 +1,5 @@
 """ Zimbabwean dollar. """
-from .._types import Currency
+from ..types import Currency
 
 ZWL: Currency = {
     "code": "ZWL",

@@ -1,5 +1,5 @@
 """ Swedish krona. """
-from .._types import Currency
+from ..types import Currency
 
 SEK: Currency = {
     "code": "SEK",

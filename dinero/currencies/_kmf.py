@@ -1,5 +1,5 @@
 """ Comoro franc. """
-from .._types import Currency
+from ..types import Currency
 
 KMF: Currency = {
     "code": "KMF",

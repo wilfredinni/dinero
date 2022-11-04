@@ -1,5 +1,5 @@
 """ Paraguayan guaraní. """
-from .._types import Currency
+from ..types import Currency
 
 PYG: Currency = {
     "code": "PYG",

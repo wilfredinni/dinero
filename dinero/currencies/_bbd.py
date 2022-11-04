@@ -1,5 +1,5 @@
 """ Barbados dollar. """
-from .._types import Currency
+from ..types import Currency
 
 BBD: Currency = {
     "code": "BBD",

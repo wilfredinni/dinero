@@ -1,5 +1,5 @@
 """ Solomon Islands dollar. """
-from .._types import Currency
+from ..types import Currency
 
 SBD: Currency = {
     "code": "SBD",

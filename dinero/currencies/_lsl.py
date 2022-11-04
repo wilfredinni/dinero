@@ -1,5 +1,5 @@
 """ Lesotho loti. """
-from .._types import Currency
+from ..types import Currency
 
 LSL: Currency = {
     "code": "LSL",

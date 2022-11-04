@@ -1,5 +1,5 @@
 """ West African CFA franc. """
-from .._types import Currency
+from ..types import Currency
 
 XOF: Currency = {
     "code": "XOF",

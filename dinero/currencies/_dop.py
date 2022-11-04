@@ -1,5 +1,5 @@
 """ Dominican peso. """
-from .._types import Currency
+from ..types import Currency
 
 DOP: Currency = {
     "code": "DOP",

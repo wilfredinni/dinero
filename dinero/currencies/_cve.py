@@ -1,5 +1,5 @@
 """ Cape Verdean escudo. """
-from .._types import Currency
+from ..types import Currency
 
 CVE: Currency = {
     "code": "CVE",

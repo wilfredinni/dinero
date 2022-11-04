@@ -1,5 +1,5 @@
 """ CFP franc. """
-from .._types import Currency
+from ..types import Currency
 
 XPF: Currency = {
     "code": "XPF",

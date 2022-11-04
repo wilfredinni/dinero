@@ -1,5 +1,5 @@
 """ WIR Franc. """
-from .._types import Currency
+from ..types import Currency
 
 CHW: Currency = {
     "code": "CHW",

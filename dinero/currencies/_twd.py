@@ -1,5 +1,5 @@
 """ New Taiwan dollar. """
-from .._types import Currency
+from ..types import Currency
 
 TWD: Currency = {
     "code": "TWD",

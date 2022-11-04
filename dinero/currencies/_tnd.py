@@ -1,5 +1,5 @@
 """ Tunisian dinar. """
-from .._types import Currency
+from ..types import Currency
 
 TND: Currency = {
     "code": "TND",

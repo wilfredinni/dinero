@@ -1,5 +1,5 @@
 """ Bahraini dinar. """
-from .._types import Currency
+from ..types import Currency
 
 BHD: Currency = {
     "code": "BHD",

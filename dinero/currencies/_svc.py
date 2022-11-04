@@ -1,5 +1,5 @@
 """ Salvadoran colón. """
-from .._types import Currency
+from ..types import Currency
 
 SVC: Currency = {
     "code": "SVC",

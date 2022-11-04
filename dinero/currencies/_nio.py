@@ -1,5 +1,5 @@
 """ Nicaraguan córdoba. """
-from .._types import Currency
+from ..types import Currency
 
 NIO: Currency = {
     "code": "NIO",

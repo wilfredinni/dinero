@@ -1,5 +1,5 @@
 """ Aruban florin. """
-from .._types import Currency
+from ..types import Currency
 
 AWG: Currency = {
     "code": "AWG",

@@ -1,5 +1,5 @@
 """ Argentine peso. """
-from .._types import Currency
+from ..types import Currency
 
 ARS: Currency = {
     "code": "ARS",

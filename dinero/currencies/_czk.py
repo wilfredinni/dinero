@@ -1,5 +1,5 @@
 """ Czech koruna. """
-from .._types import Currency
+from ..types import Currency
 
 CZK: Currency = {
     "code": "CZK",

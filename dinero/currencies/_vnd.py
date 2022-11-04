@@ -1,5 +1,5 @@
 """ Vietnamese đồng. """
-from .._types import Currency
+from ..types import Currency
 
 VND: Currency = {
     "code": "VND",

@@ -1,5 +1,5 @@
 """ Polish złoty. """
-from .._types import Currency
+from ..types import Currency
 
 PLN: Currency = {
     "code": "PLN",

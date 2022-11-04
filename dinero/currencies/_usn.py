@@ -1,5 +1,5 @@
 """ United States dollar (next day). """
-from .._types import Currency
+from ..types import Currency
 
 USN: Currency = {
     "code": "USN",

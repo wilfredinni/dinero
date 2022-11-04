@@ -1,5 +1,5 @@
 """ Macanese pataca. """
-from .._types import Currency
+from ..types import Currency
 
 MOP: Currency = {
     "code": "MOP",

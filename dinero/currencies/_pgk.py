@@ -1,5 +1,5 @@
 """ Papua New Guinean kina. """
-from .._types import Currency
+from ..types import Currency
 
 PGK: Currency = {
     "code": "PGK",

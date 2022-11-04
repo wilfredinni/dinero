@@ -1,5 +1,5 @@
 """ chilean peso """
-from .._types import Currency
+from ..types import Currency
 
 CLP: Currency = {
     "code": "CLP",

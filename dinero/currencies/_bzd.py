@@ -1,5 +1,5 @@
 """ Belize dollar. """
-from .._types import Currency
+from ..types import Currency
 
 BZD: Currency = {
     "code": "BZD",

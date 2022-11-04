@@ -1,5 +1,5 @@
 """ Kyrgyzstani som. """
-from .._types import Currency
+from ..types import Currency
 
 KGS: Currency = {
     "code": "KGS",

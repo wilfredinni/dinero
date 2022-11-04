@@ -1,5 +1,5 @@
 """ South African rand. """
-from .._types import Currency
+from ..types import Currency
 
 ZAR: Currency = {
     "code": "ZAR",

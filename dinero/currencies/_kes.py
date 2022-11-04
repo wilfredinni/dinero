@@ -1,5 +1,5 @@
 """ Kenyan shilling. """
-from .._types import Currency
+from ..types import Currency
 
 KES: Currency = {
     "code": "KES",

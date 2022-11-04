@@ -1,5 +1,5 @@
 """ South Sudanese pound. """
-from .._types import Currency
+from ..types import Currency
 
 SSP: Currency = {
     "code": "SSP",

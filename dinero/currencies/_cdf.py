@@ -1,5 +1,5 @@
 """ Congolese franc. """
-from .._types import Currency
+from ..types import Currency
 
 CDF: Currency = {
     "code": "CDF",

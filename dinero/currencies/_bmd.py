@@ -1,5 +1,5 @@
 """ Bermudian dollar. """
-from .._types import Currency
+from ..types import Currency
 
 BMD: Currency = {
     "code": "BMD",

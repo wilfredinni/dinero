@@ -1,5 +1,5 @@
 """ Serbian dinar. """
-from .._types import Currency
+from ..types import Currency
 
 RSD: Currency = {
     "code": "RSD",

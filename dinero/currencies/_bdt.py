@@ -1,5 +1,5 @@
 """ Bangladeshi taka. """
-from .._types import Currency
+from ..types import Currency
 
 BDT: Currency = {
     "code": "BDT",

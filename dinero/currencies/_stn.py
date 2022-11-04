@@ -1,5 +1,5 @@
 """ São Tomé and Príncipe dobra. """
-from .._types import Currency
+from ..types import Currency
 
 STN: Currency = {
     "code": "STN",

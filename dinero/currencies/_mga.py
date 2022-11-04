@@ -1,5 +1,5 @@
 """ Malagasy ariary. """
-from .._types import Currency
+from ..types import Currency
 
 MGA: Currency = {
     "code": "MGA",

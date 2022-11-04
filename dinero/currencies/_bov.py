@@ -1,5 +1,5 @@
 """ Bolivian Mvdol. """
-from .._types import Currency
+from ..types import Currency
 
 BOV: Currency = {
     "code": "BOV",

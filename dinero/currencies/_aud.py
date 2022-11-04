@@ -1,5 +1,5 @@
 """ Australian dollar. """
-from .._types import Currency
+from ..types import Currency
 
 AUD: Currency = {
     "code": "AUD",

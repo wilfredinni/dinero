@@ -1,5 +1,5 @@
 """ Kazakhstani tenge. """
-from .._types import Currency
+from ..types import Currency
 
 KZT: Currency = {
     "code": "KZT",

@@ -1,5 +1,5 @@
 """ Unidad de Valor Real. """
-from .._types import Currency
+from ..types import Currency
 
 COU: Currency = {
     "code": "COU",

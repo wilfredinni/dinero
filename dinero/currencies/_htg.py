@@ -1,5 +1,5 @@
 """ Haitian gourde. """
-from .._types import Currency
+from ..types import Currency
 
 HTG: Currency = {
     "code": "HTG",

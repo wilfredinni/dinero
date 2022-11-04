@@ -1,5 +1,5 @@
 """ Iraqi dinar. """
-from .._types import Currency
+from ..types import Currency
 
 IQD: Currency = {
     "code": "IQD",

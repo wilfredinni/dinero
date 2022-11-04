@@ -1,5 +1,5 @@
 """ Afghan afghani. """
-from .._types import Currency
+from ..types import Currency
 
 AFN: Currency = {
     "code": "AFN",

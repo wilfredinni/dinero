@@ -1,5 +1,5 @@
 """ Ethiopian birr. """
-from .._types import Currency
+from ..types import Currency
 
 ETB: Currency = {
     "code": "ETB",

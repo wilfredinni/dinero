@@ -1,5 +1,5 @@
 """ Mauritian rupee. """
-from .._types import Currency
+from ..types import Currency
 
 MUR: Currency = {
     "code": "MUR",

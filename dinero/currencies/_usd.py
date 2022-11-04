@@ -1,5 +1,5 @@
 """ United States dollar """
-from .._types import Currency
+from ..types import Currency
 
 USD: Currency = {
     "code": "USD",

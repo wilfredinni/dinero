@@ -1,5 +1,5 @@
 """ Seychelles rupee. """
-from .._types import Currency
+from ..types import Currency
 
 SCR: Currency = {
     "code": "SCR",

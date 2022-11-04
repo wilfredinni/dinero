@@ -1,5 +1,5 @@
 """ Turkmenistan manat. """
-from .._types import Currency
+from ..types import Currency
 
 TMT: Currency = {
     "code": "TMT",
