@@ -4,6 +4,8 @@
 
 <h1 align="center">Dinero</h1>
 
+This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
+
 A Dinero object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
 
 [Documentation (WIP)](https://wilfredinni.github.io/dinero/)

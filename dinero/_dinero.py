@@ -243,7 +243,7 @@ class Dinero(Operations, Base):
         """
         Returns a new Dinero object that represents the difference of this and an other object.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the subtrahend is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
@@ -343,7 +343,7 @@ class Dinero(Operations, Base):
     def equals_to(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object equals to the other.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the amount is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
@@ -378,7 +378,7 @@ class Dinero(Operations, Base):
     def less_than(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is less than the other.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the amount is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
@@ -413,7 +413,7 @@ class Dinero(Operations, Base):
     def less_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is less than or equal the other.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the amount is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
@@ -448,7 +448,7 @@ class Dinero(Operations, Base):
     def greater_than(self, amount: "OperationType | Dinero") -> bool:
         """Checks whether the value represented by this object is greater or equal the other.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the amount is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
@@ -484,7 +484,7 @@ class Dinero(Operations, Base):
         """
         Checks whether the value represented by this object is greater than or equal the other.
 
-        If the addend is not a Dinero object, it will be transformed to one using the
+        If the amount is not a Dinero object, it will be transformed to one using the
         same currency.
 
         Examples:
