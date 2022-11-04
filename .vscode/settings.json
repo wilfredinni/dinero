@@ -41,11 +41,16 @@
     },
     "peacock.remoteColor": "#111827",
     "cSpell.words": [
+        "ariary",
         "autorefs",
         "getcontext",
+        "inlinehilite",
+        "linenums",
         "mkdocstrings",
         "prec",
-        "repr"
+        "pymdownx",
+        "repr",
+        "superfences"
     ],
     "editor.formatOnSave": false
 }

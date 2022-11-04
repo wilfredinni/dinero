@@ -4,7 +4,10 @@
   <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
 </p>
 
+This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
+
 A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
+
 
 ## The problem
 
@@ -96,18 +99,18 @@ True
 You can easily create custom currencies:
 
 ```python
->>> from dinero import Dinero
->>>
->>> BTC = {
-...     "code": "BTC",
-...     "base": 10,
-...     "exponent": 2,
-...     "symbol": "₿",
-... }
->>>
->>> Dinero(1000.5, BTC)
+from dinero import Dinero
+
+BTC = {
+    "code": "BTC",
+    "base": 10,
+    "exponent": 2,
+    "symbol": "₿",
+}
+
+Dinero(1000.5, BTC)
+```
+
+```python
 Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
->>>
->>> Dinero(1000.5, BTC).format(symbol=True, currency=True)
-'₿1,000.50 BTC'
 ```

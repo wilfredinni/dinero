@@ -11,14 +11,16 @@ plugins:
       handlers:
         python:
           options:
-            show_source: false
+            show_source: False
 
 markdown_extensions:
     - toc:
         permalink: "#"
     - pymdownx.highlight:
-        use_pygments: True
-        linenums: True
+        anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
 
 theme:
   name: "material"
@@ -46,6 +48,6 @@ theme:
 nav:
   - Home: index.md
   - started.md
-  - methods.md
+  - api.md
   - currencies.md
   - exceptions.md

@@ -1,4 +1,4 @@
-# Methods
+# API: Dinero Methods
 
 ::: dinero.Dinero
     options:
