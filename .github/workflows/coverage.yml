@@ -34,10 +34,11 @@ jobs:
 
       - run: poetry install --no-interaction
       - name: Generate coverage report
-        run: poetry run pytest --cov=./ --cov-report=xml
+        run: poetry run pytest --cov .
 
       - name: Upload coverage to Codecov
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
+        uses: codecov/codecov-action@v3
+        # run: |
+        #   curl -Os https://uploader.codecov.io/latest/linux/codecov
+        #   chmod +x codecov
+        #   ./codecov -t ${CODECOV_TOKEN}
