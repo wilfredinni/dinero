@@ -1,6 +1,9 @@
 <h1 align="center"> Dinero: Make exact monetary calculations</h1>
 
 <p align="center">
+<a href="https://codecov.io/github/wilfredinni/dinero" > 
+ <img src="https://codecov.io/github/wilfredinni/dinero/branch/master/graph/badge.svg?token=XQA8OA1Z9W"/> 
+ </a>
 <img alt="test" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" />
 <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
 <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
