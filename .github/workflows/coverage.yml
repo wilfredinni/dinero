@@ -37,10 +37,15 @@ jobs:
         run: poetry run pytest --cov=./ --cov-report=xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage1.xml,./coverage2.xml
-          flags: version,${{ matrix.os }}
-          name: codecov-version
-          version: v0.1.0_8880
-          verbose: true
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
+        # uses: codecov/codecov-action@v3
+        # with:
+        #   files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+        #   file: ./coverage/coverage-final.json
+        #   flags: version,${{ matrix.os }}
+        #   name: codecov-version
+        #   version: v0.1.0_8880
+        #   verbose: true
