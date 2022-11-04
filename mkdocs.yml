@@ -48,6 +48,6 @@ theme:
 nav:
   - Home: index.md
   - started.md
-  - api.md
   - currencies.md
   - exceptions.md
+  - API: api.md

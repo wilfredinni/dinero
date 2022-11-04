@@ -108,7 +108,7 @@ Return a `Dinero` instance as a Python Dictionary:
 
 ### Json
 
-Return a `Dinero` instance as `JSON`:
+Return a `Dinero` instance as a `JSON` string:
 
 ```python title="amount_with_format=False"
 >>> Dinero('2,00', USD).to_json()
