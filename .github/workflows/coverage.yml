@@ -39,8 +39,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
-          file: ./coverage/coverage-final.json
+          files: ./coverage1.xml,./coverage2.xml
           flags: version,${{ matrix.os }}
           name: codecov-version
           version: v0.1.0_8880
