@@ -1,8 +1,16 @@
-# Dinero: Make exact monetary calculations
+<h1 align="center"> Dinero: Make exact monetary calculations</h1>
+
+<p align="center">
+<img alt="test" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" />
+<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
+<img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
+<img alt="PyPI - License" src="https://img.shields.io/pypi/l/dinero">
+</p>
 
 <p align="center">
   <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
 </p>
+
 
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
