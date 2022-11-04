@@ -1,22 +1,14 @@
+# Dinero: Make exact monetary calculations
+
 <p align="center">
   <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
 </p>
 
-<h1 align="center">Dinero</h1>
-
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
-A Dinero object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
+A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
 
-[Documentation (WIP)](https://wilfredinni.github.io/dinero/)
-
-## Install
-
-Dinero is a dependency free project.
-
-```bash
-pip install dinero
-```
+[Read the Documentation](https://wilfredinni.github.io/dinero/)
 
 ## The problem
 
@@ -48,7 +40,6 @@ True
 Dinero give you access to more than 100 different currencies:
 
 ```python
->>> from dinero import Dinero
 >>> from dinero.currencies import USD, EUR, GBP, INR, CLP
 ```
 
@@ -82,7 +73,7 @@ Decimal('2.32')
 # 1,492.30
 ```
 
-### Comparisons:
+### Comparisons
 
 ```python
 >>> Dinero(100, EUR) == Dinero(100, EUR)
@@ -90,8 +81,18 @@ True
 ```
 
 ```python
->>> Dinero(100, EUR) < 100
-False
+>>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
+True
+```
+
+```python
+>>> Dinero(100, EUR) == 100
+True
+```
+
+```python
+>>> Dinero(100, EUR).equals_to(100)
+True
 ```
 
 ### Custom currencies
@@ -99,18 +100,18 @@ False
 You can easily create custom currencies:
 
 ```python
->>> from dinero import Dinero
->>>
->>> BTC = {
-...     "code": "BTC",
-...     "base": 10,
-...     "exponent": 2,
-...     "symbol": "₿",
-... }
->>>
->>> Dinero(1000.5, BTC)
+from dinero import Dinero
+
+BTC = {
+    "code": "BTC",
+    "base": 10,
+    "exponent": 2,
+    "symbol": "₿",
+}
+
+Dinero(1000.5, BTC)
+```
+
+```python
 Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
->>>
->>> Dinero(1000.5, BTC).format(symbol=True, currency=True)
-'₿1,000.50 BTC'
 ```
