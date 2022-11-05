@@ -11,7 +11,8 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.10", "3.11"]
+        # python-version: ["3.10", "3.11"]
+        python-version: ["3.11"]
 
     steps:
       - uses: actions/checkout@v3
@@ -38,11 +39,14 @@ jobs:
       - run: poetry install --no-interaction
 
       - name: Generate coverage report
-        run: poetry run pytest --cov .
+        run: |
+            poetry run pytest --cov . --cov-report=
+            poetry run coverage xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        # run: |
-        #   curl -Os https://uploader.codecov.io/latest/linux/codecov
-        #   chmod +x codecov
-        #   ./codecov -t ${CODECOV_TOKEN}
+        with:
+          flags: ${{ matrix.os }}_${{ matrix.python-version }}
+          verbose: true
+          fail_ci_if_error: true
+          file: coverage.xml
