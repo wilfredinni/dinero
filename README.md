@@ -1,19 +1,19 @@
 <h1 align="center"> Dinero: Make exact monetary calculations</h1>
 
 <p align="center">
-<a href="https://codecov.io/github/wilfredinni/dinero" > 
- <img src="https://codecov.io/github/wilfredinni/dinero/branch/master/graph/badge.svg?token=XQA8OA1Z9W"/> 
- </a>
-<img alt="test" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" />
-<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
 <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
+<a href="https://codecov.io/github/wilfredinni/dinero" > 
+<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
+<img alt="test" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" />
+ <img alt="Codecov" src="https://img.shields.io/codecov/c/github/wilfredinni/dinero">
+ </a>
+ <a href="https://www.codacy.com/gh/wilfredinni/dinero/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wilfredinni/dinero&amp;utm_campaign=Badge_Grade"><img alt="Codacy grade" src="https://img.shields.io/codacy/grade/d6b13235aec14905968fb4b0e9a5e8fd"></a>
 <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dinero">
 </p>
 
 <p align="center">
   <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
 </p>
-
 
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
