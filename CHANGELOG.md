@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.4...master)
 
-- It is no longer posible to campare a `Dinero` instance to objects of other types.
+-  It is no longer possible to compare a `Dinero` instance to objects of other types.
 - Multiplication and division can be performed only with `int`, `float` and `Decimal` types.
 - Added GitHub community files: SECURITY, CHANGELOG and CONTRIBUTING.
 - Added coverage and code quality checks.
