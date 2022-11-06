@@ -62,8 +62,10 @@ def test_obj_formatted(obj, number, symbol, currency, full):
 @pytest.mark.parametrize(
     "unit_price, units_sold, money_received",
     [
-        (Dinero("2.32", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.32", USD), Dinero("5.38", USD)),
+        (Dinero("2.32", USD), 3, Dinero("6.96", USD)),
+        (Dinero("2.32", USD), Decimal(3), Dinero("6.96", USD)),
+        (Dinero("2.32", USD), 3.0, Dinero("6.96", USD)),
+        (Dinero("2.32", USD), Decimal(3.0), Dinero("6.96", USD)),
     ],
 )
 def test_balance_ok(unit_price, units_sold, money_received):
@@ -74,8 +76,10 @@ def test_balance_ok(unit_price, units_sold, money_received):
 @pytest.mark.parametrize(
     "unit_price, units_sold, money_received",
     [
-        (Dinero("2.38", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.33", USD), Dinero("5.38", USD)),
+        (Dinero("2.38", USD), 3, Dinero("6.96", USD)),
+        (Dinero("2.38", USD), Decimal(3), Dinero("6.96", USD)),
+        (Dinero("2.32", USD), 2.33, Dinero("5.38", USD)),
+        (Dinero("2.32", USD), Decimal(2.33), Dinero("5.38", USD)),
     ],
 )
 def test_balance_wrong(unit_price, units_sold, money_received):

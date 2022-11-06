@@ -6,7 +6,7 @@ class DifferentCurrencyError(Exception):
 
 
 class InvalidOperationError(InvalidOperation):
-    """Dinero obj was compared to something that is not int, str, float, Decimal or Dinero."""
+    """An operation between unsupported types was executed."""
 
-    addition_msg = "You can only work against int, float, str, Decimal and Dinero."
-    comparison_msg = "You can only compare against Dinero instances."
+    operation_msg = "An operation between unsupported types was executed."
+    comparison_msg = "You can only compare against other Dinero instances."

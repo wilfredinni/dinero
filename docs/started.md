@@ -122,15 +122,43 @@ Return a `Dinero` instance as a `JSON` string:
 
 ## Operations
 
+If the addend or subtrahend is an `str`, `int`, `float` or `Decimal`, it will be transformed, under the hood, to a Dinero instance using the same currency:
+
 ```python title='Addition'
+# those operations
 Dinero(1000, USD).add(Dinero(1000, USD))
 Dinero(1000, USD) + Dinero(1000, USD)
+
+# are equivalent to
+Dinero(1000, USD).add(1000)
+Dinero(1000, USD) + 1000
 ```
 
 ```python title='Subtraction'
+# those operations
 Dinero(1000, USD).subtract(Dinero(100, USD))
 Dinero(1000, USD) - Dinero(100, USD)
+
+# are equivalent to
+Dinero(1000, USD).subtract(1000)
+Dinero(1000, USD) - 100
 ```
+
+Additions and subtractions must be between instances with the same `currency`:
+
+```python title='DifferentCurrencyError'
+>>> total = Dinero(100, USD) + Dinero(100, EUR)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/.../dinero/_dinero.py", line 120, in __add__
+    addend_obj = self._get_instance(addend)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/.../dinero/_dinero.py", line 74, in _get_instance
+    raise DifferentCurrencyError("Currencies can not be different")
+dinero.exceptions.DifferentCurrencyError: Currencies can not be different
+```
+
+The multiplicand and divisor can be `int`, `float` or of `Decimal` type:
 
 ```python title='Multiplication'
 Dinero(1000, USD).multiply(2)
@@ -140,18 +168,6 @@ Dinero(1000, USD) * 2
 ```python title='Division'
 Dinero(1000, USD).divide(2)
 Dinero(1000, USD) / 2
-```
-
-If a `Dinero` object is operated against an `int`, `float`, `str` or `Decimal`, that value will be transformed to a `Dinero` instance using the same currency:
-
-```python title='Addition'
-Dinero(1000, USD).add(1000)
-Dinero(1000, USD) + 1000
-```
-
-```python title='Subtraction'
-Dinero(1000, USD).subtract(100)
-Dinero(1000, USD) - 100
 ```
 
 ## Comparisons
@@ -179,6 +195,19 @@ Dinero(1000, USD) > Dinero(1000, USD)
 ```python title='Greater than or equal'
 Dinero(1000, USD).greater_than_or_equal(Dinero(1000, USD))
 Dinero(1000, USD) >= Dinero(1000, USD)
+```
+
+You can only compare to other `Dinero` objects:
+
+```python title='InvalidOperationError'
+>>> Dinero(100, USD) == 100
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/.../dinero/_dinero.py", line 146, in __eq__
+    self._validate_comparison_amount(amount)
+  File "/home/.../dinero/_dinero.py", line 103, in _validate_comparison_amount
+    raise InvalidOperationError(InvalidOperationError.comparison_msg)
+dinero.exceptions.InvalidOperationError: You can only compare against other Dinero instances.
 ```
 
 ## Currencies
@@ -221,7 +250,6 @@ Dinero(1000.5, BTC)
 ### Type hints
 
 If you are using `type hints` in your project you would want to import `dinero.types.Currency` to prevent warnings:
-
 
 ```python title='dinero.types.Currency'
 class Currency(TypedDict):

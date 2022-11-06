@@ -32,7 +32,7 @@ class Base:
         self.amount = amount
         self.currency = currency
 
-        _check_valid_amount(amount)
+        _validate_dinero_amount(amount)
 
     @property
     def symbol(self):
@@ -116,6 +116,7 @@ class Operations(Utils):
     """All the operations supported between Dinero objects."""
 
     def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
+        _validate_addition_subtraction_amount(addend)
         addend_obj = self._get_instance(addend)
         total = self._normalize() + addend_obj._normalize()
         return Dinero(str(total), self.currency)
@@ -124,16 +125,19 @@ class Operations(Utils):
         return self
 
     def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
+        _validate_addition_subtraction_amount(subtrahend)
         subtrahend_obj = self._get_instance(subtrahend)
         total = self._normalize() - subtrahend_obj._normalize()
         return Dinero(str(total), self.currency)
 
-    def __mul__(self, multiplicand: "OperationType | Dinero") -> "Dinero":
+    def __mul__(self, multiplicand: int | float | Decimal) -> "Dinero":
+        _validate_multiplication_division_amount(multiplicand)
         multiplicand_obj = self._get_instance(multiplicand)
         total = self._normalize() * multiplicand_obj._normalize()
         return Dinero(str(total), self.currency)
 
-    def __truediv__(self, divisor: "OperationType | Dinero") -> "Dinero":
+    def __truediv__(self, divisor: int | float | Decimal) -> "Dinero":
+        _validate_multiplication_division_amount(divisor)
         divisor_obj = self._get_instance(divisor)
         total = self._normalize() / divisor_obj._normalize()
         return Dinero(str(total), self.currency)
@@ -554,7 +558,7 @@ class Dinero(Operations, Base):
         return f"{formatted_output}"
 
 
-def _check_valid_amount(amount: int | float | str | Decimal) -> None:
+def _validate_dinero_amount(amount: int | float | str | Decimal) -> None:
     """Validate that the amount passed to Dinero is of valid type
 
     Args:
@@ -565,9 +569,43 @@ def _check_valid_amount(amount: int | float | str | Decimal) -> None:
     """
     try:
         if not isinstance(amount, (int, float, str, Decimal, Dinero)):
-            raise InvalidOperationError(InvalidOperationError.addition_msg)
+            raise InvalidOperationError(InvalidOperationError.operation_msg)
 
         Decimal(amount)
 
     except (ValueError, InvalidOperation):
-        raise InvalidOperationError(InvalidOperationError.addition_msg)
+        raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+
+def _validate_addition_subtraction_amount(amount: "OperationType | Dinero") -> None:
+    """Validate that the amount passed to an addition or subtraction is of valid type.
+
+    Args:
+        amount (str, int, float, Decimal, Dinero)
+
+    Raises:
+        InvalidOperationError: An operation between unsupported types was executed.
+    """
+    try:
+        if not isinstance(amount, (int, float, str, Decimal, Dinero)):
+            raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+    except (ValueError, InvalidOperation):
+        raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+
+def _validate_multiplication_division_amount(number: int | float | Decimal) -> None:
+    """Validate that the number passed to a multiplication and division is of valid type.
+
+    Args:
+        amount (int, float, Decimal)
+
+    Raises:
+        InvalidOperationError: An operation between unsupported types was executed.
+    """
+    try:
+        if not isinstance(number, (int, float, Decimal)):
+            raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+    except (ValueError, InvalidOperation):
+        raise InvalidOperationError(InvalidOperationError.operation_msg)
