@@ -52,7 +52,7 @@ Python `Decimal` instances are enough for basic cases but when you face more com
 >>> from dinero import Dinero
 >>> from dinero.currencies import USD
 >>>
->>> Dinero(2.32, USD) * 3 == 6.96
+>>> Dinero(2.32, USD) * 3 == Dinero(6.96. USD)
 True
 ```
 
@@ -97,22 +97,12 @@ Decimal('2.32')
 ### Comparisons
 
 ```python
->>> Dinero(100, EUR) == Dinero(100, EUR)
-True
-```
-
-```python
 >>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
 True
 ```
 
 ```python
->>> Dinero(100, EUR) == 100
-True
-```
-
-```python
->>> Dinero(100, EUR).equals_to(100)
+>>> Dinero(100, EUR) == Dinero(100, EUR)
 True
 ```
 

@@ -63,7 +63,6 @@ def test_obj_formatted(obj, number, symbol, currency, full):
     "unit_price, units_sold, money_received",
     [
         (Dinero("2.32", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.32", USD), "5.38"),
         (Dinero("2.32", USD), Dinero("2.32", USD), Dinero("5.38", USD)),
     ],
 )
@@ -76,7 +75,6 @@ def test_balance_ok(unit_price, units_sold, money_received):
     "unit_price, units_sold, money_received",
     [
         (Dinero("2.38", USD), "3", Dinero("6.96", USD)),
-        (Dinero("2.32", USD), Dinero("2.31", USD), "5.38"),
         (Dinero("2.32", USD), Dinero("2.33", USD), Dinero("5.38", USD)),
     ],
 )

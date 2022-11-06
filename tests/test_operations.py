@@ -9,7 +9,7 @@ from dinero.exceptions import InvalidOperationError
     "obj_1, obj_2",
     [
         (Dinero(24.5, USD), Dinero(24.5, USD)),
-        (Dinero(24.5, USD), 24.5),
+        (Dinero(22.9934534, USD), Dinero(22.9934534, USD)),
     ],
 )
 def test_equal(obj_1, obj_2):
@@ -22,7 +22,7 @@ def test_equal(obj_1, obj_2):
     [
         (Dinero(24.5, USD), Dinero(24, USD)),
         (Dinero(24.5, USD), Dinero(24.5, EUR)),
-        (Dinero(24.5, USD), 24.4),
+        (Dinero(22.9934534, USD), Dinero(22.9234539, USD)),
     ],
 )
 def test_not_equal(obj_1, obj_2):

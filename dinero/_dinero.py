@@ -98,6 +98,10 @@ class Utils(Base):
 
         return normalized_amount
 
+    def _validate_comparison_amount(self, amount):
+        if not isinstance(amount, Dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
     @property
     def _formatted_amount(self) -> str:
         currency_format = f",.{self.exponent}f"
@@ -135,6 +139,8 @@ class Operations(Utils):
         return Dinero(str(total), self.currency)
 
     def __eq__(self, amount: object) -> bool:
+        self._validate_comparison_amount(amount)
+
         if isinstance(amount, Dinero):
             if amount.code != self.code:
                 return False
@@ -340,11 +346,8 @@ class Dinero(Operations, Base):
 
         return self.__truediv__(amount)
 
-    def equals_to(self, amount: "OperationType | Dinero") -> bool:
-        """Checks whether the value represented by this object equals to the other.
-
-        If the amount is not a Dinero object, it will be transformed to one using the
-        same currency.
+    def equals_to(self, amount: "Dinero") -> bool:
+        """Checks whether the value represented by this object equals to other Dinero instance.
 
         Examples:
             >>> amount_1 = Dinero("2.32", USD)
@@ -352,18 +355,11 @@ class Dinero(Operations, Base):
             >>> amount_1.equals_to(amount_2)
             True
 
-            >>> amount = Dinero("2.32", USD)
-            >>> amount.equals_to("2.31")
-            False
-
             >>> Dinero("2.32", USD) == Dinero("2.32", USD)
             True
 
-            >>> Dinero("2.32", USD) == "2.31"
-            False
-
         Args:
-            amount (str, int, float, Decimal, Dinero): The object to compare to.
+            amount (Dinero): The object to compare to.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -375,11 +371,8 @@ class Dinero(Operations, Base):
 
         return self.__eq__(amount)
 
-    def less_than(self, amount: "OperationType | Dinero") -> bool:
+    def less_than(self, amount: "Dinero") -> bool:
         """Checks whether the value represented by this object is less than the other.
-
-        If the amount is not a Dinero object, it will be transformed to one using the
-        same currency.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
@@ -387,18 +380,11 @@ class Dinero(Operations, Base):
             >>> amount_1.less_than(amount_2)
             True
 
-            >>> amount = Dinero(24, USD)
-            >>> amount.less_than("25")
-            True
-
             >>> Dinero(24, USD) < Dinero(25, USD)
             True
 
-            >>> Dinero(24, USD) < "25"
-            True
-
         Args:
-            amount (str, int, float, Decimal, Dinero): The object to compare to.
+            amount (Dinero): The object to compare to.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -410,11 +396,8 @@ class Dinero(Operations, Base):
 
         return self.__lt__(amount)
 
-    def less_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
+    def less_than_or_equal(self, amount: "Dinero") -> bool:
         """Checks whether the value represented by this object is less than or equal the other.
-
-        If the amount is not a Dinero object, it will be transformed to one using the
-        same currency.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
@@ -422,18 +405,11 @@ class Dinero(Operations, Base):
             >>> amount_1.less_than_or_equal(amount_2)
             True
 
-            >>> amount = Dinero(24, USD)
-            >>> amount.less_than_or_equal("25")
-            True
-
             >>> Dinero(24, USD) <= Dinero(25, USD)
             True
 
-            >>> Dinero(24, USD) <= "25"
-            True
-
         Args:
-            amount (str, int, float, Decimal, Dinero): The object to compare to.
+            amount (Dinero): The object to compare to.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -445,11 +421,8 @@ class Dinero(Operations, Base):
 
         return self.__le__(amount)
 
-    def greater_than(self, amount: "OperationType | Dinero") -> bool:
+    def greater_than(self, amount: "Dinero") -> bool:
         """Checks whether the value represented by this object is greater or equal the other.
-
-        If the amount is not a Dinero object, it will be transformed to one using the
-        same currency.
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
@@ -457,18 +430,11 @@ class Dinero(Operations, Base):
             >>> amount_1.greater_than(amount_2)
             True
 
-            >>> amount = Dinero(25, USD)
-            >>> amount.greater_than("24")
-            True
-
             >>> Dinero(25, USD) > Dinero(24, USD)
             True
 
-            >>> Dinero(25, USD) > "24"
-            True
-
         Args:
-            amount (str, int, float, Decimal, Dinero): The object to compare to.
+            amount (Dinero): The object to compare to.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -480,12 +446,9 @@ class Dinero(Operations, Base):
 
         return self.__gt__(amount)
 
-    def greater_than_or_equal(self, amount: "OperationType | Dinero") -> bool:
+    def greater_than_or_equal(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object is greater than or equal the other.
-
-        If the amount is not a Dinero object, it will be transformed to one using the
-        same currency.
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
@@ -493,18 +456,11 @@ class Dinero(Operations, Base):
             >>> amount_1.greater_than_or_equal(amount_2)
             True
 
-            >>> amount = Dinero(25, USD)
-            >>> amount.greater_than_or_equal("24")
-            True
-
             >>> Dinero(25, USD) >= Dinero(24, USD)
             True
 
-            >>> Dinero(25, USD) >= "24"
-            True
-
         Args:
-            amount (str, int, float, Decimal, Dinero): The object to compare to.
+            amount (Dinero): The object to compare to.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -609,9 +565,9 @@ def _check_valid_amount(amount: int | float | str | Decimal) -> None:
     """
     try:
         if not isinstance(amount, (int, float, str, Decimal, Dinero)):
-            raise InvalidOperationError(InvalidOperationError.message)
+            raise InvalidOperationError(InvalidOperationError.addition_msg)
 
         Decimal(amount)
 
     except (ValueError, InvalidOperation):
-        raise InvalidOperationError(InvalidOperationError.message)
+        raise InvalidOperationError(InvalidOperationError.addition_msg)

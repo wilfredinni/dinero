@@ -7,12 +7,10 @@ from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 @pytest.mark.parametrize(
     "amount, divisor, total",
     [
-        (Dinero("155.5", USD), "2.5", "62.20"),
-        (Dinero("155.5", USD), Dinero("2.5", USD), "62.20"),
         (Dinero("155.5", USD), Dinero("2.5", USD), Dinero("62.20", USD)),
         (Dinero("155.5", USD), "2.5", Dinero("62.20", USD)),
     ],
-    ids=["obj_str_str", "obj_obj_str", "obj_obj_obj", "obj_str_obj"],
+    ids=["obj_obj_obj", "obj_str_obj"],
 )
 def test_divide_amount_str(amount, divisor, total):
     assert amount / divisor == total
@@ -23,12 +21,10 @@ def test_divide_amount_str(amount, divisor, total):
 @pytest.mark.parametrize(
     "amount, divisor, total",
     [
-        (Dinero(155.5, USD), 2.5, 62.20),
-        (Dinero(155.5, USD), Dinero(2.5, USD), 62.20),
         (Dinero(155.5, USD), Dinero(2.5, USD), Dinero(62.20, USD)),
         (Dinero(155.5, USD), 2.5, Dinero(62.20, USD)),
     ],
-    ids=["obj_str_str", "obj_obj_str", "obj_obj_obj", "obj_str_obj"],
+    ids=["obj_obj_obj", "obj_str_obj"],
 )
 def test_divide_amount_number(amount, divisor, total):
     assert amount / divisor == total
@@ -45,13 +41,6 @@ def test_divide_amount_number(amount, divisor, total):
         (Dinero(155.5, USD), Dinero(2.5, USD), Dinero("62.20", USD)),
         (Dinero("155.5", USD), Dinero(2.5, USD), Dinero(62.20, USD)),
         (Dinero(155.5, USD), Dinero("2.5", USD), Dinero(62.20, USD)),
-        # ----
-        (Dinero(155.5, USD), Dinero("2.5", USD), "62.20"),
-        (Dinero("155.5", USD), Dinero(2.5, USD), "62.20"),
-        (Dinero("155.5", USD), Dinero("2.5", USD), 62.20),
-        (Dinero(155.5, USD), Dinero(2.5, USD), "62.20"),
-        (Dinero("155.5", USD), Dinero(2.5, USD), 62.20),
-        (Dinero(155.5, USD), Dinero("2.5", USD), 62.20),
         # ----
         (Dinero(155.5, USD), "2.5", Dinero("62.20", USD)),
         (Dinero("155.5", USD), 2.5, Dinero("62.20", USD)),

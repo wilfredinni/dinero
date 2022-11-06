@@ -8,4 +8,5 @@ class DifferentCurrencyError(Exception):
 class InvalidOperationError(InvalidOperation):
     """Dinero obj was compared to something that is not int, str, float, Decimal or Dinero."""
 
-    message = "You can only work against int, float, str, Decimal and Dinero"
+    addition_msg = "You can only work against int, float, str, Decimal and Dinero."
+    comparison_msg = "You can only compare against Dinero instances."

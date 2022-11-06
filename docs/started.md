@@ -156,56 +156,29 @@ Dinero(1000, USD) - 100
 
 ## Comparisons
 
-Again, if a `Dinero` object is compared against an `int`, `float`, `str` or `Decimal`, that value will be transformed to a `Dinero` instance using the same currency:
-
 ```python title='Equals to'
-# the following comparisons
 Dinero(1000, USD).equals_to(Dinero(1000, USD))
 Dinero(1000, USD) == Dinero(1000, USD)
-
-# are equivalent to
-Dinero(1000, USD).equals_to(1000)
-Dinero(1000, USD) == 1000
 ```
 
 ```python title='Less than'
-# the following comparisons
 Dinero(1000, USD).less_than(Dinero(1000, USD))
 Dinero(1000, USD) < Dinero(1000, USD)
-
-# are equivalent to
-Dinero(1000, USD).less_than(1000)
-Dinero(1000, USD) < 1000
 ```
 
 ```python title='Less than or equal'
-# the following comparisons
 Dinero(1000, USD).less_than_or_equal(Dinero(1000, USD))
 Dinero(1000, USD) <= Dinero(1000, USD)
-
-# are equivalent to
-Dinero(1000, USD).less_than_or_equal(1000)
-Dinero(1000, USD) <= 1000
 ```
 
 ```python title='Greater than'
-# the following comparisons
 Dinero(1000, USD).greater_than(Dinero(1000, USD))
 Dinero(1000, USD) > Dinero(1000, USD)
-
-# are equivalent to
-Dinero(1000, USD).greater_than(1000)
-Dinero(1000, USD) > 1000
 ```
 
 ```python title='Greater than or equal'
-# the following comparisons
 Dinero(1000, USD).greater_than_or_equal(Dinero(1000, USD))
 Dinero(1000, USD) >= Dinero(1000, USD)
-
-# are equivalent to
-Dinero(1000, USD).greater_than_or_equal(1000)
-Dinero(1000, USD) >= 1000
 ```
 
 ## Currencies

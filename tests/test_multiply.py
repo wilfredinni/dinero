@@ -8,12 +8,10 @@ from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 @pytest.mark.parametrize(
     "amount, multiplicand, total",
     [
-        (Dinero("2.32", USD), "3", "6.96"),
-        (Dinero("2.32", USD), Dinero("3", USD), "6.96"),
         (Dinero("2.32", USD), Dinero("3", USD), Dinero("6.96", USD)),
         (Dinero("2.32", USD), "3", Dinero("6.96", USD)),
     ],
-    ids=["obj_str_str", "obj_obj_str", "obj_obj_obj", "obj_str_obj"],
+    ids=["obj_obj_obj", "obj_str_obj"],
 )
 def test_multiply_amount_str(amount, multiplicand, total):
     assert amount * multiplicand == total
@@ -24,12 +22,10 @@ def test_multiply_amount_str(amount, multiplicand, total):
 @pytest.mark.parametrize(
     "amount, multiplicand, total",
     [
-        (Dinero(2.32, USD), 3, 6.96),
-        (Dinero(2.32, USD), Dinero(3, USD), 6.96),
         (Dinero(2.32, USD), Dinero(3, USD), Dinero(6.96, USD)),
         (Dinero(2.32, USD), 3, Dinero(6.96, USD)),
     ],
-    ids=["obj_str_str", "obj_obj_str", "obj_obj_obj", "obj_str_obj"],
+    ids=["obj_obj_obj", "obj_str_obj"],
 )
 def test_multiply_amount_number(amount, multiplicand, total):
     assert amount * multiplicand == total
@@ -46,13 +42,6 @@ def test_multiply_amount_number(amount, multiplicand, total):
         (Dinero(2.32, USD), Dinero(3, USD), Dinero("6.96", USD)),
         (Dinero("2.32", USD), Dinero(3, USD), Dinero(6.96, USD)),
         (Dinero(2.32, USD), Dinero("3", USD), Dinero(6.96, USD)),
-        # ----
-        (Dinero(2.32, USD), Dinero("3", USD), "6.96"),
-        (Dinero("2.32", USD), Dinero(3, USD), "6.96"),
-        (Dinero("2.32", USD), Dinero("3", USD), 6.96),
-        (Dinero(2.32, USD), Dinero(3, USD), "6.96"),
-        (Dinero("2.32", USD), Dinero(3, USD), 6.96),
-        (Dinero(2.32, USD), Dinero("3", USD), 6.96),
         # ----
         (Dinero(2.32, USD), "3", Dinero("6.96", USD)),
         (Dinero("2.32", USD), 3, Dinero("6.96", USD)),
