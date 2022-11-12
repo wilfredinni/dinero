@@ -20,9 +20,9 @@ import json
 from decimal import Decimal, InvalidOperation, getcontext
 from typing import Any
 
-from .types import Currency, OperationType
 from ._utils import DecimalEncoder
 from .exceptions import DifferentCurrencyError, InvalidOperationError
+from .types import Currency, OperationType
 
 
 class Base:
