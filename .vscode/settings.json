@@ -52,5 +52,5 @@
         "repr",
         "superfences"
     ],
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
 }
