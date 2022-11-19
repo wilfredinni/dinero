@@ -1,6 +1,6 @@
-"""This module allows the user to make exact monetary calculations.
+"""Dinero allows the user to make exact monetary calculations.
 
-The module contains the following methods:
+This module contains the following methods:
 
 - `format()` - Format a Dinero object with his decimals, symbol and/or code.
 - `add()` - Returns a new Dinero object that represents the sum two amounts.
@@ -21,7 +21,7 @@ from decimal import Decimal, getcontext
 from typing import Any
 
 from ._utils import DecimalEncoder
-from .exceptions import DifferentCurrencyError, InvalidOperationError
+from .exceptions import DifferentCurrencyError
 from .types import Currency, OperationType
 from ._validators import Validate
 
@@ -101,10 +101,6 @@ class Utils(Base):
 
         return normalized_amount
 
-    def _validate_comparison_amount(self, amount):
-        if not isinstance(amount, Dinero):
-            raise InvalidOperationError(InvalidOperationError.comparison_msg)
-
     @property
     def _formatted_amount(self) -> str:
         currency_format = f",.{self.exponent}f"
@@ -146,7 +142,7 @@ class Operations(Utils):
         return Dinero(str(total), self.currency)
 
     def __eq__(self, amount: object) -> bool:
-        self._validate_comparison_amount(amount)
+        validator.validate_comparison_amount(amount)
 
         if isinstance(amount, Dinero):
             if amount.code != self.code:
@@ -158,21 +154,25 @@ class Operations(Utils):
         return bool(num_1 == num_2)
 
     def __lt__(self, amount: object) -> bool:
+        validator.validate_comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 < num_2)
 
     def __le__(self, amount: object) -> bool:
+        validator.validate_comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 <= num_2)
 
     def __gt__(self, amount: object) -> bool:
+        validator.validate_comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 > num_2)
 
     def __ge__(self, amount: object) -> bool:
+        validator.validate_comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 >= num_2)

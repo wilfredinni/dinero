@@ -34,7 +34,7 @@ def test_not_equal(obj_1, obj_2):
     "obj_1, obj_2",
     [
         (Dinero(24, USD), Dinero(25, USD)),
-        (Dinero(24.5, USD), 24.6),
+        (Dinero(24.5, USD), Dinero(24.6, USD)),
     ],
 )
 def test_less_than(obj_1, obj_2):
@@ -46,8 +46,8 @@ def test_less_than(obj_1, obj_2):
     "obj_1, obj_2",
     [
         (Dinero(24, USD), Dinero(25, USD)),
-        (Dinero(24.5, USD), 24.6),
-        (Dinero(24.5, USD), 24.5),
+        (Dinero(24.5, USD), Dinero(24.6, USD)),
+        (Dinero(24.5, USD), Dinero(24.5, USD)),
     ],
 )
 def test_less_than_or_equal(obj_1, obj_2):
@@ -59,7 +59,7 @@ def test_less_than_or_equal(obj_1, obj_2):
     "obj_1, obj_2",
     [
         (Dinero(25, USD), Dinero(24, USD)),
-        (Dinero(24.6, USD), 24.5),
+        (Dinero(24.6, USD), Dinero(24.5, USD)),
     ],
 )
 def test_greater_than(obj_1, obj_2):
@@ -71,8 +71,8 @@ def test_greater_than(obj_1, obj_2):
     "obj_1, obj_2",
     [
         (Dinero(25, USD), Dinero(24, USD)),
-        (Dinero(24.6, USD), 24.5),
-        (Dinero(24.5, USD), 24.5),
+        (Dinero(24.6, USD), Dinero(24.5, USD)),
+        (Dinero(24.5, USD), Dinero(24.5, USD)),
     ],
 )
 def test_greater_than_or_equal(obj_1, obj_2):

@@ -61,3 +61,10 @@ class Validate:
 
         except (ValueError, InvalidOperation):
             raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+    @staticmethod
+    def validate_comparison_amount(amount: object) -> None:
+        from ._dinero import Dinero
+
+        if not isinstance(amount, Dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)

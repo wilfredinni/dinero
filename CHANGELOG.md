@@ -2,7 +2,8 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.5...master)
 
-- Fix Type Hints for multiply and divide methods.
+- Fixed Type Hints for `multiply` and `divide` methods.
+- Fixed `InvalidOperationError` not raising when comparing against a non `Dinero` object.
 - Move validators to their own module.
 
 ## [0.1.5](https://github.com/wilfredinni/dinero/releases/tag/0.1.5) (2022-11-03)
