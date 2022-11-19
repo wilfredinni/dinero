@@ -1,6 +1,6 @@
 """This module allows the user to make exact monetary calculations.
 
-The module contains the following functions:
+The module contains the following methods:
 
 - `format()` - Format a Dinero object with his decimals, symbol and/or code.
 - `add()` - Returns a new Dinero object that represents the sum two amounts.
@@ -285,7 +285,7 @@ class Dinero(Operations, Base):
 
         return self.__sub__(amount)
 
-    def multiply(self, amount: "OperationType | Dinero") -> "Dinero":
+    def multiply(self, amount: int | float | Decimal) -> "Dinero":
         """
         Returns a new Dinero object that represents the multiplied value by the given factor.
 
@@ -318,7 +318,7 @@ class Dinero(Operations, Base):
 
         return self.__mul__(amount)
 
-    def divide(self, amount: "OperationType | Dinero") -> "Dinero":
+    def divide(self, amount: int | float | Decimal) -> "Dinero":
         """Returns a new Dinero object that represents the divided value by the given factor.
 
         Examples:

@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.5...master)
 
+- Fix types for multiply and divide methods.
+
 ## [0.1.5](https://github.com/wilfredinni/dinero/releases/tag/0.1.5) (2022-11-03)
 
 -  It is no longer possible to compare a `Dinero` instance to objects of other types ([796b9e2](https://github.com/wilfredinni/dinero/commit/796b9e2e1f344f20be14edffc9a0579192d9a93b)).
