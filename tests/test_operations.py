@@ -1,7 +1,7 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR
+from dinero.currencies import USD
 from dinero.exceptions import InvalidOperationError
 
 
@@ -21,7 +21,6 @@ def test_equal(obj_1, obj_2):
     "obj_1, obj_2",
     [
         (Dinero(24.5, USD), Dinero(24, USD)),
-        (Dinero(24.5, USD), Dinero(24.5, EUR)),
         (Dinero(22.9934534, USD), Dinero(22.9234539, USD)),
     ],
 )

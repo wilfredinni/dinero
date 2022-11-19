@@ -4,10 +4,36 @@ import pytest
 
 from dinero import Dinero
 from dinero.currencies import USD, EUR, GBP
+from dinero.exceptions import InvalidOperationError
+from dinero._validators import Validators
 
 unit_price = Dinero(2.32, USD)
 money_received = Dinero("6.96", USD)
 number_sold = 3
+
+
+validate = Validators()
+
+
+@pytest.mark.parametrize(
+    "amount",
+    [
+        (Dinero(24, USD)),
+        (Dinero(24.5, USD)),
+        (Dinero("24.5", USD)),
+    ],
+)
+def test_dinero_amount_validator(amount):
+    assert isinstance(amount, Dinero)
+
+
+@pytest.mark.parametrize(
+    "amount",
+    [[], (), {}, set()],
+)
+def test_error_dinero_amount_validator(amount):
+    with pytest.raises(InvalidOperationError):
+        Dinero(amount, USD)
 
 
 @pytest.mark.parametrize(

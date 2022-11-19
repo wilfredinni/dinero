@@ -1,19 +1,18 @@
-"""Dinero allows the user to make exact monetary calculations.
+"""
+Dinero allows the user to make exact monetary calculations.
 
-This module contains the following methods:
-
-- `format()` - Format a Dinero object with his decimals, symbol and/or code.
-- `add()` - Returns a new Dinero object that represents the sum two amounts.
-- `subtract()` - Returns a new Dinero object that represents the difference of two amounts.
-- `multiply()` - Returns a new Dinero object that represents the multiplied value by a factor.
-- `divide()` - Returns a new Dinero object that represents the divided value by a factor.
-- `equals_to()` - Checks whether the value represented by this object equals to the other.
-- `less_than()` - Checks whether the value represented by this object is less than the other.
-- `less_than_or_equal()` - Checks whether an object is less than or equal the other.
-- `greater_than()` - Checks whether an object is greater or equal the other.
-- `greater_than_or_equal()` - Checks whether an object is greater or equal the other.
-- `to_dict()` - Returns the object's data as a Python Dictionary.
-- `to_json()` - Returns the object's data as a JSON string.
+- format:: Format a Dinero object with his decimals, symbol and/or code.
+- add:: Returns a new Dinero object that represents the sum two amounts.
+- subtract:: Returns a new Dinero object that represents the difference of two amounts.
+- multiply:: Returns a new Dinero object that represents the multiplied value by a factor.
+- divide:: Returns a new Dinero object that represents the divided value by a factor.
+- equals_to:: Checks whether the value represented by this object equals to the other.
+- less_than:: Checks whether the value represented by this object is less than the other.
+- less_than_or_equal:: Checks whether an object is less than or equal the other.
+- greater_than:: Checks whether an object is greater or equal the other.
+- greater_than_or_equal:: Checks whether an object is greater or equal the other.
+- to_dict:: Returns the object's data as a Python Dictionary.
+- to_json:: Returns the object's data as a JSON string.
 """
 
 import json
@@ -57,7 +56,7 @@ class Base:
 class Utils(Base):
     """Utility class with the most important methods to count money exactly."""
 
-    def _get_instance(self, amount: "OperationType | object | Dinero") -> "Dinero":
+    def _get_instance(self, amount: "OperationType | object") -> "Dinero":
         """Return a Dinero object after checking the currency codes are equal and
         transforming it to Dinero if needed.
 
@@ -90,10 +89,7 @@ class Utils(Base):
 
         getcontext().prec = self.precision
 
-        if isinstance(self.amount, Dinero):
-            normalized_amount = self.amount._normalize()
-        else:
-            normalized_amount = Decimal(self.amount).normalize()
+        normalized_amount = Decimal(self.amount).normalize()
 
         if quantize:
             places = Decimal(f"1e-{self.exponent}")
@@ -143,14 +139,8 @@ class Operations(Utils):
 
     def __eq__(self, amount: object) -> bool:
         validate.comparison_amount(amount)
-
-        if isinstance(amount, Dinero):
-            if amount.code != self.code:
-                return False
-
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         num_1 = self._normalize(quantize=True)
-
         return bool(num_1 == num_2)
 
     def __lt__(self, amount: object) -> bool:
