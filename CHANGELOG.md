@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.6...master)
 
-## [0.1.6](https://github.com/wilfredinni/dinero/releases/tag/0.1.6)
+## [0.1.6](https://github.com/wilfredinni/dinero/releases/tag/0.1.6) (2022-11-19)
 
 - 100% code coverage 🎉
 - Fixed Type Hints for `multiply` and `divide` methods.
