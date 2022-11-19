@@ -23,9 +23,9 @@ from typing import Any
 from ._utils import DecimalEncoder
 from .exceptions import DifferentCurrencyError
 from .types import Currency, OperationType
-from ._validators import Validate
+from ._validators import Validators
 
-validator = Validate()
+validate = Validators()
 
 
 class Base:
@@ -35,7 +35,7 @@ class Base:
         self.amount = amount
         self.currency = currency
 
-        validator.validate_dinero_amount(amount)
+        validate.dinero_amount(amount)
 
     @property
     def symbol(self):
@@ -115,7 +115,7 @@ class Operations(Utils):
     """All the operations supported between Dinero objects."""
 
     def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
-        validator.validate_addition_subtraction_amount(addend)
+        validate.addition_and_subtraction_amount(addend)
         addend_obj = self._get_instance(addend)
         total = self._normalize() + addend_obj._normalize()
         return Dinero(str(total), self.currency)
@@ -124,25 +124,25 @@ class Operations(Utils):
         return self
 
     def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
-        validator.validate_addition_subtraction_amount(subtrahend)
+        validate.addition_and_subtraction_amount(subtrahend)
         subtrahend_obj = self._get_instance(subtrahend)
         total = self._normalize() - subtrahend_obj._normalize()
         return Dinero(str(total), self.currency)
 
     def __mul__(self, multiplicand: int | float | Decimal) -> "Dinero":
-        validator.validate_multiplication_division_amount(multiplicand)
+        validate.multiplication_and_division_amount(multiplicand)
         multiplicand_obj = self._get_instance(multiplicand)
         total = self._normalize() * multiplicand_obj._normalize()
         return Dinero(str(total), self.currency)
 
     def __truediv__(self, divisor: int | float | Decimal) -> "Dinero":
-        validator.validate_multiplication_division_amount(divisor)
+        validate.multiplication_and_division_amount(divisor)
         divisor_obj = self._get_instance(divisor)
         total = self._normalize() / divisor_obj._normalize()
         return Dinero(str(total), self.currency)
 
     def __eq__(self, amount: object) -> bool:
-        validator.validate_comparison_amount(amount)
+        validate.comparison_amount(amount)
 
         if isinstance(amount, Dinero):
             if amount.code != self.code:
@@ -154,25 +154,25 @@ class Operations(Utils):
         return bool(num_1 == num_2)
 
     def __lt__(self, amount: object) -> bool:
-        validator.validate_comparison_amount(amount)
+        validate.comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 < num_2)
 
     def __le__(self, amount: object) -> bool:
-        validator.validate_comparison_amount(amount)
+        validate.comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 <= num_2)
 
     def __gt__(self, amount: object) -> bool:
-        validator.validate_comparison_amount(amount)
+        validate.comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 > num_2)
 
     def __ge__(self, amount: object) -> bool:
-        validator.validate_comparison_amount(amount)
+        validate.comparison_amount(amount)
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 >= num_2)

@@ -204,8 +204,8 @@ You can only compare to other `Dinero` objects:
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "/home/.../dinero/_dinero.py", line 146, in __eq__
-    self._validate_comparison_amount(amount)
-  File "/home/.../dinero/_dinero.py", line 103, in _validate_comparison_amount
+    self._comparison_amount(amount)
+  File "/home/.../dinero/_dinero.py", line 103, in _comparison_amount
     raise InvalidOperationError(InvalidOperationError.comparison_msg)
 dinero.exceptions.InvalidOperationError: You can only compare against other Dinero instances.
 ```

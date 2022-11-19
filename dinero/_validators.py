@@ -4,9 +4,9 @@ from .types import OperationType
 from .exceptions import InvalidOperationError
 
 
-class Validate:
+class Validators:
     @staticmethod
-    def validate_addition_subtraction_amount(amount: OperationType | object) -> None:
+    def addition_and_subtraction_amount(amount: OperationType | object) -> None:
         """Validate that the amount passed to an addition or subtraction is of valid type.
 
         Args:
@@ -25,7 +25,7 @@ class Validate:
             raise InvalidOperationError(InvalidOperationError.operation_msg)
 
     @staticmethod
-    def validate_multiplication_division_amount(number: int | float | Decimal) -> None:
+    def multiplication_and_division_amount(number: int | float | Decimal) -> None:
         """Validate that the number passed to a multiplication and division is of valid type.
 
         Args:
@@ -42,7 +42,7 @@ class Validate:
             raise InvalidOperationError(InvalidOperationError.operation_msg)
 
     @staticmethod
-    def validate_dinero_amount(amount: int | float | str | Decimal) -> None:
+    def dinero_amount(amount: int | float | str | Decimal) -> None:
         """Validate that the amount passed to Dinero is of valid type
 
         Args:
@@ -63,7 +63,7 @@ class Validate:
             raise InvalidOperationError(InvalidOperationError.operation_msg)
 
     @staticmethod
-    def validate_comparison_amount(amount: object) -> None:
+    def comparison_amount(amount: object) -> None:
         from ._dinero import Dinero
 
         if not isinstance(amount, Dinero):
