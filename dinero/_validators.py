@@ -1,7 +1,7 @@
 from decimal import Decimal, InvalidOperation
 
-from .types import OperationType
 from .exceptions import InvalidOperationError
+from .types import OperationType
 
 
 class Validators:

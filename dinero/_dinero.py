@@ -20,9 +20,9 @@ from decimal import Decimal, getcontext
 from typing import Any
 
 from ._utils import DecimalEncoder
+from ._validators import Validators
 from .exceptions import DifferentCurrencyError
 from .types import Currency, OperationType
-from ._validators import Validators
 
 validate = Validators()
 
