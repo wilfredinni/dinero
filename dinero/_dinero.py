@@ -256,7 +256,7 @@ class Dinero(Operations, Base):
             0.32
 
             >>> amount = Dinero("2.32", USD)
-            >>> amount.subtract("2")
+            >>> amount.subtract(2)
             0.32
 
             >>> Dinero("2.32", USD) - Dinero("2", USD)
@@ -283,23 +283,15 @@ class Dinero(Operations, Base):
         Returns a new Dinero object that represents the multiplied value by the given factor.
 
         Examples:
-            >>> amount_1 = Dinero("2.32", USD)
-            >>> amount_2 = Dinero("3", USD)
-            >>> amount_1.multiply(amount_2)
-            6.96
-
             >>> amount = Dinero("2.32", USD)
-            >>> amount.multiply("3")
+            >>> amount.multiply(3)
             6.96
 
-            >>> Dinero("2.32", USD) * Dinero("3", USD)
-            6.96
-
-            >>> Dinero("2.32", USD) * "3"
+            >>> Dinero("2.32", USD) * 3
             6.96
 
         Args:
-            amount (str, int, float, Decimal, Dinero): The multiplicand.
+            amount (int, float, Decimal): The multiplicand.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -315,23 +307,15 @@ class Dinero(Operations, Base):
         """Returns a new Dinero object that represents the divided value by the given factor.
 
         Examples:
-            >>> amount_1 = Dinero("2.32", USD)
-            >>> amount_2 = Dinero("3", USD)
-            >>> amount_1.divide(amount_2)
-            0.77
-
             >>> amount = Dinero("2.32", USD)
-            >>> amount.divide("3")
+            >>> amount.divide(3)
             0.77
 
-            >>> Dinero("2.32", USD) / Dinero("3", USD)
-            0.77
-
-            >>> Dinero("2.32", USD) / "3"
+            >>> Dinero("2.32", USD) / 3
             0.77
 
         Args:
-            amount (str, int, float, Decimal, Dinero): The divisor.
+            amount (int, float, Decimal): The divisor.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
