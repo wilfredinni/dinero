@@ -27,7 +27,7 @@
 
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
-A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting them.
+Python `Decimal` instances are enough for basic monetary calculations, but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and easier to use API while still relying on the standard library. So it's still `Decimal`, but easier.
 
 ## The problem
 
@@ -44,7 +44,7 @@ You can read [How to Count Money Exactly in Python](https://learnpython.com/blog
 
 ## Why Dinero?
 
-Python `Decimal` instances are enough for basic cases but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and more easy to use API while still relying on the standard library. So it's still `Decimal` but easier.
+A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
 
 ```python
 >>> from dinero import Dinero
