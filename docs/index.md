@@ -86,8 +86,7 @@ Decimal('2.32')
 ```
 
 ```python
->>> product = Dinero(345.32, USD).multiply(3)
->>> total = product.add(456.343567)
+>>> total = (Dinero(345.32, USD).multiply(3)).add(456.343567)
 >>> print(total)
 # 1,492.30
 ```
