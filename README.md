@@ -8,9 +8,9 @@
   <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
 </a>
 <a href="https://github.com/wilfredinni/dinero/actions">
-  <img alt="Build status" src="https://img.shields.io/github/workflow/status/wilfredinni/dinero/Tests" data-canonical-src="https://img.shields.io/github/workflow/status/Delgan/loguru/Tests/master" style="max-width: 100%;">
+  <img alt="Build status" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" data-canonical-src="https://img.shields.io/github/workflow/status/Delgan/loguru/Tests/master" style="max-width: 100%;">
 </a>
-<a href="https://codecov.io/github/wilfredinni/dinero" > 
+<a href="https://codecov.io/github/wilfredinni/dinero" >
  <img alt="Codecov" src="https://img.shields.io/codecov/c/github/wilfredinni/dinero">
 </a>
 <a href="https://www.codacy.com/gh/wilfredinni/dinero/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wilfredinni/dinero&amp;utm_campaign=Badge_Grade">
