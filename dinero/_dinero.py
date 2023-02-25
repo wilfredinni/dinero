@@ -88,7 +88,6 @@ class Utils(Base):
         """
 
         getcontext().prec = self.precision
-
         normalized_amount = Decimal(self.amount).normalize()
 
         if quantize:

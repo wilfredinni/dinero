@@ -64,6 +64,7 @@ class Validators:
 
     @staticmethod
     def comparison_amount(amount: object) -> None:
+        """Checks if the amount is an instance of Dinero"""
         from ._dinero import Dinero
 
         if not isinstance(amount, Dinero):
