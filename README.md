@@ -48,25 +48,71 @@ You can read [How to Count Money Exactly in Python](https://learnpython.com/blog
 
 A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
 
-```python
->>> from dinero import Dinero
->>> from dinero.currencies import USD
->>>
->>> Dinero(2.32, USD) * 3 == Dinero(6.96. USD)
-True
+## Install
+
+```bash
+pip install dinero
 ```
 
-### Currencies
+## Initialization
 
-Dinero give you access to more than 100 different currencies:
+To create a `Dinero` object, you need an `amount` that can be an `int`, `float`, `str` or `Decimal`, and a `currency`:
 
 ```python
->>> from dinero.currencies import USD, EUR, GBP, INR, CLP
+from dinero import Dinero
+from dinero.currencies import USD
+
+amount = Dinero(100.4, USD)
+```
+
+## Properties
+
+Every `Dinero` object has the following properties:
+
+```python
+>>> amount.raw_amount
+Decimal('100.40')
 ```
 
 ```python
->>> Dinero(2.32, EUR)
-Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol': '€'})
+>>> amount.symbol
+'$'
+```
+
+```python
+>>> amount.code
+'USD'
+```
+
+```python
+>>> amount.exponent
+2
+```
+
+```python
+>>> amount.precision
+10
+```
+
+## Formatting
+
+### String
+
+You can return a formatted string representation of `Dinero` with the `format` method:
+
+```python
+>>> Dinero(2.32, EUR).format()
+'2.32'
+```
+
+```python
+>>> Dinero(2.32, EUR).format(symbol=True)
+'€2.32'
+```
+
+```python
+>>> Dinero(2.32, EUR).format(currency=True)
+'2.32 EUR'
 ```
 
 ```python
@@ -74,38 +120,163 @@ Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol'
 '€2.32 EUR'
 ```
 
-```python
->>> Dinero(2.32, EUR).raw_amount
-Decimal('2.32')
-```
+### Dictionary
 
-### Operations
+Return a `Dinero` instance as a Python Dictionary:
 
 ```python
->>> total = Dinero(456.343567, USD) + 345.32 *  3
->>> print(total)
-# 1,492.30
-```
-
-```python
->>> total = (Dinero(345.32, USD).multiply(3)).add(456.343567)
->>> print(total)
-# 1,492.30
-```
-
-### Comparisons
-
-```python
->>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
-True
+>>> Dinero("3333.259", USD).to_dict()
+{
+    'amount': '3333.26',
+    'currency':
+        {
+            'code': 'USD',
+            'base': 10,
+            'exponent': 2,
+            'symbol': '$'
+        }
+}
 ```
 
 ```python
->>> Dinero(100, EUR) == Dinero(100, EUR)
-True
+>>> Dinero('3333.26', USD).to_dict(amount_with_format=True)
+{
+    'amount': '3,333.26',
+    'currency':
+        {
+            'code': 'USD',
+            'base': 10,
+            'exponent': 2,
+            'symbol': '$'
+        }
+}
 ```
 
-### Custom currencies
+### Json
+
+Return a `Dinero` instance as a `JSON` string:
+
+```python
+>>> Dinero('2,00', USD).to_json()
+'{"amount": "3333.20", "currency": {"code": "USD", "base": 10...'
+```
+
+```python
+>>> Dinero('2,00', USD).to_json(amount_with_format=True)
+'{"amount": "3,333.26", "currency": {"code": "USD", "base": 10...'
+```
+
+## Operations
+
+If the addend or subtrahend is an `str`, `int`, `float` or `Decimal`, it will be transformed, under the hood, to a Dinero instance using the same currency:
+
+```python
+# those operations
+Dinero(1000, USD).add(Dinero(1000, USD))
+Dinero(1000, USD) + Dinero(1000, USD)
+
+# are equivalent to
+Dinero(1000, USD).add(1000)
+Dinero(1000, USD) + 1000
+```
+
+```python
+# those operations
+Dinero(1000, USD).subtract(Dinero(100, USD))
+Dinero(1000, USD) - Dinero(100, USD)
+
+# are equivalent to
+Dinero(1000, USD).subtract(1000)
+Dinero(1000, USD) - 100
+```
+
+Additions and subtractions must be between instances with the same `currency`:
+
+```python
+>>> total = Dinero(100, USD) + Dinero(100, EUR)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/.../dinero/_dinero.py", line 120, in __add__
+    addend_obj = self._get_instance(addend)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/.../dinero/_dinero.py", line 74, in _get_instance
+    raise DifferentCurrencyError("Currencies can not be different")
+dinero.exceptions.DifferentCurrencyError: Currencies can not be different
+```
+
+The multiplicand and divisor can be `int`, `float` or of `Decimal` type:
+
+```python
+Dinero(1000, USD).multiply(2)
+Dinero(1000, USD) * 2
+```
+
+```python
+Dinero(1000, USD).divide(2)
+Dinero(1000, USD) / 2
+```
+
+## Comparisons
+
+```python
+Dinero(1000, USD).equals_to(Dinero(1000, USD))
+Dinero(1000, USD) == Dinero(1000, USD)
+```
+
+```python
+Dinero(1000, USD).less_than(Dinero(1000, USD))
+Dinero(1000, USD) < Dinero(1000, USD)
+```
+
+```python
+Dinero(1000, USD).less_than_or_equal(Dinero(1000, USD))
+Dinero(1000, USD) <= Dinero(1000, USD)
+```
+
+```python
+Dinero(1000, USD).greater_than(Dinero(1000, USD))
+Dinero(1000, USD) > Dinero(1000, USD)
+```
+
+```python
+Dinero(1000, USD).greater_than_or_equal(Dinero(1000, USD))
+Dinero(1000, USD) >= Dinero(1000, USD)
+```
+
+You can only compare to other `Dinero` objects:
+
+```python
+>>> Dinero(100, USD) == 100
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/.../dinero/_dinero.py", line 146, in __eq__
+    self._comparison_amount(amount)
+  File "/home/.../dinero/_dinero.py", line 103, in _comparison_amount
+    raise InvalidOperationError(InvalidOperationError.comparison_msg)
+dinero.exceptions.InvalidOperationError: You can only compare against other Dinero instances.
+```
+
+## Currencies
+
+The currency is one of the two pieces necessary to create a Dinero object.
+
+A Dinero currency is composed of:
+
+- A unique code.
+- A base, or radix.
+- An exponent.
+- A symbol (optional)
+
+```python
+EUR: Currency = {
+    "code": "EUR",
+    "base": 10,
+    "exponent": 2,
+    "symbol": "€",
+}
+```
+
+### Custom Currencies
 
 You can easily create custom currencies:
 
@@ -122,6 +293,27 @@ BTC = {
 Dinero(1000.5, BTC)
 ```
 
+### Type hints
+
+If you are using `type hints` in your project you would want to import `dinero.types.Currency` to prevent warnings:
+
 ```python
-Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
+class Currency(TypedDict):
+    code: str
+    base: int
+    exponent: int
+    symbol: NotRequired[str]
+```
+
+```python
+from dinero.types import Currency
+
+BTC: Currency = {
+    "code": "BTC",
+    "base": 10,
+    "exponent": 2,
+    "symbol": "₿",
+}
+
+Dinero(1000.5, BTC)
 ```

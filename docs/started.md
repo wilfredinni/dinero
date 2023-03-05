@@ -2,8 +2,6 @@
 
 ## Install
 
-Dinero is a dependency free project.
-
 ```bash
 pip install dinero
 ```
