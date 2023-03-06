@@ -2,6 +2,11 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.6...master)
 
+## [0.1.7](https://github.com/wilfredinni/dinero/releases/tag/0.1.7) (2023-03-05)
+
+- Update dependencies to the latest versions.
+- Updated README and documentation.
+
 ## [0.1.6](https://github.com/wilfredinni/dinero/releases/tag/0.1.6) (2022-11-19)
 
 - 100% code coverage 🎉
