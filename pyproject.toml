@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dinero"
-version = "0.1.6"
+version = "0.1.7"
 description = "Dinero is a library for working with monetary values in Python."
 license = "MIT"
 authors = ["Carlos Montecinos Geisse <carlos@pythoncheatsheet.org>"]
