@@ -31,19 +31,6 @@ Python Decimal instances are enough for basic monetary calculations, but when yo
 
 [Read the Documentation](https://wilfredinni.github.io/dinero/)
 
-## The problem
-
-> Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.
-
-```python
->>> 2.32 * 3 == 6.96
-False
->>> 2.32 * 3
-6.959999999999999
-```
-
-You can read [How to Count Money Exactly in Python](https://learnpython.com/blog/count-money-python/) to get a better idea.
-
 ## Why Dinero?
 
 A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
@@ -274,6 +261,27 @@ EUR: Currency = {
     "exponent": 2,
     "symbol": "€",
 }
+```
+
+Dinero give you access to [more than 100 different currencies](/dinero/currencies/):
+
+```python
+>>> from dinero.currencies import USD, EUR, GBP, INR, CLP
+```
+
+```python
+>>> Dinero(2.32, EUR)
+Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol': '€'})
+```
+
+```python
+>>> Dinero(2.32, EUR).format(symbol=True, currency=True)
+'€2.32 EUR'
+```
+
+```python
+>>> Dinero(2.32, EUR).raw_amount
+Decimal('2.32')
 ```
 
 ### Custom Currencies
