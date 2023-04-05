@@ -892,14 +892,14 @@ files = [
 
 [[package]]
 name = "mkdocstrings"
-version = "0.20.0"
+version = "0.21.0"
 description = "Automatic documentation from sources, for MkDocs."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocstrings-0.20.0-py3-none-any.whl", hash = "sha256:f17fc2c4f760ec302b069075ef9e31045aa6372ca91d2f35ded3adba8e25a472"},
-    {file = "mkdocstrings-0.20.0.tar.gz", hash = "sha256:c757f4f646d4f939491d6bc9256bfe33e36c5f8026392f49eaa351d241c838e5"},
+    {file = "mkdocstrings-0.21.0-py3-none-any.whl", hash = "sha256:05c52573366f0a32536f7bf0258f2a8ad180836058bb024b252b8a61a25452b3"},
+    {file = "mkdocstrings-0.21.0.tar.gz", hash = "sha256:df7399cec11bdc12ece9a370a6c37bac70ea0a07f479c051d0c82b07a38a3220"},
 ]
 
 [package.dependencies]
@@ -1890,4 +1890,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "613b7bcc285a32478bbd5d28bc5b7e4c1d19625bde27e45f30e4c484c93faa86"
+content-hash = "d48fb0cc4ddf437203f07ce7e0f7efcb0923e8c207b4f514e171866adcd425b9"
