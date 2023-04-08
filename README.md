@@ -33,7 +33,24 @@ Python Decimal instances are enough for basic monetary calculations, but when yo
 
 ## Why Dinero?
 
-A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
+> Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.
+
+```python
+>>> 2.32 * 3 == 6.96
+False
+>>> 2.32 * 3
+6.959999999999999
+```
+
+With `Dinero`, you can do exact calculations:
+
+```python
+>>> from dinero import Dinero
+>>> from dinero.currencies import USD
+>>>
+>>> Dinero(2.32, USD) * 3 == Dinero(6.96. USD)
+True
+```
 
 ## Install
 
