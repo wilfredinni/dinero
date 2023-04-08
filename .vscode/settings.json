@@ -20,6 +20,22 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
+    "peacock.remoteColor": "#111827",
+    "cSpell.words": [
+        "ariary",
+        "autorefs",
+        "Codacy",
+        "Dinero",
+        "getcontext",
+        "inlinehilite",
+        "linenums",
+        "mkdocstrings",
+        "prec",
+        "pymdownx",
+        "repr",
+        "superfences"
+    ],
+    "editor.formatOnSave": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#202e4b",
         "activityBar.background": "#202e4b",
@@ -38,21 +54,5 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#11182799",
         "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.remoteColor": "#111827",
-    "cSpell.words": [
-        "ariary",
-        "autorefs",
-        "Codacy",
-        "Dinero",
-        "getcontext",
-        "inlinehilite",
-        "linenums",
-        "mkdocstrings",
-        "prec",
-        "pymdownx",
-        "repr",
-        "superfences"
-    ],
-    "editor.formatOnSave": true
+    }
 }
