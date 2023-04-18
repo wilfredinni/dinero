@@ -1,5 +1,5 @@
 {
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "none",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length=95"
@@ -26,6 +26,7 @@
         "autorefs",
         "Codacy",
         "Dinero",
+        "dólares",
         "getcontext",
         "inlinehilite",
         "linenums",
@@ -33,7 +34,8 @@
         "prec",
         "pymdownx",
         "repr",
-        "superfences"
+        "superfences",
+        "treinta"
     ],
     "editor.formatOnSave": true,
     "workbench.colorCustomizations": {
@@ -54,5 +56,8 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#11182799",
         "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
     }
 }
