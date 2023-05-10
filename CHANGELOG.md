@@ -4,6 +4,7 @@
 
 - Added new `tools` module.
 - Added `calculate_simple_interest` tool.
+- Added `calculate_compound_interest` tool.
 - Added `calculate_vat` tool.
 - Added `calculate_percentage` tool.
 - Update dependencies to the latest versions.

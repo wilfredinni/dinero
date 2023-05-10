@@ -3,10 +3,12 @@ from dinero.exceptions import InvalidOperationError
 
 
 def calculate_simple_interest(
-    principal: Dinero, interest_rate: float | int, duration: int
+    principal: Dinero, interest_rate: int | float, duration: int
 ) -> Dinero:
     """
     Calculates the simple interest on a loan given the principal, interest rate, and duration.
+
+    Calculate the total interest using the formula: I = P * r * t
 
     Args:
         principal (Dinero): The principal amount of the loan.

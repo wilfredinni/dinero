@@ -1,9 +1,14 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR, CLP
+from dinero.currencies import USD, EUR, CLP, JPY
 from dinero.exceptions import InvalidOperationError
-from dinero.tools import calculate_vat, calculate_percentage, calculate_simple_interest
+from dinero.tools import (
+    calculate_vat,
+    calculate_percentage,
+    calculate_simple_interest,
+    calculate_compound_interest,
+)
 
 
 @pytest.mark.parametrize(
@@ -79,3 +84,36 @@ def test_calculate_simple_interest(
 
     with pytest.raises(ValueError):
         calculate_simple_interest(principal, interest_rate, -2)
+
+
+@pytest.mark.parametrize(
+    "principal, interest_rate, duration, compound_frequency, expected, error",
+    [
+        (Dinero(1000, USD), 5.0, 10, 12, Dinero(647.01, USD), None),
+        (Dinero(500, EUR), 2.5, 5, 4, Dinero(66.35, EUR), None),
+        (Dinero(2000, JPY), 1.0, 3, 1, Dinero(60.60, JPY), None),
+        (1000, 5.0, 10, 12, None, InvalidOperationError),
+        (Dinero(1000, USD), -5.0, 10, 12, None, ValueError),
+        (Dinero(1000, USD), 5.0, -10, 12, None, ValueError),
+        (Dinero(1000, USD), 5.0, 10, -12, None, ValueError),
+    ],
+)
+def test_calculate_compound_interest(
+    principal, interest_rate, duration, compound_frequency, expected, error
+):
+    if error:
+        with pytest.raises(error):
+            calculate_compound_interest(
+                principal=principal,
+                interest_rate=interest_rate,
+                duration=duration,
+                compound_frequency=compound_frequency,
+            )
+    else:
+        compound_interest = calculate_compound_interest(
+            principal=principal,
+            interest_rate=interest_rate,
+            duration=duration,
+            compound_frequency=compound_frequency,
+        )
+        assert compound_interest.equals_to(expected)
