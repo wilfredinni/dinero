@@ -4,6 +4,7 @@
 
 - Added new `tools` module.
 - Added `calculate_vat` tool.
+- Added `calculate_percentage` tool.
 - Update dependencies to the latest versions.
 
 ## [0.1.8](https://github.com/wilfredinni/dinero/releases/tag/0.1.8) (2023-03-11)
