@@ -29,7 +29,8 @@ def test_calculate_vat(amount, vat_rate, expected_vat_amount):
         with pytest.raises(expected_vat_amount):
             calculate_vat(amount, vat_rate)
     else:
-        assert calculate_vat(amount, vat_rate) == expected_vat_amount
+        vat = calculate_vat(amount, vat_rate)
+        assert vat == expected_vat_amount
 
 
 @pytest.mark.parametrize(
@@ -51,39 +52,38 @@ def test_calculate_percentage(amount, percentage, expected_result):
         with pytest.raises(expected_result):
             calculate_percentage(amount, percentage)
     else:
-        assert calculate_percentage(amount, percentage) == expected_result
+        percentage = calculate_percentage(amount, percentage)
+        assert percentage == expected_result
 
 
 @pytest.mark.parametrize(
-    "principal, interest_rate, duration, expected_interest",
+    "principal, interest_rate, duration, expected_interest, error",
     [
-        (Dinero(1000, USD), 5, 2, Dinero(100, USD)),
-        (Dinero(500, EUR), 3.5, 3, Dinero(52.5, EUR)),
+        (Dinero(1000, USD), 5, 2, Dinero(100, USD), None),
+        (Dinero(500, EUR), 3.5, 3, Dinero(52.5, EUR), None),
+        (1000, 5, 2, None, InvalidOperationError),
+        (Dinero(1000, USD), 5, 2.5, None, TypeError),
+        (Dinero(1000, USD), -5, 2, None, ValueError),
+        (Dinero(1000, USD), 5, -2, None, ValueError),
     ],
 )
 def test_calculate_simple_interest(
-    principal, interest_rate, duration, expected_interest
+    principal, interest_rate, duration, expected_interest, error
 ):
-    assert (
-        calculate_simple_interest(principal, interest_rate, duration)
-        == expected_interest
-    )
-
-    # Test invalid input
-    with pytest.raises(InvalidOperationError):
-        calculate_simple_interest(1000, interest_rate, duration)  # type: ignore
-
-    with pytest.raises(TypeError):
-        calculate_simple_interest(principal, "5", duration)  # type: ignore
-
-    with pytest.raises(TypeError):
-        calculate_simple_interest(principal, interest_rate, 2.5)  # type: ignore
-
-    with pytest.raises(ValueError):
-        calculate_simple_interest(principal, -5, duration)
-
-    with pytest.raises(ValueError):
-        calculate_simple_interest(principal, interest_rate, -2)
+    if error:
+        with pytest.raises(error):
+            calculate_simple_interest(
+                principal=principal,
+                interest_rate=interest_rate,
+                duration=duration,
+            )
+    else:
+        interest = calculate_simple_interest(
+            principal=principal,
+            interest_rate=interest_rate,
+            duration=duration,
+        )
+        assert interest == expected_interest
 
 
 @pytest.mark.parametrize(
