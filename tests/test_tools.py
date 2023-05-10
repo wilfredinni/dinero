@@ -63,6 +63,7 @@ def test_calculate_percentage(amount, percentage, expected_result):
         (Dinero(1000, USD), 5, 2, Dinero(100, USD), None),
         (Dinero(500, EUR), 3.5, 3, Dinero(52.5, EUR), None),
         (1000, 5, 2, None, InvalidOperationError),
+        (Dinero(1000, USD), 5, "2.5", None, TypeError),
         (Dinero(1000, USD), 5, 2.5, None, TypeError),
         (Dinero(1000, USD), -5, 2, None, ValueError),
         (Dinero(1000, USD), 5, -2, None, ValueError),
