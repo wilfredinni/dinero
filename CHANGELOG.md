@@ -3,6 +3,7 @@
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.6...master)
 
 - Added new `tools` module.
+- Added `calculate_simple_interest` tool.
 - Added `calculate_vat` tool.
 - Added `calculate_percentage` tool.
 - Update dependencies to the latest versions.

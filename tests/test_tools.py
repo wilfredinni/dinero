@@ -3,7 +3,7 @@ import pytest
 from dinero import Dinero
 from dinero.currencies import USD, EUR, CLP
 from dinero.exceptions import InvalidOperationError
-from dinero.tools import calculate_vat, calculate_percentage
+from dinero.tools import calculate_vat, calculate_percentage, calculate_simple_interest
 
 
 @pytest.mark.parametrize(
@@ -47,3 +47,35 @@ def test_calculate_percentage(amount, percentage, expected_result):
             calculate_percentage(amount, percentage)
     else:
         assert calculate_percentage(amount, percentage) == expected_result
+
+
+@pytest.mark.parametrize(
+    "principal, interest_rate, duration, expected_interest",
+    [
+        (Dinero(1000, USD), 5, 2, Dinero(100, USD)),
+        (Dinero(500, EUR), 3.5, 3, Dinero(52.5, EUR)),
+    ],
+)
+def test_calculate_simple_interest(
+    principal, interest_rate, duration, expected_interest
+):
+    assert (
+        calculate_simple_interest(principal, interest_rate, duration)
+        == expected_interest
+    )
+
+    # Test invalid input
+    with pytest.raises(InvalidOperationError):
+        calculate_simple_interest(1000, interest_rate, duration)  # type: ignore
+
+    with pytest.raises(TypeError):
+        calculate_simple_interest(principal, "5", duration)  # type: ignore
+
+    with pytest.raises(TypeError):
+        calculate_simple_interest(principal, interest_rate, 2.5)  # type: ignore
+
+    with pytest.raises(ValueError):
+        calculate_simple_interest(principal, -5, duration)
+
+    with pytest.raises(ValueError):
+        calculate_simple_interest(principal, interest_rate, -2)
