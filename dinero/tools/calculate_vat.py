@@ -24,6 +24,14 @@ def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
         >>> vat_amount.format(symbol=True, currency=True)
         '$6.76 USD'
     """
+    validate_inputs(amount, vat_rate)
+    divisor = 1 + (vat_rate / 100)
+    amount_without_vat = amount / divisor
+    vat_amount = amount - amount_without_vat
+    return vat_amount
+
+
+def validate_inputs(amount: Dinero, vat_rate: int | float) -> None:
     if not isinstance(amount, Dinero):
         raise InvalidOperationError(InvalidOperationError.operation_msg)
 
@@ -32,8 +40,3 @@ def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
 
     if vat_rate < 0:
         raise ValueError("The vat_rate argument cannot be negative.")
-
-    divisor = 1 + (vat_rate / 100)
-    amount_without_vat = amount / divisor
-    vat_amount = amount - amount_without_vat
-    return vat_amount

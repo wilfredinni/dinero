@@ -7,7 +7,6 @@ def calculate_simple_interest(
 ) -> Dinero:
     """
     Calculates the simple interest on a loan given the principal, interest rate, and duration.
-
     Calculate the total interest using the formula: I = P * r * t
 
     Args:
@@ -34,6 +33,15 @@ def calculate_simple_interest(
         >>> calculate_simple_interest(principal, interest_rate, duration)
         Dinero(100)
     """
+    validate_inputs(principal, interest_rate, duration)
+
+    # Calculate the total interest using the formula: I = P * r * t
+    return principal * (interest_rate / 100) * duration
+
+
+def validate_inputs(
+    principal: Dinero, interest_rate: int | float, duration: int
+) -> None:
     if not isinstance(principal, Dinero):
         raise InvalidOperationError(InvalidOperationError.operation_msg)
 
@@ -48,6 +56,3 @@ def calculate_simple_interest(
 
     if duration < 0:
         raise ValueError("The duration cannot be negative.")
-
-    # Calculate the total interest using the formula: I = P * r * t
-    return principal * (interest_rate / 100) * duration

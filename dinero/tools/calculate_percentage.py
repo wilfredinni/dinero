@@ -24,6 +24,11 @@ def calculate_percentage(amount: Dinero, percentage: int | float) -> Dinero:
         >>> percentage_amount.format(symbol=True, currency=True)
         '$450.00 USD'
     """
+    validate_inputs(amount, percentage)
+    return amount * (percentage / 100)
+
+
+def validate_inputs(amount: Dinero, percentage: int | float) -> None:
     if not isinstance(amount, Dinero):
         raise InvalidOperationError(InvalidOperationError.operation_msg)
 
@@ -32,5 +37,3 @@ def calculate_percentage(amount: Dinero, percentage: int | float) -> Dinero:
 
     if percentage < 0:
         raise ValueError("The percentage argument cannot be negative.")
-
-    return amount * (percentage / 100)
