@@ -24,7 +24,8 @@ from dinero.tools import (
 )
 def test_calculate_vat(amount, vat_rate, expected_vat_amount):
     if isinstance(expected_vat_amount, type) and issubclass(
-        expected_vat_amount, Exception
+        expected_vat_amount,
+        Exception,
     ):
         with pytest.raises(expected_vat_amount):
             calculate_vat(amount, vat_rate)
