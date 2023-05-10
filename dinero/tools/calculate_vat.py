@@ -1,5 +1,5 @@
 from dinero import Dinero
-from ..exceptions import InvalidOperationError
+from dinero.exceptions import InvalidOperationError
 
 
 def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
