@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.6...master)
+## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.8...master)
 
 - Added new `tools` module.
 - Added `calculate_simple_interest` tool.
