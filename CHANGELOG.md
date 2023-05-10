@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.6...master)
 
+- Added new `tools` module.
+- Added `calculate_vat` tool.
+- Update dependencies to the latest versions.
+
 ## [0.1.8](https://github.com/wilfredinni/dinero/releases/tag/0.1.8) (2023-03-11)
 
 - Update dependencies to the latest versions.
