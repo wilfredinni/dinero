@@ -24,3 +24,19 @@ def test_calculate_vat_invalid_amount():
 
     with pytest.raises(InvalidOperationError):
         calculate_vat(amount, vat_rate)  # type: ignore
+
+
+def test_calculate_vat_invalid_vat_rate():
+    amount = Dinero(100, USD)
+    vat_rate = "7.25"
+
+    with pytest.raises(TypeError):
+        calculate_vat(amount, vat_rate)  # type: ignore
+
+
+def test_calculate_vat_negative_vat_rate():
+    amount = Dinero(100, USD)
+    vat_rate = -7.25
+
+    with pytest.raises(ValueError):
+        calculate_vat(amount, vat_rate)
