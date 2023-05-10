@@ -15,8 +15,8 @@ def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
 
     Raises:
         InvalidOperationError: If the amount is not a Dinero object
-        TypeError: If the percentage argument is not a number.
-        ValueError: If the percentage argument is negative.
+        TypeError: If the vat_rate argument is not a number.
+        ValueError: If the vat_rate argument is negative.
 
     Examples:
         >>> amount = Dinero(100, USD)
