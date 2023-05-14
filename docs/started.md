@@ -210,7 +210,7 @@ dinero.exceptions.InvalidOperationError: You can only compare against other Dine
 
 ## Tools
 
-Dinero give you access to some useful tools that allow you to perform common monetary calculations, like calculating percentages, VAT, simple and compound interests, etc.
+Dinero give you access to some useful tools that allow you to perform common monetary calculations, like percentages, VAT, simple and compound interests, etc.
 
 ```python
 from dinero import Dinero
