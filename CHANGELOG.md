@@ -1,12 +1,15 @@
 # Changelog
 
-## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.1.8...master)
+## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.0...master)
+
+## [0.2.0](https://github.com/wilfredinni/dinero/releases/tag/0.2.0) (2023-05-14)
 
 - Added new `tools` module.
 - Added `calculate_simple_interest` tool.
 - Added `calculate_compound_interest` tool.
 - Added `calculate_vat` tool.
 - Added `calculate_percentage` tool.
+- Update documentation.
 - Update dependencies to the latest versions.
 
 ## [0.1.8](https://github.com/wilfredinni/dinero/releases/tag/0.1.8) (2023-03-11)
