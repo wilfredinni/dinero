@@ -49,6 +49,6 @@ nav:
   - Home: index.md
   - started.md
   - currencies.md
-  - exceptions.md
   - tools.md
+  - exceptions.md
   - API: api.md

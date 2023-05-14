@@ -29,6 +29,12 @@ This project is inspired by the excellent [dinero.js](https://github.com/dineroj
 
 Python `Decimal` instances are enough for basic monetary calculations, but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and easier to use API while still relying on the standard library. So it's still `Decimal`, but easier.
 
+## Install
+
+```bash
+pip install dinero
+```
+
 ## The problem
 
 > Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.
@@ -77,7 +83,12 @@ Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol'
 Decimal('2.32')
 ```
 
+More about [currencies](/dinero/currencies).
+
 ### Operations
+
+Operations can be performed between Dinero objects or between Dinero objects and numbers by using Python operators or its own methods:
+
 
 ```python
 >>> total = Dinero(456.343567, USD) + 345.32 *  3
@@ -91,17 +102,45 @@ Decimal('2.32')
 # 1,492.30
 ```
 
+More about [operations](/dinero/started/#operations).
+
 ### Comparisons
+
+Dinero objects can be compared to each other by using Python comparison operators or by using its own methods:
+
+```python
+>>> Dinero(100, EUR) == Dinero(100, EUR)
+True
+```
 
 ```python
 >>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
 True
 ```
 
+More about [comparisons](/dinero/started/#comparisons).
+
+### Tools
+
+Dinero give you access to some useful tools that allow you to perform common monetary calculations, like calculating percentages, VAT, simple and compound interests, etc.
+
 ```python
->>> Dinero(100, EUR) == Dinero(100, EUR)
-True
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools import calculate_compound_interest
+
+principal = Dinero("2000", USD)
+total_interest = calculate_compound_interest(
+    principal=principal,
+    interest_rate=5,
+    duration=10,
+    compound_frequency=12,
+)
+total_interest.format(symbol=True, currency=True)
+'$1,294.02 USD'
 ```
+
+See al the available tools in the [tools](/dinero/tools/) section.
 
 ### Custom currencies
 
@@ -123,3 +162,5 @@ Dinero(1000.5, BTC)
 ```python
 Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
 ```
+
+More about [custom currencies](/dinero/currencies/#custom-currencies).

@@ -208,6 +208,28 @@ Traceback (most recent call last):
 dinero.exceptions.InvalidOperationError: You can only compare against other Dinero instances.
 ```
 
+## Tools
+
+Dinero give you access to some useful tools that allow you to perform common monetary calculations, like calculating percentages, VAT, simple and compound interests, etc.
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools import calculate_compound_interest
+
+principal = Dinero("2000", USD)
+total_interest = calculate_compound_interest(
+    principal=principal,
+    interest_rate=5, # 5% interest rate
+    duration=10, # 10 year loan duration
+    compound_frequency=12, # interest compounded monthly
+)
+total_interest.format(symbol=True, currency=True)
+'$1,294.02 USD'
+```
+
+See al the available tools in the [tools](/dinero/tools/) section.
+
 ## Currencies
 
 The currency is one of the two pieces necessary to create a Dinero object.
@@ -228,6 +250,8 @@ EUR: Currency = {
 }
 ```
 
+More about [currencies](/dinero/currencies).
+
 ### Custom Currencies
 
 You can easily create custom currencies:
@@ -244,6 +268,8 @@ BTC = {
 
 Dinero(1000.5, BTC)
 ```
+
+More about [custom currencies](/dinero/currencies/#custom-currencies).
 
 ### Type hints
 
