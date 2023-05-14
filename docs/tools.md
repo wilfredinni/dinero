@@ -38,3 +38,22 @@ vat_amount = calculate_percentage(
 vat_amount.format(symbol=True, currency=True)
 '$450.00 USD'
 ```
+
+## Calculate Simple Interest
+
+This function calculates the simple interest of a given monetary value. It takes three arguments: the monetary value as a Dinero object, the interest rate and the number of periods.
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools import calculate_simple_interest
+
+amount = Dinero(1000, USD)
+interest_amount = calculate_simple_interest(
+    principal=amount,
+    interest_rate=5,
+    duration=2,
+)
+interest_amount.format(symbol=True, currency=True)
+'$100.00 USD'
+```
