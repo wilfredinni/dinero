@@ -23,10 +23,6 @@ def calculate_simple_interest(
         Dinero: The total interest on the loan.
 
     Examples:
-        >>> from dinero import Dinero
-        >>> from dinero.currencies import USD
-        >>> from dinero.tools import calculate_simple_interest
-        >>>
         >>> principal = Dinero(1000, USD)
         >>> interest_rate = 5
         >>> duration = 2
