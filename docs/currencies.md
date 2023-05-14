@@ -1,6 +1,6 @@
 # Currencies
 
-The currency is one of the three pieces of domain data necessary to create a Dinero object.
+The currency is one of the two pieces of domain data necessary to create a Dinero object.
 
 A Dinero currency is composed of:
 
