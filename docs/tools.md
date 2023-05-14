@@ -57,3 +57,37 @@ interest_amount = calculate_simple_interest(
 interest_amount.format(symbol=True, currency=True)
 '$100.00 USD'
 ```
+
+## Calculate Compound Interest
+
+This function calculates the compound interest of a given monetary value. It takes four arguments:
+
+ - **principal**: The monetary value as a Dinero object
+ - **interest_rate**: The annual interest rate as a decimal
+ - **duration**: The duration of the loan in years
+ - **compound_frequency**: The number of times interest is compounded per year
+
+Uses the following formula:
+
+```
+A = P(1 + r/n)^(nt)
+```
+
+Example:
+
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools import calculate_compound_interest
+
+principal = Dinero("2000", USD)
+total_interest = calculate_compound_interest(
+    principal=principal,
+    interest_rate=5, # 5% interest rate
+    duration=10, # 10 year loan duration
+    compound_frequency=12, # interest compounded monthly
+)
+total_interest.format(symbol=True, currency=True)
+'$1,294.02 USD'
+```
