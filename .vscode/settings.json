@@ -35,6 +35,7 @@
         "pymdownx",
         "repr",
         "superfences",
+        "Traceback",
         "treinta"
     ],
     "editor.formatOnSave": true,
