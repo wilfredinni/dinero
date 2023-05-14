@@ -19,7 +19,7 @@ def calculate_percentage(amount: Dinero, percentage: int | float) -> Dinero:
         ValueError: If the percentage argument is negative.
 
     Examples:
-        >>> amount = Dinero("3000", CLP)
+        >>> amount = Dinero("3000", USD)
         >>> percentage_amount = calculate_percentage(amount, 15)
         >>> percentage_amount.format(symbol=True, currency=True)
         '$450.00 USD'
