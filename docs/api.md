@@ -16,3 +16,27 @@
             - to_dict
             - to_json
         show_root_toc_entry: False
+
+::: dinero.tools.calculate_vat
+    options:
+        members:
+            - calculate_vat
+        show_root_toc_entry: False
+
+::: dinero.tools.calculate_percentage
+    options:
+        members:
+            - calculate_percentage
+        show_root_toc_entry: False
+
+::: dinero.tools.calculate_simple_interest
+    options:
+        members:
+            - calculate_simple_interest
+        show_root_toc_entry: False
+
+::: dinero.tools.calculate_compound_interest
+    options:
+        members:
+            - calculate_compound_interest
+        show_root_toc_entry: False

@@ -4,7 +4,7 @@ from dinero.exceptions import InvalidOperationError
 
 def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
     """
-    Calculates the VAT amount for a given Dinero object.
+    Calculates the VAT amount of a given Dinero object.
 
     Args:
         amount (Dinero): The amount to calculate the VAT for.
