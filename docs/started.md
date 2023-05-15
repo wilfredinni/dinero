@@ -228,7 +228,7 @@ total_interest.format(symbol=True, currency=True)
 '$1,294.02 USD'
 ```
 
-See al the available tools in the [tools](/dinero/tools/) section.
+See all the available tools in the [tools](/dinero/tools/) section.
 
 ## Currencies
 
