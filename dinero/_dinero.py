@@ -17,159 +17,18 @@ Dinero allows the user to make exact monetary calculations.
 
 
 import json
-from decimal import Decimal, getcontext
+from decimal import Decimal
 from typing import Any
 
+from ._operations import Operations
 from ._utils import DecimalEncoder
 from ._validators import Validators
-from .exceptions import DifferentCurrencyError
 from .types import Currency, OperationType
-
 
 validate = Validators()
 
 
-class Base:
-    """The base Dinero class with the constructor and properties."""
-
-    def __init__(self, amount: int | float | str | Decimal, currency: Currency):
-        self.amount = amount
-        self.currency = currency
-
-        validate.dinero_amount(amount)
-
-    @property
-    def symbol(self):
-        return self.currency.get("symbol", "$")
-
-    @property
-    def code(self):
-        return self.currency.get("code")
-
-    @property
-    def exponent(self):
-        return self.currency.get("exponent")
-
-    @property
-    def precision(self):
-        return self.currency.get("base")
-
-
-class Utils(Base):
-    """Utility class with the most important methods to count money exactly."""
-
-    def _get_instance(self, amount: "OperationType | object") -> "Dinero":
-        """Return a Dinero object after checking the currency codes are equal and
-        transforming it to Dinero if needed.
-
-        Args:
-            amount (str, int, float, Decimal, Dinero): amount to be instantiated
-
-        Returns:
-            DINERO: Dinero object.
-        """
-
-        if isinstance(amount, Dinero):
-            amount_obj = amount
-        else:
-            amount_obj = Dinero(str(amount), self.currency)
-
-        if amount_obj.code != self.code:
-            raise DifferentCurrencyError("Currencies can not be different")
-
-        return amount_obj
-
-    def _normalize(self, quantize: bool = False) -> Decimal:
-        """Return a Decimal object, that can be quantize.
-
-        Args:
-            quantize (bool): Only for the final result. Defaults to False.
-
-        Returns
-            DECIMAL: Decimal object.
-        """
-
-        getcontext().prec = self.precision
-        normalized_amount = Decimal(self.amount).normalize()
-
-        if quantize:
-            places = Decimal(f"1e-{self.exponent}")
-            normalized_amount = normalized_amount.quantize(places)
-
-        return normalized_amount
-
-    @property
-    def _formatted_amount(self) -> str:
-        currency_format = f",.{self.exponent}f"
-        return f"{self._normalize(quantize=True):{currency_format}}"
-
-    @property
-    def raw_amount(self) -> Decimal:
-        return self._normalize(quantize=True)
-
-
-class Operations(Utils):
-    """All the operations supported between Dinero objects."""
-
-    def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
-        validate.addition_and_subtraction_amount(addend)
-        addend_obj = self._get_instance(addend)
-        total = self._normalize() + addend_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __radd__(self, obj):
-        return self
-
-    def __sub__(self, subtrahend: "OperationType | Dinero") -> "Dinero":
-        validate.addition_and_subtraction_amount(subtrahend)
-        subtrahend_obj = self._get_instance(subtrahend)
-        total = self._normalize() - subtrahend_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __mul__(self, multiplicand: int | float | Decimal) -> "Dinero":
-        validate.multiplication_and_division_amount(multiplicand)
-        multiplicand_obj = self._get_instance(multiplicand)
-        total = self._normalize() * multiplicand_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __truediv__(self, divisor: int | float | Decimal) -> "Dinero":
-        validate.multiplication_and_division_amount(divisor)
-        divisor_obj = self._get_instance(divisor)
-        total = self._normalize() / divisor_obj._normalize()
-        return Dinero(str(total), self.currency)
-
-    def __eq__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-        num_1 = self._normalize(quantize=True)
-        return bool(num_1 == num_2)
-
-    def __lt__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
-        num_1 = self._normalize(quantize=True)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-        return bool(num_1 < num_2)
-
-    def __le__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
-        num_1 = self._normalize(quantize=True)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-        return bool(num_1 <= num_2)
-
-    def __gt__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
-        num_1 = self._normalize(quantize=True)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-        return bool(num_1 > num_2)
-
-    def __ge__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
-        num_1 = self._normalize(quantize=True)
-        num_2 = self._get_instance(amount)._normalize(quantize=True)
-        return bool(num_1 >= num_2)
-
-
-class Dinero(Operations, Base):
+class Dinero(Operations):
     """A Dinero object is an immutable data structure representing a specific monetary value.
     It comes with methods for creating, parsing, manipulating, testing and formatting them.
 
@@ -502,6 +361,7 @@ class Dinero(Operations, Base):
         _dict = self.__dict__
         _dict["amount"] = amount
         _dict["currency"].setdefault("symbol", "$")
+        del _dict["dinero"]
         return _dict
 
     def to_json(self, amount_with_format: bool = False) -> str:
