@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.1...master)
 
+- Modularize tools validators.
+
 
 ## [0.2.1](https://github.com/wilfredinni/dinero/releases/tag/0.2.1)
 

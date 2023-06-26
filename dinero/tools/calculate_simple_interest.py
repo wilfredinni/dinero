@@ -1,5 +1,6 @@
 from dinero import Dinero
-from dinero.exceptions import InvalidOperationError
+
+from ._validators import ToolValidators
 
 
 def calculate_simple_interest(
@@ -29,26 +30,8 @@ def calculate_simple_interest(
         >>> calculate_simple_interest(principal, interest_rate, duration)
         Dinero(100)
     """
-    validate_inputs(principal, interest_rate, duration)
+    validate = ToolValidators()
+    validate.simple_interest_inputs(principal, interest_rate, duration)
 
     # Calculate the total interest using the formula: I = P * r * t
     return principal * (interest_rate / 100) * duration
-
-
-def validate_inputs(
-    principal: Dinero, interest_rate: int | float, duration: int
-) -> None:
-    if not isinstance(principal, Dinero):
-        raise InvalidOperationError(InvalidOperationError.operation_msg)
-
-    if not isinstance(interest_rate, (int, float)):
-        raise TypeError("The interest rate must be a number.")
-
-    if not isinstance(duration, int):
-        raise TypeError("The duration must be an integer.")
-
-    if interest_rate < 0:
-        raise ValueError("The interest rate cannot be negative.")
-
-    if duration < 0:
-        raise ValueError("The duration cannot be negative.")

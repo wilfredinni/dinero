@@ -1,5 +1,6 @@
 from dinero import Dinero
-from dinero.exceptions import InvalidOperationError
+
+from ._validators import ToolValidators
 
 
 def calculate_percentage(amount: Dinero, percentage: int | float) -> Dinero:
@@ -24,16 +25,6 @@ def calculate_percentage(amount: Dinero, percentage: int | float) -> Dinero:
         >>> percentage_amount.format(symbol=True, currency=True)
         '$450.00 USD'
     """
-    validate_inputs(amount, percentage)
+    validate = ToolValidators()
+    validate.percentage_inputs(amount, percentage)
     return amount * (percentage / 100)
-
-
-def validate_inputs(amount: Dinero, percentage: int | float) -> None:
-    if not isinstance(amount, Dinero):
-        raise InvalidOperationError(InvalidOperationError.operation_msg)
-
-    if not isinstance(percentage, (int, float)):
-        raise TypeError("The percentage argument must be a number.")
-
-    if percentage < 0:
-        raise ValueError("The percentage argument cannot be negative.")
