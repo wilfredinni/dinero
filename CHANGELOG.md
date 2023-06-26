@@ -1,11 +1,14 @@
 # Changelog
 
-## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.0...master)
+## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.1...master)
 
-- Refactor: Modularized the codebase.
-- Refactor: Removed unused conversions to string.
-- Fix: Circular imports.
-- Fix: Type linting errors.
+
+## [0.2.1](https://github.com/wilfredinni/dinero/releases/tag/0.2.1)
+
+- Modularized the codebase.
+- Removed unused conversions to string.
+- Fixed Circular imports.
+- Fixed Type linting errors.
 
 ## [0.2.0](https://github.com/wilfredinni/dinero/releases/tag/0.2.0) (2023-05-14)
 
