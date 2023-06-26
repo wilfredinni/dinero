@@ -353,16 +353,15 @@ class Dinero(Operations):
         """
 
         normalized_amount = self._normalize(quantize=True)
-        if amount_with_format:
-            amount = self._formatted_amount
-        else:
-            amount = str(normalized_amount)
+        amount = (
+            self._formatted_amount if amount_with_format else str(normalized_amount)
+        )
 
-        _dict = self.__dict__
-        _dict["amount"] = amount
-        _dict["currency"].setdefault("symbol", "$")
-        del _dict["dinero"]
-        return _dict
+        dict_repr = self.__dict__
+        dict_repr["amount"] = amount
+        dict_repr["currency"].setdefault("symbol", "$")
+        del dict_repr["dinero"]
+        return dict_repr
 
     def to_json(self, amount_with_format: bool = False) -> str:
         """Returns the object's data as a JSON string.
