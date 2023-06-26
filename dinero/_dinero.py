@@ -24,6 +24,7 @@ from ._validators import Validators
 from .exceptions import DifferentCurrencyError
 from .types import Currency, OperationType
 
+
 validate = Validators()
 
 

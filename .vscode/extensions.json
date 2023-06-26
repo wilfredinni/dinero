@@ -8,6 +8,8 @@
         "ms-python.vscode-pylance",
         "njqdev.vscode-python-typehint",
         "gruntfuggly.todo-tree",
-        "shardulm94.trailing-spaces"
+        "shardulm94.trailing-spaces",
+        "ms-python.flake8",
+        "ms-python.black-formatter"
     ]
 }

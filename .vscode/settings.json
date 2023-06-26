@@ -1,11 +1,6 @@
 {
-    "python.formatting.provider": "none",
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [
-        "--max-line-length=95"
-    ],
     "python.linting.enabled": true,
-    "python.linting.mypyEnabled": true,
+    "python.linting.mypyEnabled": false,
     "python.linting.mypyArgs": [
         "--ignore-missing-imports",
         "--follow-imports=silent",
@@ -58,7 +53,7 @@
         "titleBar.inactiveBackground": "#11182799",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "editor.defaultFormatter": "ms-python.black-formatter"
 }
