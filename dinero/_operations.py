@@ -15,14 +15,17 @@ validate = Validators()
 class Operations(Base):
     """All the operations supported between Dinero objects."""
 
-    def __init__(self, amount: int | float | str, currency: Currency):
+    def __init__(self, amount: int | float | str | Decimal, currency: Currency):
+        from ._dinero import Dinero
+
         super().__init__(amount, currency)
+        self.dinero = Dinero
 
     def __add__(self, addend: "OperationType | Dinero") -> "Dinero":
         validate.addition_and_subtraction_amount(addend)
         addend_obj = self._get_instance(addend)
         total = self._normalize() + addend_obj._normalize()
-        return self.__class__(total, self.currency)
+        return self.dinero(total, self.currency)
 
     def __radd__(self, obj):
         return self
@@ -31,19 +34,19 @@ class Operations(Base):
         validate.addition_and_subtraction_amount(subtrahend)
         subtrahend_obj = self._get_instance(subtrahend)
         total = self._normalize() - subtrahend_obj._normalize()
-        return self.__class__(total, self.currency)
+        return self.dinero(total, self.currency)
 
     def __mul__(self, multiplicand: int | float | Decimal) -> "Dinero":
         validate.multiplication_and_division_amount(multiplicand)
         multiplicand_obj = self._get_instance(multiplicand)
         total = self._normalize() * multiplicand_obj._normalize()
-        return self.__class__(total, self.currency)
+        return self.dinero(total, self.currency)
 
     def __truediv__(self, divisor: int | float | Decimal) -> "Dinero":
         validate.multiplication_and_division_amount(divisor)
         divisor_obj = self._get_instance(divisor)
         total = self._normalize() / divisor_obj._normalize()
-        return self.__class__(total, self.currency)
+        return self.dinero(total, self.currency)
 
     def __eq__(self, amount: object) -> bool:
         validate.comparison_amount(amount)

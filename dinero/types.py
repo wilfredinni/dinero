@@ -3,7 +3,7 @@ from typing import TypedDict
 
 from typing_extensions import NotRequired
 
-OperationType = str | int | float | Decimal
+OperationType = str | int | float | Decimal | object
 
 
 class Currency(TypedDict):

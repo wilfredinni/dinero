@@ -48,7 +48,7 @@ class Base:
     def raw_amount(self) -> Decimal:
         return self._normalize(quantize=True)
 
-    def _get_instance(self, amount: "OperationType | object") -> "Dinero":
+    def _get_instance(self, amount: "OperationType | Dinero") -> "Dinero":
         """Return a Dinero object after checking the currency codes are equal and
         transforming it to Dinero if needed.
 
@@ -62,7 +62,7 @@ class Base:
         if isinstance(amount, self.dinero):
             amount_obj = amount
         else:
-            amount_obj = self.__class__(str(amount), self.currency)
+            amount_obj = self.dinero(str(amount), self.currency)
 
         if amount_obj.code != self.code:
             raise DifferentCurrencyError("Currencies can not be different")

@@ -37,7 +37,7 @@ class Dinero(Operations):
         currency (dict): Expressed as an ISO 4217 currency code.
     """
 
-    def __init__(self, amount: int | float | str, currency: Currency):
+    def __init__(self, amount: int | float | str | Decimal, currency: Currency):
         super().__init__(amount, currency)
 
     def format(self, symbol: bool = False, currency: bool = False) -> str:
