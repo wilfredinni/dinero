@@ -49,5 +49,5 @@ jobs:
         with:
           flags: ${{ matrix.os }}_${{ matrix.python-version }}
           verbose: true
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           file: coverage.xml
