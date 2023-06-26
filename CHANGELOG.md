@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.0...master)
 
+- Refactor: Modularized the codebase.
+- Refactor: Removed unused conversions to string.
+- Fix: Circular imports.
+
 ## [0.2.0](https://github.com/wilfredinni/dinero/releases/tag/0.2.0) (2023-05-14)
 
 - Added new `tools` module.
