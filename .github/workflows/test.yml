@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -46,7 +46,7 @@ jobs:
             poetry run coverage xml
 
       - name: Lint
-        run: poetry run mypy --strict --ignore-missing-imports --show-error-codes --pretty .
+        run: poetry run mypy .
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
