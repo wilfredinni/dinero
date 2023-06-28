@@ -14,8 +14,6 @@ Dinero allows the user to make exact monetary calculations.
 - to_dict:: Returns the object's data as a Python Dictionary.
 - to_json:: Returns the object's data as a JSON string.
 """
-
-
 import json
 from decimal import Decimal
 from typing import Any
