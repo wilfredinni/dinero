@@ -61,7 +61,7 @@ class Base:
         amount_obj = (
             amount
             if isinstance(amount, self.dinero)
-            else self.dinero(str(amount), self.currency)
+            else self.dinero(amount, self.currency)
         )
 
         if amount_obj.code != self.code:

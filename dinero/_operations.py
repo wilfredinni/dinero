@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from ._base import Base
 from ._validators import Validators
 from .types import Currency, OperationType
+from .exceptions import InvalidOperationError
 
 if TYPE_CHECKING:
     from ._dinero import Dinero
@@ -49,31 +50,41 @@ class Operations(Base):
         return self.dinero(total, self.currency)
 
     def __eq__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
+        if not isinstance(amount, self.dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         num_1 = self._normalize(quantize=True)
         return bool(num_1 == num_2)
 
     def __lt__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
+        if not isinstance(amount, self.dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 < num_2)
 
     def __le__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
+        if not isinstance(amount, self.dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 <= num_2)
 
     def __gt__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
+        if not isinstance(amount, self.dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 > num_2)
 
     def __ge__(self, amount: object) -> bool:
-        validate.comparison_amount(amount)
+        if not isinstance(amount, self.dinero):
+            raise InvalidOperationError(InvalidOperationError.comparison_msg)
+
         num_1 = self._normalize(quantize=True)
         num_2 = self._get_instance(amount)._normalize(quantize=True)
         return bool(num_1 >= num_2)

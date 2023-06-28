@@ -45,6 +45,9 @@ jobs:
             poetry run pytest --cov . --cov-report=
             poetry run coverage xml
 
+      - name: Lint
+        run: poetry run mypy --strict --ignore-missing-imports --show-error-codes --pretty .
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
