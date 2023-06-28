@@ -58,11 +58,11 @@ class Base:
         Returns:
             DINERO: Dinero object.
         """
-
-        if isinstance(amount, self.dinero):
-            amount_obj = amount
-        else:
-            amount_obj = self.dinero(str(amount), self.currency)
+        amount_obj = (
+            amount
+            if isinstance(amount, self.dinero)
+            else self.dinero(str(amount), self.currency)
+        )
 
         if amount_obj.code != self.code:
             raise DifferentCurrencyError("Currencies can not be different")
