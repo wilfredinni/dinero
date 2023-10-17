@@ -21,10 +21,6 @@
   </a>
 </p>
 
-<p align="center">
-  <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
-</p>
-
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
 Python Decimal instances are enough for basic monetary calculations, but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and easier to use API while still relying on the standard library. So it's still Decimal, but easier.
@@ -52,7 +48,7 @@ You can read [How to Count Money Exactly in Python](https://learnpython.com/blog
 
 ## Why Dinero?
 
-A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
+A `Dinero` object represent a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
 
 ```python
 >>> from dinero import Dinero
@@ -71,17 +67,11 @@ Dinero give you access to more than 100 different currencies:
 ```
 
 ```python
->>> Dinero(2.32, EUR)
-Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol': '€'})
-```
-
-```python
->>> Dinero(2.32, EUR).format(symbol=True, currency=True)
+>>> amount = Dinero(2.32, EUR)
+>>> amount.format(symbol=True, currency=True)
 '€2.32 EUR'
-```
-
-```python
->>> Dinero(2.32, EUR).raw_amount
+>>>
+>>> amount.raw_amount
 Decimal('2.32')
 ```
 

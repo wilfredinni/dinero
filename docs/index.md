@@ -1,10 +1,6 @@
 # Dinero: Make exact monetary calculations
 
 <p align="center">
-  <img width="300" height="200" src="https://media.tenor.com/EWRvErYGzPUAAAAC/bugs-bunny-looney-tunes.gif">
-</p>
-
-<p align="center">
   <a href="https://pypi.org/project/dinero/">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
   </a>
@@ -50,7 +46,7 @@ You can read [How to Count Money Exactly in Python](https://learnpython.com/blog
 
 ## Why Dinero?
 
-A `Dinero` object is an immutable data structure representing a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
+A `Dinero` represent a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
 
 ```python
 >>> from dinero import Dinero
@@ -66,20 +62,12 @@ Dinero give you access to more than 100 different currencies:
 
 ```python
 >>> from dinero.currencies import USD, EUR, GBP, INR, CLP
-```
-
-```python
->>> Dinero(2.32, EUR)
-Dinero(amount=2.32, currency={'code': 'EUR', 'base': 10, 'exponent': 2, 'symbol': '€'})
-```
-
-```python
->>> Dinero(2.32, EUR).format(symbol=True, currency=True)
+>>>
+>>> amount = Dinero(2.32, EUR)
+>>> amount.format(symbol=True, currency=True)
 '€2.32 EUR'
-```
-
-```python
->>> Dinero(2.32, EUR).raw_amount
+>>>
+>>> amount.raw_amount
 Decimal('2.32')
 ```
 
