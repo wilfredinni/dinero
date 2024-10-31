@@ -4,17 +4,11 @@
   <a href="https://pypi.org/project/dinero/">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
   </a>
-  <a href="https://pypi.org/project/dinero/">
-    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dinero">
-  </a>
   <a href="https://github.com/wilfredinni/dinero/actions">
     <img alt="Build status" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" data-canonical-src="https://img.shields.io/github/workflow/status/Delgan/loguru/Tests/master" style="max-width: 100%;">
   </a>
   <a href="https://codecov.io/github/wilfredinni/dinero" > 
   <img alt="Codecov" src="https://img.shields.io/codecov/c/github/wilfredinni/dinero">
-  </a>
-  <a href="https://www.codacy.com/gh/wilfredinni/dinero/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wilfredinni/dinero&amp;utm_campaign=Badge_Grade">
-  <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/d6b13235aec14905968fb4b0e9a5e8fd">
   </a>
   <a href="https://github.com/wilfredinni/dinero/blob/master/LICENSE">
     <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dinero">
