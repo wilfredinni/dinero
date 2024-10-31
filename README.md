@@ -4,14 +4,13 @@
 ### Make exact monetary calculations.
 
 [![PyPI][pypi-badge]][pypi-url]
-[![Python Version][python-badge]][pypi-url]
 [![Build Status][build-badge]][build-url]
+[![CodeQL Status](https://github.com/wilfredinni/dinero/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/wilfredinni/dinero/actions/workflows/github-code-scanning/codeql)
 [![Codecov][codecov-badge]][codecov-url]
 [![License][license-badge]][license-url]
 
 <!-- Badge URLs -->
 [pypi-badge]: https://img.shields.io/pypi/v/dinero
-[python-badge]: https://img.shields.io/pypi/pyversions/dinero
 [build-badge]: https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg
 [codecov-badge]: https://img.shields.io/codecov/c/github/wilfredinni/dinero
 [license-badge]: https://img.shields.io/pypi/l/dinero
