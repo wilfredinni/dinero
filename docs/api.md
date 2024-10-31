@@ -40,3 +40,9 @@
         members:
             - calculate_compound_interest
         show_root_toc_entry: False
+
+::: dinero.tools.calculate_markup
+    options:
+        members:
+            - calculate_markup
+        show_root_toc_entry: False
