@@ -1,6 +1,6 @@
 # Dinero: Make exact monetary calculations
 
-<p align="center">
+<div align="center">
   <a href="https://pypi.org/project/dinero/">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
   </a>
@@ -19,7 +19,7 @@
   <a href="https://github.com/wilfredinni/dinero/blob/master/LICENSE">
     <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dinero">
   </a>
-</p>
+</div>
 
 This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
@@ -75,7 +75,7 @@ More about [currencies](/dinero/currencies).
 
 ### Operations
 
-Operations can be performed between Dinero objects or between Dinero objects and numbers by using Python operators or its own methods:
+Operations can be performed between Dinero objects or between Dinero objects and numbers:
 
 
 ```python
@@ -94,7 +94,7 @@ More about [operations](/dinero/started/#operations).
 
 ### Comparisons
 
-Dinero objects can be compared to each other by using Python comparison operators or by using its own methods:
+Dinero objects can be compared to each other:
 
 ```python
 >>> Dinero(100, EUR) == Dinero(100, EUR)

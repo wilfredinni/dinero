@@ -28,7 +28,7 @@ def calculate_compound_interest(
         >>> interest_rate = 5.0
         >>> duration = 10
         >>> compound_frequency = 12
-        >>> calculate_compound_interest(principal, interest_rate, duration, compound_frequency)
+        >>> calculate_compound_interest(principal, interest_rate, duration, compound_frequency)  # noqa
         Dinero(648.34)
     """
     validate = ToolValidators()

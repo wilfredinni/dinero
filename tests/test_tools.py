@@ -8,6 +8,7 @@ from dinero.tools import (
     calculate_percentage,
     calculate_simple_interest,
     calculate_compound_interest,
+    calculate_markup,
 )
 
 
@@ -119,3 +120,23 @@ def test_calculate_compound_interest(
             compound_frequency=compound_frequency,
         )
         assert compound_interest.equals_to(expected)
+
+
+@pytest.mark.parametrize(
+    "cost, markup, expected_final_price, error",
+    [
+        (Dinero(1000, USD), 15, Dinero(1150, USD), None),
+        (Dinero(500, EUR), 10, Dinero(550, EUR), None),
+        (Dinero(2000, CLP), 20, Dinero(2400, CLP), None),
+        (1000, 15, None, InvalidOperationError),
+        (Dinero(1000, USD), "15", None, TypeError),
+        (Dinero(1000, USD), -15, None, ValueError),
+    ],
+)
+def test_calculate_markup(cost, markup, expected_final_price, error):
+    if error:
+        with pytest.raises(error):
+            calculate_markup(cost, markup)
+    else:
+        calculated_final_price = calculate_markup(cost, markup)
+        assert calculated_final_price == expected_final_price

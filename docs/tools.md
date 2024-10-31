@@ -1,4 +1,3 @@
-
 # Tools
 
 This module provides a collection of tools that can be used to perform common monetary calculations.
@@ -98,4 +97,27 @@ total_interest = calculate_compound_interest(
 )
 total_interest.format(symbol=True, currency=True)
 '$1,294.02 USD'
+```
+
+## Calculate Markup
+
+Calculates the markup of a given Dinero object:
+
+- **cost**: The monetary value as a Dinero object
+- **markup**: The percentage to calculate
+
+Example:
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools import calculate_markup
+
+amount = Dinero("1000", USD)
+vat_amount = calculate_markup(
+    amount=amount,
+    percentage=15,
+)
+vat_amount.format(symbol=True, currency=True)
+'$1,150.00 USD'
 ```
