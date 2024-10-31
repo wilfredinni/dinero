@@ -542,6 +542,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dinero.tools.calculate_markup.calculate_markup" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_markup
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -715,6 +724,15 @@
   <a href="#dinero.tools.calculate_compound_interest.calculate_compound_interest" class="md-nav__link">
     <span class="md-ellipsis">
       calculate_compound_interest
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dinero.tools.calculate_markup.calculate_markup" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_markup
     </span>
   </a>
   
@@ -2933,6 +2951,176 @@ duration, and compound frequency. Uses the formula A = P * (1 + r/n)^(n*t)</p>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">compound_frequency</span> <span class="o">=</span> <span class="mi">12</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">interest_rate</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">compound_frequency</span><span class="p">)</span>  <span class="c1"># noqa</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">Dinero(648.34)</span>
+</code></pre></div>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="dinero.tools.calculate_markup.calculate_markup" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calculate_markup</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">markup</span><span class="p">)</span></code>
+
+<a href="#dinero.tools.calculate_markup.calculate_markup" class="headerlink" title="Permanent link">#</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Calculates the markup of a given Dinero object.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>cost</code>
+            </td>
+            <td>
+                  <code><span title="dinero.Dinero">Dinero</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The cost to calculate the markup of.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>markup</code>
+            </td>
+            <td>
+                  <code>int | float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The markup to calculate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Dinero</code></td>            <td>
+                  <code><span title="dinero.Dinero">Dinero</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The calculated markup of the cost.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>InvalidOperationError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the cost is not an instance of Dinero.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code>TypeError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the markup argument is not a number.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code>ValueError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the markup argument is negative.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">cost</span> <span class="o">=</span> <span class="n">Dinero</span><span class="p">(</span><span class="s2">&quot;3000&quot;</span><span class="p">,</span> <span class="n">USD</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">markup_amount</span> <span class="o">=</span> <span class="n">calculate_markup</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">markup_amount</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">&#39;$3,450.00 USD&#39;</span>
 </code></pre></div>
 
     </div>
