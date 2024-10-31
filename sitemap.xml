@@ -2,32 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://wilfredinni.github.io/dinero/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
     <url>
          <loc>https://wilfredinni.github.io/dinero/api/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
     <url>
          <loc>https://wilfredinni.github.io/dinero/currencies/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
     <url>
          <loc>https://wilfredinni.github.io/dinero/exceptions/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
     <url>
          <loc>https://wilfredinni.github.io/dinero/started/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
     <url>
          <loc>https://wilfredinni.github.io/dinero/tools/</loc>
-         <lastmod>2023-10-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-31</lastmod>
     </url>
 </urlset>
