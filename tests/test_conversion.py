@@ -99,6 +99,12 @@ class TestConversion:
         with pytest.raises(TypeError):
             usd_amount.convert("0.85", "EUR")  # type: ignore
 
+    def test_convert_with_non_dinero_object(self):
+        """Test conversion with non-Dinero object."""
+        # Attempt to convert with a non-Dinero object
+        with pytest.raises(TypeError):
+            convert("100", "0.85", EUR)  # type: ignore
+
     def test_convert_decimal_precision(self):
         """Test that conversion maintains appropriate decimal precision."""
         # Create a Dinero object in USD with a fractional amount
