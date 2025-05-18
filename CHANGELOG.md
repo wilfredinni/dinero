@@ -2,6 +2,7 @@
 
 ## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.1...master)
 
+- Added currency conversion functionality with `convert()` method
 - Modularize tools validators.
 
 

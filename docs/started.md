@@ -142,6 +142,25 @@ Dinero(1000, USD).subtract(1000)
 Dinero(1000, USD) - 100
 ```
 
+### Currency Conversion
+
+You can convert between different currencies using the `convert` method:
+
+```python title='Currency Conversion'
+from dinero.currencies import USD, EUR, CLP
+
+# Convert USD to EUR with an exchange rate of 0.85
+usd_amount = Dinero("100", USD)
+eur_amount = usd_amount.convert("0.85", EUR)
+eur_amount.format(symbol=True)
+'€85.00'
+
+# Convert USD to CLP (which has 0 decimal places)
+clp_amount = usd_amount.convert(750, CLP)
+clp_amount.format(currency=True)
+'75,000 CLP'
+```
+
 Additions and subtractions must be between instances with the same `currency`:
 
 ```python title='DifferentCurrencyError'

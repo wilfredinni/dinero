@@ -8,6 +8,7 @@
             - subtract
             - multiply
             - divide
+            - convert
             - equals_to
             - greater_than
             - greater_than_or_equal
@@ -29,6 +30,12 @@
     options:
         members:
             - calculate_percentage
+        show_root_toc_entry: False
+
+::: dinero.tools.conversion
+    options:
+        members:
+            - convert
         show_root_toc_entry: False
 
 ::: dinero.tools.interest

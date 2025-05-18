@@ -1,3 +1,45 @@
+## Currency Conversion
+
+The library provides functionality to convert Dinero objects between different currencies using specified exchange rates:
+
+### Convert
+
+Converts a Dinero object to a different currency using the specified exchange rate. This can be used as either a method on Dinero objects or as a standalone function:
+
+- **exchange_rate**: The exchange rate to use for conversion (as a string or float)
+- **currency**: The target currency to convert to (a Currency object)
+
+#### Method Usage
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD, EUR, CLP
+
+# Convert USD to EUR with an exchange rate of 0.85
+usd_amount = Dinero("100", USD)
+eur_amount = usd_amount.convert("0.85", EUR)
+eur_amount.format(symbol=True, currency=True)
+'€85.00 EUR'
+
+# Convert USD to CLP with an exchange rate of 750
+clp_amount = usd_amount.convert(750, CLP)
+clp_amount.format(currency=True)
+'75,000 CLP'
+```
+
+#### Function Usage
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD, EUR
+from dinero.tools import convert
+
+usd_amount = Dinero("100", USD)
+eur_amount = convert(usd_amount, "0.85", EUR)
+eur_amount.format(symbol=True, currency=True)
+'€85.00 EUR'
+```
+
 ## VAT Calculations
 
 The library provides three functions for working with VAT (Value Added Tax):
