@@ -1,26 +1,55 @@
-# Tools
+## VAT Calculations
 
-This module provides a collection of tools that can be used to perform common monetary calculations.
+The library provides three functions for working with VAT (Value Added Tax):
 
-## Calculate VAT
+### Calculate Net Amount
 
-This function calculates the VAT amount of a given monetary value. It takes two arguments:
+Extracts the net amount (excluding VAT) from a gross amount (including VAT):
 
-- **amount**: The amount to calculate the VAT of
+- **amount**: The gross amount (including VAT)
 - **vat_rate**: The VAT rate as a percentage
 
 ```python
 from dinero import Dinero
 from dinero.currencies import USD
-from dinero.tools import extract_vat
+from dinero.tools.vat import calculate_net_amount
 
-amount = Dinero(100, USD)
-vat_amount = extract_vat(
-    amount=amount,
-    vat_rate=7.25,
-)
-vat_amount.format(symbol=True, currency=True)
-'$6.76 USD'
+gross_amount = Dinero(120, USD)  # Amount including 20% VAT
+net_amount = calculate_net_amount(gross_amount, 20)
+net_amount.format(symbol=True, currency=True)
+'$100.00 USD'
+```
+
+### Calculate VAT Portion
+
+Extracts just the VAT amount from a gross amount:
+
+- **amount**: The gross amount (including VAT)
+- **vat_rate**: The VAT rate as a percentage
+
+```python
+from dinero.tools.vat import calculate_vat_portion
+
+gross_amount = Dinero(120, USD)  # Amount including 20% VAT
+vat = calculate_vat_portion(gross_amount, 20)
+vat.format(symbol=True, currency=True)
+'$20.00 USD'
+```
+
+### Calculate Gross Amount
+
+Adds VAT to a net amount to get the gross amount:
+
+- **amount**: The net amount (excluding VAT)
+- **vat_rate**: The VAT rate as a percentage
+
+```python
+from dinero.tools.vat import calculate_gross_amount
+
+net_amount = Dinero(100, USD)  # Amount without VAT
+gross_amount = calculate_gross_amount(net_amount, 20)
+gross_amount.format(symbol=True, currency=True)
+'$120.00 USD'
 ```
 
 ## Calculate Percentage
