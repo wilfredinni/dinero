@@ -89,31 +89,31 @@ def test_greater_than_or_equal(obj_1, obj_2):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount == addend
+        amount == addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.equals_to(addend)
 
     with pytest.raises(InvalidOperationError):
-        amount < addend
+        amount < addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.less_than(addend)
 
     with pytest.raises(InvalidOperationError):
-        amount >= addend
+        amount >= addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.less_than_or_equal(addend)
 
     with pytest.raises(InvalidOperationError):
-        amount > addend
+        amount > addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.greater_than(addend)
 
     with pytest.raises(InvalidOperationError):
-        amount >= addend
+        amount >= addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.greater_than_or_equal(addend)

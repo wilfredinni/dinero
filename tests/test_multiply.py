@@ -32,7 +32,7 @@ def test_multiply_amount_str(amount, multiplicand, total):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount * addend
+        amount * addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.multiply(addend)

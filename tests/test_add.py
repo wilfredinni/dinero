@@ -1,7 +1,7 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR
+from dinero.currencies import EUR, USD
 from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 
 
@@ -90,7 +90,7 @@ def test_sum_amount_mixed(amount, addend, total):
 )
 def test_different_currencies_error(amount, addend):
     with pytest.raises(DifferentCurrencyError):
-        amount + addend
+        amount + addend  # type: ignore
 
     with pytest.raises(DifferentCurrencyError):
         amount.add(addend)
@@ -106,7 +106,7 @@ def test_different_currencies_error(amount, addend):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount + addend
+        amount + addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.add(addend)

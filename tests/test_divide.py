@@ -32,7 +32,7 @@ def test_divide_amount(amount, divisor, total):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount / addend
+        amount / addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.divide(addend)
