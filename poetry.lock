@@ -954,48 +954,47 @@ files = [
 
 [[package]]
 name = "mkdocstrings"
-version = "0.26.2"
+version = "0.29.1"
 description = "Automatic documentation from sources, for MkDocs."
 optional = false
 python-versions = ">=3.9"
 groups = ["docs"]
 files = [
-    {file = "mkdocstrings-0.26.2-py3-none-any.whl", hash = "sha256:1248f3228464f3b8d1a15bd91249ce1701fe3104ac517a5f167a0e01ca850ba5"},
-    {file = "mkdocstrings-0.26.2.tar.gz", hash = "sha256:34a8b50f1e6cfd29546c6c09fbe02154adfb0b361bb758834bf56aa284ba876e"},
+    {file = "mkdocstrings-0.29.1-py3-none-any.whl", hash = "sha256:37a9736134934eea89cbd055a513d40a020d87dfcae9e3052c2a6b8cd4af09b6"},
+    {file = "mkdocstrings-0.29.1.tar.gz", hash = "sha256:8722f8f8c5cd75da56671e0a0c1bbed1df9946c0cef74794d6141b34011abd42"},
 ]
 
 [package.dependencies]
-click = ">=7.0"
 Jinja2 = ">=2.11.1"
 Markdown = ">=3.6"
 MarkupSafe = ">=1.1"
-mkdocs = ">=1.4"
-mkdocs-autorefs = ">=1.2"
-mkdocstrings-python = {version = ">=0.5.2", optional = true, markers = "extra == \"python\""}
-platformdirs = ">=2.2"
+mkdocs = ">=1.6"
+mkdocs-autorefs = ">=1.4"
+mkdocstrings-python = {version = ">=1.16.2", optional = true, markers = "extra == \"python\""}
 pymdown-extensions = ">=6.3"
 
 [package.extras]
 crystal = ["mkdocstrings-crystal (>=0.3.4)"]
-python = ["mkdocstrings-python (>=0.5.2)"]
+python = ["mkdocstrings-python (>=1.16.2)"]
 python-legacy = ["mkdocstrings-python-legacy (>=0.2.1)"]
 
 [[package]]
 name = "mkdocstrings-python"
-version = "1.13.0"
+version = "1.16.10"
 description = "A Python handler for mkdocstrings."
 optional = false
 python-versions = ">=3.9"
 groups = ["docs"]
 files = [
-    {file = "mkdocstrings_python-1.13.0-py3-none-any.whl", hash = "sha256:b88bbb207bab4086434743849f8e796788b373bd32e7bfefbf8560ac45d88f97"},
-    {file = "mkdocstrings_python-1.13.0.tar.gz", hash = "sha256:2dbd5757e8375b9720e81db16f52f1856bf59905428fd7ef88005d1370e2f64c"},
+    {file = "mkdocstrings_python-1.16.10-py3-none-any.whl", hash = "sha256:63bb9f01f8848a644bdb6289e86dc38ceddeaa63ecc2e291e3b2ca52702a6643"},
+    {file = "mkdocstrings_python-1.16.10.tar.gz", hash = "sha256:f9eedfd98effb612ab4d0ed6dd2b73aff6eba5215e0a65cea6d877717f75502e"},
 ]
 
 [package.dependencies]
-griffe = ">=0.49"
-mkdocs-autorefs = ">=1.2"
-mkdocstrings = ">=0.26"
+griffe = ">=1.6.2"
+mkdocs-autorefs = ">=1.4"
+mkdocstrings = ">=0.28.3"
+typing-extensions = {version = ">=4.0", markers = "python_version < \"3.11\""}
 
 [[package]]
 name = "mypy"
@@ -1867,11 +1866,12 @@ version = "4.13.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
 python-versions = ">=3.8"
-groups = ["main", "dev"]
+groups = ["main", "dev", "docs"]
 files = [
     {file = "typing_extensions-4.13.2-py3-none-any.whl", hash = "sha256:a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c"},
     {file = "typing_extensions-4.13.2.tar.gz", hash = "sha256:e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef"},
 ]
+markers = {docs = "python_version == \"3.10\""}
 
 [[package]]
 name = "tzdata"
@@ -1961,4 +1961,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "751480e42b05c664be5efc85f59a87238c61f5971bd35db0bb34fca5033dc948"
+content-hash = "3ab74f113a9c5e79fd100047ae6de1aea019e47fe91ce7c8b5dfe1bf216177cc"

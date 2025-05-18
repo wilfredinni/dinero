@@ -22,7 +22,7 @@ pytest-cov = "^6.0.0"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"
-mkdocstrings = {extras = ["python"], version = "^0.26.2"}
+mkdocstrings = {extras = ["python"], version = "^0.29.0"}
 mkdocs-material = "^9.5.43"
 
 [build-system]
