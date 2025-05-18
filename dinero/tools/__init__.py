@@ -1,4 +1,5 @@
 from .calculate_percentage import calculate_percentage
+from .conversion import convert
 from .interest import calculate_compound_interest, calculate_simple_interest
 from .margin import (
     calculate_cost_amount,
@@ -25,4 +26,5 @@ __all__ = [
     "calculate_cost_amount",
     "calculate_margin_portion",
     "calculate_selling_price",
+    "convert",
 ]

@@ -395,6 +395,39 @@ class Dinero(Operations):
         dict_representation = self.to_dict(amount_with_format)
         return json.dumps(dict_representation, cls=DecimalEncoder)
 
+    def convert(self, exchange_rate: str | float, currency: Currency) -> "Dinero":
+        """
+        Converts the Dinero object to a different currency using the specified
+        exchange rate.
+
+        Args:
+            exchange_rate (str | float): The exchange rate to use for conversion.
+            currency (Currency): The target currency to convert to.
+
+        Returns:
+            Dinero: A new Dinero object in the target currency.
+
+        Raises:
+            TypeError: If currency is not a Currency object.
+            ValueError: If exchange_rate is negative, zero, or cannot be converted to
+                a number.
+
+        Examples:
+            >>> from dinero.currencies import USD, EUR
+            >>> usd_amount = Dinero("100", USD)
+            >>> eur_amount = usd_amount.convert("0.85", EUR)
+            >>> eur_amount.format()
+            '85.00'
+
+            >>> from dinero.currencies import CLP
+            >>> clp_amount = usd_amount.convert(750, CLP)
+            >>> clp_amount.format()
+            '75,000'
+        """
+        from .tools.conversion import convert
+
+        return convert(self, exchange_rate, currency)
+
     def __repr__(self):
         return f"Dinero(amount={self.amount}, currency={self.currency})"
 
