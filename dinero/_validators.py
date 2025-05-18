@@ -7,7 +7,8 @@ from .types import OperationType
 class Validators:
     @staticmethod
     def addition_and_subtraction_amount(amount: OperationType | object) -> None:
-        """Validate that the amount passed to an addition or subtraction is of valid type.
+        """
+        Validate that the amount passed to an addition or subtraction is of valid type.
 
         Args:
             amount (str, int, float, Decimal, Dinero)
@@ -26,7 +27,8 @@ class Validators:
 
     @staticmethod
     def multiplication_and_division_amount(number: int | float | Decimal) -> None:
-        """Validate that the number passed to a multiplication and division is of valid type.
+        """
+        Validate that the number passed to a multiplication and division is of valid type.
 
         Args:
             amount (int, float, Decimal)
@@ -43,7 +45,8 @@ class Validators:
 
     @staticmethod
     def dinero_amount(amount: int | float | str | Decimal) -> None:
-        """Validate that the amount passed to Dinero is of valid type
+        """
+        Validate that the amount passed to Dinero is of valid type
 
         Args:
             amount (str, int, float, Decimal, Dinero)
@@ -61,11 +64,3 @@ class Validators:
 
         except (ValueError, InvalidOperation):
             raise InvalidOperationError(InvalidOperationError.operation_msg)
-
-    @staticmethod
-    def comparison_amount(amount: object) -> None:
-        """Checks if the amount is an instance of Dinero"""
-        from ._dinero import Dinero
-
-        if not isinstance(amount, Dinero):
-            raise InvalidOperationError(InvalidOperationError.comparison_msg)

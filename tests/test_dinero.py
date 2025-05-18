@@ -3,9 +3,9 @@ from decimal import Decimal
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR, GBP
-from dinero.exceptions import InvalidOperationError
 from dinero._validators import Validators
+from dinero.currencies import EUR, GBP, USD
+from dinero.exceptions import InvalidOperationError
 
 unit_price = Dinero(2.32, USD)
 money_received = Dinero("6.96", USD)
@@ -95,7 +95,7 @@ def test_obj_formatted(obj, number, symbol, currency, full):
     ],
 )
 def test_balance_ok(unit_price, units_sold, money_received):
-    assert unit_price.multiply(units_sold).equals_to(money_received)
+    assert unit_price.multiply(units_sold).eq(money_received)
     assert unit_price * units_sold == money_received
 
 
@@ -109,5 +109,5 @@ def test_balance_ok(unit_price, units_sold, money_received):
     ],
 )
 def test_balance_wrong(unit_price, units_sold, money_received):
-    assert unit_price.multiply(units_sold).equals_to(money_received) is False
+    assert unit_price.multiply(units_sold).eq(money_received) is False
     assert unit_price * units_sold != money_received

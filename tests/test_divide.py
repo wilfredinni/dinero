@@ -19,7 +19,7 @@ from dinero.exceptions import InvalidOperationError
 def test_divide_amount(amount, divisor, total):
     assert amount / divisor == total
     assert amount.divide(divisor) == total
-    assert amount.divide(divisor).equals_to(total)
+    assert amount.divide(divisor).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -32,7 +32,7 @@ def test_divide_amount(amount, divisor, total):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount / addend
+        amount / addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.divide(addend)

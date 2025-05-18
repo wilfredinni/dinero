@@ -1,7 +1,7 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR
+from dinero.currencies import EUR, USD
 from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 
 
@@ -16,7 +16,7 @@ from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 def test_subtract_amount_str(amount, subtrahend, total):
     assert amount - subtrahend == total
     assert amount.subtract(subtrahend) == total
-    assert amount.subtract(subtrahend).equals_to(total)
+    assert amount.subtract(subtrahend).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -30,7 +30,7 @@ def test_subtract_amount_str(amount, subtrahend, total):
 def test_subtract_amount_number(amount, subtrahend, total):
     assert amount - subtrahend == total
     assert amount.subtract(subtrahend) == total
-    assert amount.subtract(subtrahend).equals_to(total)
+    assert amount.subtract(subtrahend).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -54,7 +54,7 @@ def test_subtract_amount_number(amount, subtrahend, total):
 def test_subtract_amount_mixed(amount, subtrahend, total):
     assert amount - subtrahend == total
     assert amount.subtract(subtrahend) == total
-    assert amount.subtract(subtrahend).equals_to(total)
+    assert amount.subtract(subtrahend).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -68,7 +68,7 @@ def test_subtract_amount_mixed(amount, subtrahend, total):
 )
 def test_different_currencies_error(amount, subtrahend):
     with pytest.raises(DifferentCurrencyError):
-        amount - subtrahend
+        amount - subtrahend  # type: ignore
 
     with pytest.raises(DifferentCurrencyError):
         amount.subtract(subtrahend)
@@ -84,7 +84,7 @@ def test_different_currencies_error(amount, subtrahend):
 )
 def test_invalid_operation_error(amount, addend):
     with pytest.raises(InvalidOperationError):
-        amount - addend
+        amount - addend  # type: ignore
 
     with pytest.raises(InvalidOperationError):
         amount.subtract(addend)

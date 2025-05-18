@@ -6,14 +6,16 @@ Dinero allows the user to make exact monetary calculations.
 - subtract:: Returns a new Dinero object that represents the difference of two amounts.
 - multiply:: Returns a new Dinero object that represents the multiplied value by a factor.
 - divide:: Returns a new Dinero object that represents the divided value by a factor.
-- equals_to:: Checks whether the value represented by this object equals to the other.
-- less_than:: Checks whether the value represented by this object is less than the other.
-- less_than_or_equal:: Checks whether an object is less than or equal the other.
-- greater_than:: Checks whether an object is greater or equal the other.
-- greater_than_or_equal:: Checks whether an object is greater or equal the other.
+- eq:: Checks whether the value represented by this object equals to the other.
+- lt:: Checks whether the value represented by this object is less than the other.
+- lte:: Checks whether an object is less than or equal the other.
+- gt:: Checks whether an object is greater or equal the other.
+- gte:: Checks whether an object is greater or equal the other.
 - to_dict:: Returns the object's data as a Python Dictionary.
 - to_json:: Returns the object's data as a JSON string.
+- convert:: Converts the Dinero object to a different currency.
 """
+
 import json
 from decimal import Decimal
 from typing import Any
@@ -27,8 +29,10 @@ validate = Validators()
 
 
 class Dinero(Operations):
-    """A Dinero object is an immutable data structure representing a specific monetary value.
-    It comes with methods for creating, parsing, manipulating, testing and formatting them.
+    """
+    A Dinero object is an immutable data structure representing a specific
+    monetary value. It comes with methods for creating, parsing, manipulating,
+    testing and formatting them.
 
     Args:
         amount (str, int, float, Decimal): The amount to work with.
@@ -66,7 +70,8 @@ class Dinero(Operations):
         return f"{currency_symbol}{self._formatted_amount}{currency_code}"
 
     def add(self, amount: "OperationType | Dinero") -> "Dinero":
-        """Returns a new Dinero object that represents the sum of this and an other object.
+        """
+        Returns a new Dinero object that represents the sum of this and an other object.
 
         If the addend is not a Dinero object, it will be transformed to one using the
         same currency.
@@ -102,7 +107,7 @@ class Dinero(Operations):
 
     def subtract(self, amount: "OperationType | Dinero") -> "Dinero":
         """
-        Returns a new Dinero object that represents the difference of this and an other object.
+        Returns a new Dinero object that represents the difference of this and other.
 
         If the subtrahend is not a Dinero object, it will be transformed to one using the
         same currency.
@@ -138,7 +143,8 @@ class Dinero(Operations):
 
     def multiply(self, amount: int | float | Decimal) -> "Dinero":
         """
-        Returns a new Dinero object that represents the multiplied value by the given factor.
+        Returns a new Dinero object that represents the multiplied value by
+        the given factor.
 
         Examples:
             >>> amount = Dinero("2.32", USD)
@@ -162,7 +168,8 @@ class Dinero(Operations):
         return self.__mul__(amount)
 
     def divide(self, amount: int | float | Decimal) -> "Dinero":
-        """Returns a new Dinero object that represents the divided value by the given factor.
+        """
+        Returns a new Dinero object that represents the divided value by the given factor.
 
         Examples:
             >>> amount = Dinero("2.32", USD)
@@ -185,13 +192,14 @@ class Dinero(Operations):
 
         return self.__truediv__(amount)
 
-    def equals_to(self, amount: "Dinero") -> bool:
-        """Checks whether the value represented by this object equals to other Dinero instance.
+    def eq(self, amount: "Dinero") -> bool:
+        """
+        Checks whether the value represented by this object equals to other instance.
 
         Examples:
             >>> amount_1 = Dinero("2.32", USD)
             >>> amount_2 = Dinero("2.32", USD)
-            >>> amount_1.equals_to(amount_2)
+            >>> amount_1.eq(amount_2)
             True
 
             >>> Dinero("2.32", USD) == Dinero("2.32", USD)
@@ -210,13 +218,14 @@ class Dinero(Operations):
 
         return self.__eq__(amount)
 
-    def less_than(self, amount: "Dinero") -> bool:
-        """Checks whether the value represented by this object is less than the other.
+    def lt(self, amount: "Dinero") -> bool:
+        """
+        Checks whether the value represented by this object is less than the other.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
             >>> amount_2 = Dinero(25, USD)
-            >>> amount_1.less_than(amount_2)
+            >>> amount_1.lt(amount_2)
             True
 
             >>> Dinero(24, USD) < Dinero(25, USD)
@@ -235,13 +244,14 @@ class Dinero(Operations):
 
         return self.__lt__(amount)
 
-    def less_than_or_equal(self, amount: "Dinero") -> bool:
-        """Checks whether the value represented by this object is less than or equal the other.
+    def lte(self, amount: "Dinero") -> bool:
+        """
+        Checks whether the value represented by this object is less than or equal other.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
             >>> amount_2 = Dinero(25, USD)
-            >>> amount_1.less_than_or_equal(amount_2)
+            >>> amount_1.lte(amount_2)
             True
 
             >>> Dinero(24, USD) <= Dinero(25, USD)
@@ -260,13 +270,14 @@ class Dinero(Operations):
 
         return self.__le__(amount)
 
-    def greater_than(self, amount: "Dinero") -> bool:
-        """Checks whether the value represented by this object is greater or equal the other.
+    def gt(self, amount: "Dinero") -> bool:
+        """
+        Checks whether the value represented by this object is greater or equal other.
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
             >>> amount_2 = Dinero(24, USD)
-            >>> amount_1.greater_than(amount_2)
+            >>> amount_1.gt(amount_2)
             True
 
             >>> Dinero(25, USD) > Dinero(24, USD)
@@ -285,14 +296,14 @@ class Dinero(Operations):
 
         return self.__gt__(amount)
 
-    def greater_than_or_equal(self, amount: "Dinero") -> bool:
+    def gte(self, amount: "Dinero") -> bool:
         """
-        Checks whether the value represented by this object is greater than or equal the other.
+        Checks whether the value represented by this object is greater than or equal other
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
             >>> amount_2 = Dinero(24, USD)
-            >>> amount_1.greater_than_or_equal(amount_2)
+            >>> amount_1.gte(amount_2)
             True
 
             >>> Dinero(25, USD) >= Dinero(24, USD)
@@ -312,7 +323,8 @@ class Dinero(Operations):
         return self.__ge__(amount)
 
     def to_dict(self, amount_with_format: bool = False) -> dict[str, Any]:
-        """Returns the object's data as a Python Dictionary.
+        """
+        Returns the object's data as a Python Dictionary.
 
         Examples:
             >>> Dinero("3333.259", USD).to_dict()
@@ -340,7 +352,7 @@ class Dinero(Operations):
             }
 
         Args:
-            amount_with_format (bool): If the amount is formatted or not. Defaults to False.
+            amount_with_format (bool): If the amount is formatted. Defaults to False.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -351,9 +363,7 @@ class Dinero(Operations):
         """
 
         normalized_amount = self._normalize(quantize=True)
-        amount = (
-            self._formatted_amount if amount_with_format else str(normalized_amount)
-        )
+        amount = self._formatted_amount if amount_with_format else str(normalized_amount)
 
         dict_repr = self.__dict__
         dict_repr["amount"] = amount
@@ -362,7 +372,8 @@ class Dinero(Operations):
         return dict_repr
 
     def to_json(self, amount_with_format: bool = False) -> str:
-        """Returns the object's data as a JSON string.
+        """
+        Returns the object's data as a JSON string.
 
         Examples:
             >>> Dinero('2,00', USD).to_json()
@@ -372,7 +383,7 @@ class Dinero(Operations):
             '{"amount": "3,333.26", "currency": {"code": "USD", "base": 10...'
 
         Args:
-            amount_with_format (bool): If the amount is formatted or not. Defaults to False.
+            amount_with_format (bool): If the amount is formatted. Defaults to False.
 
         Raises:
             DifferentCurrencyError: Different currencies where used.
@@ -384,6 +395,39 @@ class Dinero(Operations):
 
         dict_representation = self.to_dict(amount_with_format)
         return json.dumps(dict_representation, cls=DecimalEncoder)
+
+    def convert(self, exchange_rate: str | float, currency: Currency) -> "Dinero":
+        """
+        Converts the Dinero object to a different currency using the specified
+        exchange rate.
+
+        Args:
+            exchange_rate (str | float): The exchange rate to use for conversion.
+            currency (Currency): The target currency to convert to.
+
+        Returns:
+            Dinero: A new Dinero object in the target currency.
+
+        Raises:
+            TypeError: If currency is not a Currency object.
+            ValueError: If exchange_rate is negative, zero, or cannot be converted to
+                a number.
+
+        Examples:
+            >>> from dinero.currencies import USD, EUR
+            >>> usd_amount = Dinero("100", USD)
+            >>> eur_amount = usd_amount.convert("0.85", EUR)
+            >>> eur_amount.format()
+            '85.00'
+
+            >>> from dinero.currencies import CLP
+            >>> clp_amount = usd_amount.convert(750, CLP)
+            >>> clp_amount.format()
+            '75,000'
+        """
+        from .tools.conversion import convert
+
+        return convert(self, exchange_rate, currency)
 
     def __repr__(self):
         return f"Dinero(amount={self.amount}, currency={self.currency})"

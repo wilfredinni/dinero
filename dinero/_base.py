@@ -49,7 +49,8 @@ class Base:
         return self._normalize(quantize=True)
 
     def _get_instance(self, amount: "OperationType | Dinero") -> "Dinero":
-        """Return a Dinero object after checking the currency codes are equal and
+        """
+        Return a Dinero object after checking the currency codes are equal and
         transforming it to Dinero if needed.
 
         Args:
@@ -70,7 +71,8 @@ class Base:
         return amount_obj
 
     def _normalize(self, quantize: bool = False) -> Decimal:
-        """Return a Decimal object, that can be quantize.
+        """
+        Return a Decimal object, that can be quantize.
 
         Args:
             quantize (bool): Only for the final result. Defaults to False.

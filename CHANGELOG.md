@@ -1,7 +1,20 @@
 # Changelog
 
-## [Unreleased](https://github.com/wilfredinni/dinero/compare/0.2.1...master)
+## [0.4.0](https://github.com/wilfredinni/dinero/compare/0.2.1...master)
 
+- Added currency conversion functionality with `convert()` method
+- Added new tools:
+    - `calculate_base_amount()`
+    - `calculate_markup_portion()`
+    - `calculate_marked_up_amount()`
+    - `calculate_cost_amount()`
+    - `calculate_margin_portion()`
+    - `calculate_selling_price()`
+    - `calculate_net_amount()`
+    - `calculate_vat_portion()`
+    - `calculate_gross_amount()`
+    - `convert()`
+- Comparison operators where renamed to `eq`, `gt`, `gte`, `lt`, and `lte`.
 - Modularize tools validators.
 
 

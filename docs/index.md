@@ -96,7 +96,7 @@ True
 ```
 
 ```python
->>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
+>>> Dinero(100, EUR).eq(Dinero(100, EUR))
 True
 ```
 
