@@ -181,3 +181,57 @@ final_amount = calculate_marked_up_amount(base_amount, 15)
 final_amount.format(symbol=True, currency=True)
 '$115.00 USD'
 ```
+
+## Margin Calculations
+
+The library provides three functions for working with profit margins. Unlike markup which is calculated from the cost price, margin is calculated as a percentage of the selling price.
+
+### Calculate Cost Amount
+
+Extracts the cost amount from a selling price and margin rate:
+
+- **amount**: The selling price (including margin)
+- **margin_rate**: The margin rate as a percentage of selling price
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools.margin import calculate_cost_amount
+
+selling_price = Dinero(100, USD)  # Amount including 20% margin
+cost_amount = calculate_cost_amount(selling_price, 20)
+cost_amount.format(symbol=True, currency=True)
+'$80.00 USD'
+```
+
+### Calculate Margin Portion
+
+Extracts just the margin amount from a selling price:
+
+- **amount**: The selling price (including margin)
+- **margin_rate**: The margin rate as a percentage of selling price
+
+```python
+from dinero.tools.margin import calculate_margin_portion
+
+selling_price = Dinero(100, USD)  # Amount including 20% margin
+margin = calculate_margin_portion(selling_price, 20)
+margin.format(symbol=True, currency=True)
+'$20.00 USD'
+```
+
+### Calculate Selling Price
+
+Calculates the selling price from a cost amount and desired margin rate:
+
+- **amount**: The cost amount (excluding margin)
+- **margin_rate**: The desired margin rate as a percentage of selling price
+
+```python
+from dinero.tools.margin import calculate_selling_price
+
+cost_amount = Dinero(80, USD)  # Cost amount before margin
+selling_price = calculate_selling_price(cost_amount, 20)
+selling_price.format(symbol=True, currency=True)
+'$100.00 USD'
+```
