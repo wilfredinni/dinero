@@ -94,4 +94,4 @@ def test_calculate_compound_interest(
             duration=duration,
             compound_frequency=compound_frequency,
         )
-        assert compound_interest.equals_to(expected)
+        assert compound_interest.eq(expected)

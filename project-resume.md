@@ -54,7 +54,7 @@ The `Dinero` class provides the following main interfaces:
 - Constructor: `Dinero(amount, currency)`
 - Formatting: `format(symbol=False, currency=False)`
 - Arithmetic: `add()`, `subtract()`, `multiply()`, `divide()`
-- Comparison: `equals_to()`, `less_than()`, `greater_than()`, etc.
+- Comparison: `eq()`, `lt()`, `gt()`, etc.
 - Serialization: `to_dict()`, `to_json()`
 
 ### Important Methods and Signatures

@@ -35,7 +35,7 @@ amount = Dinero(42.42, USD)  # Not recommended
 result = price.multiply(quantity).subtract(discount)
 
 # CORRECT - Compare only same-currency values
-if price1.currency == price2.currency and price1.less_than(price2):
+if price1.currency == price2.currency and price1.lt(price2):
     # Handle comparison
 ```
 

@@ -6,13 +6,14 @@ Dinero allows the user to make exact monetary calculations.
 - subtract:: Returns a new Dinero object that represents the difference of two amounts.
 - multiply:: Returns a new Dinero object that represents the multiplied value by a factor.
 - divide:: Returns a new Dinero object that represents the divided value by a factor.
-- equals_to:: Checks whether the value represented by this object equals to the other.
-- less_than:: Checks whether the value represented by this object is less than the other.
-- less_than_or_equal:: Checks whether an object is less than or equal the other.
-- greater_than:: Checks whether an object is greater or equal the other.
-- greater_than_or_equal:: Checks whether an object is greater or equal the other.
+- eq:: Checks whether the value represented by this object equals to the other.
+- lt:: Checks whether the value represented by this object is less than the other.
+- lte:: Checks whether an object is less than or equal the other.
+- gt:: Checks whether an object is greater or equal the other.
+- gte:: Checks whether an object is greater or equal the other.
 - to_dict:: Returns the object's data as a Python Dictionary.
 - to_json:: Returns the object's data as a JSON string.
+- convert:: Converts the Dinero object to a different currency.
 """
 
 import json
@@ -191,14 +192,14 @@ class Dinero(Operations):
 
         return self.__truediv__(amount)
 
-    def equals_to(self, amount: "Dinero") -> bool:
+    def eq(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object equals to other instance.
 
         Examples:
             >>> amount_1 = Dinero("2.32", USD)
             >>> amount_2 = Dinero("2.32", USD)
-            >>> amount_1.equals_to(amount_2)
+            >>> amount_1.eq(amount_2)
             True
 
             >>> Dinero("2.32", USD) == Dinero("2.32", USD)
@@ -217,14 +218,14 @@ class Dinero(Operations):
 
         return self.__eq__(amount)
 
-    def less_than(self, amount: "Dinero") -> bool:
+    def lt(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object is less than the other.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
             >>> amount_2 = Dinero(25, USD)
-            >>> amount_1.less_than(amount_2)
+            >>> amount_1.lt(amount_2)
             True
 
             >>> Dinero(24, USD) < Dinero(25, USD)
@@ -243,14 +244,14 @@ class Dinero(Operations):
 
         return self.__lt__(amount)
 
-    def less_than_or_equal(self, amount: "Dinero") -> bool:
+    def lte(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object is less than or equal other.
 
         Examples:
             >>> amount_1 = Dinero(24, USD)
             >>> amount_2 = Dinero(25, USD)
-            >>> amount_1.less_than_or_equal(amount_2)
+            >>> amount_1.lte(amount_2)
             True
 
             >>> Dinero(24, USD) <= Dinero(25, USD)
@@ -269,14 +270,14 @@ class Dinero(Operations):
 
         return self.__le__(amount)
 
-    def greater_than(self, amount: "Dinero") -> bool:
+    def gt(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object is greater or equal other.
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
             >>> amount_2 = Dinero(24, USD)
-            >>> amount_1.greater_than(amount_2)
+            >>> amount_1.gt(amount_2)
             True
 
             >>> Dinero(25, USD) > Dinero(24, USD)
@@ -295,14 +296,14 @@ class Dinero(Operations):
 
         return self.__gt__(amount)
 
-    def greater_than_or_equal(self, amount: "Dinero") -> bool:
+    def gte(self, amount: "Dinero") -> bool:
         """
         Checks whether the value represented by this object is greater than or equal other
 
         Examples:
             >>> amount_1 = Dinero(25, USD)
             >>> amount_2 = Dinero(24, USD)
-            >>> amount_1.greater_than_or_equal(amount_2)
+            >>> amount_1.gte(amount_2)
             True
 
             >>> Dinero(25, USD) >= Dinero(24, USD)

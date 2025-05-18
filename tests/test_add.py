@@ -16,7 +16,7 @@ from dinero.exceptions import DifferentCurrencyError, InvalidOperationError
 def test_add_amount_str(amount, addend, total):
     assert amount + addend == total
     assert amount.add(addend) == total
-    assert amount.add(addend).equals_to(total)
+    assert amount.add(addend).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -30,7 +30,7 @@ def test_add_amount_str(amount, addend, total):
 def test_add_amount_number(amount, addend, total):
     assert amount + addend == total
     assert amount.add(addend) == total
-    assert amount.add(addend).equals_to(total)
+    assert amount.add(addend).eq(total)
 
 
 @pytest.mark.parametrize(
@@ -54,7 +54,7 @@ def test_add_amount_number(amount, addend, total):
 def test_add_amount_mixed(amount, addend, total):
     assert amount + addend == total
     assert amount.add(addend) == total
-    assert amount.add(addend).equals_to(total)
+    assert amount.add(addend).eq(total)
 
 
 @pytest.mark.parametrize(

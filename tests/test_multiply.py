@@ -19,7 +19,7 @@ from dinero.exceptions import InvalidOperationError
 def test_multiply_amount_str(amount, multiplicand, total):
     assert amount * multiplicand == total
     assert amount.multiply(multiplicand) == total
-    assert amount.multiply(multiplicand).equals_to(total)
+    assert amount.multiply(multiplicand).eq(total)
 
 
 @pytest.mark.parametrize(

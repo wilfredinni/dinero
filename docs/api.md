@@ -9,11 +9,11 @@
             - multiply
             - divide
             - convert
-            - equals_to
-            - greater_than
-            - greater_than_or_equal
-            - less_than
-            - less_than_or_equal
+            - eq
+            - gt
+            - gte
+            - lt
+            - lte
             - to_dict
             - to_json
             - convert

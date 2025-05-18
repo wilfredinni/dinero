@@ -190,27 +190,27 @@ Dinero(1000, USD) / 2
 ## Comparisons
 
 ```python title='Equals to'
-Dinero(1000, USD).equals_to(Dinero(1000, USD))
+Dinero(1000, USD).eq(Dinero(1000, USD))
 Dinero(1000, USD) == Dinero(1000, USD)
 ```
 
 ```python title='Less than'
-Dinero(1000, USD).less_than(Dinero(1000, USD))
+Dinero(1000, USD).lt(Dinero(1000, USD))
 Dinero(1000, USD) < Dinero(1000, USD)
 ```
 
 ```python title='Less than or equal'
-Dinero(1000, USD).less_than_or_equal(Dinero(1000, USD))
+Dinero(1000, USD).lte(Dinero(1000, USD))
 Dinero(1000, USD) <= Dinero(1000, USD)
 ```
 
 ```python title='Greater than'
-Dinero(1000, USD).greater_than(Dinero(1000, USD))
+Dinero(1000, USD).gt(Dinero(1000, USD))
 Dinero(1000, USD) > Dinero(1000, USD)
 ```
 
 ```python title='Greater than or equal'
-Dinero(1000, USD).greater_than_or_equal(Dinero(1000, USD))
+Dinero(1000, USD).gte(Dinero(1000, USD))
 Dinero(1000, USD) >= Dinero(1000, USD)
 ```
 
