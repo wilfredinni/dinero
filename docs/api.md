@@ -17,10 +17,10 @@
             - to_json
         show_root_toc_entry: False
 
-::: dinero.tools.calculate_vat
+::: dinero.tools.extract_vat
     options:
         members:
-            - calculate_vat
+            - extract_vat
         show_root_toc_entry: False
 
 ::: dinero.tools.calculate_percentage

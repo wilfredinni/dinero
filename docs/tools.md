@@ -12,10 +12,10 @@ This function calculates the VAT amount of a given monetary value. It takes two 
 ```python
 from dinero import Dinero
 from dinero.currencies import USD
-from dinero.tools import calculate_vat
+from dinero.tools import extract_vat
 
 amount = Dinero(100, USD)
-vat_amount = calculate_vat(
+vat_amount = extract_vat(
     amount=amount,
     vat_rate=7.25,
 )

@@ -1,14 +1,14 @@
 import pytest
 
 from dinero import Dinero
-from dinero.currencies import USD, EUR, CLP, JPY
+from dinero.currencies import CLP, EUR, JPY, USD
 from dinero.exceptions import InvalidOperationError
 from dinero.tools import (
-    calculate_vat,
-    calculate_percentage,
-    calculate_simple_interest,
     calculate_compound_interest,
     calculate_markup,
+    calculate_percentage,
+    calculate_simple_interest,
+    extract_vat,
 )
 
 
@@ -23,15 +23,15 @@ from dinero.tools import (
         (Dinero(100, USD), -7.25, ValueError),
     ],
 )
-def test_calculate_vat(amount, vat_rate, expected_vat_amount):
+def test_extract_vat(amount, vat_rate, expected_vat_amount):
     if isinstance(expected_vat_amount, type) and issubclass(
         expected_vat_amount,
         Exception,
     ):
         with pytest.raises(expected_vat_amount):
-            calculate_vat(amount, vat_rate)
+            extract_vat(amount, vat_rate)
     else:
-        vat = calculate_vat(amount, vat_rate)
+        vat = extract_vat(amount, vat_rate)
         assert vat == expected_vat_amount
 
 

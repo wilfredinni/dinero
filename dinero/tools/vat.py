@@ -3,7 +3,7 @@ from dinero import Dinero
 from ._validators import ToolValidators
 
 
-def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
+def extract_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
     """
     Calculates the VAT amount of a given Dinero object.
 
@@ -21,7 +21,7 @@ def calculate_vat(amount: Dinero, vat_rate: int | float) -> Dinero:
 
     Examples:
         >>> amount = Dinero(100, USD)
-        >>> vat_amount = calculate_vat(amount, 7.25)
+        >>> vat_amount = extract_vat(amount, 7.25)
         >>> vat_amount.format(symbol=True, currency=True)
         '$6.76 USD'
     """
