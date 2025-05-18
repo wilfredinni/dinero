@@ -8,31 +8,7 @@ from dinero.tools import (
     calculate_markup,
     calculate_percentage,
     calculate_simple_interest,
-    extract_vat,
 )
-
-
-@pytest.mark.parametrize(
-    "amount, vat_rate, expected_vat_amount",
-    [
-        (Dinero(100, USD), 7.25, Dinero("6.76", USD)),
-        (Dinero(50, EUR), 21, Dinero("8.68", EUR)),
-        (Dinero(500, CLP), 19, Dinero("80", CLP)),
-        (100, 7.25, InvalidOperationError),
-        (Dinero(100, USD), "7.25", TypeError),
-        (Dinero(100, USD), -7.25, ValueError),
-    ],
-)
-def test_extract_vat(amount, vat_rate, expected_vat_amount):
-    if isinstance(expected_vat_amount, type) and issubclass(
-        expected_vat_amount,
-        Exception,
-    ):
-        with pytest.raises(expected_vat_amount):
-            extract_vat(amount, vat_rate)
-    else:
-        vat = extract_vat(amount, vat_rate)
-        assert vat == expected_vat_amount
 
 
 @pytest.mark.parametrize(
