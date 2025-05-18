@@ -3,7 +3,11 @@ import pytest
 from dinero import Dinero
 from dinero.currencies import CLP, EUR, USD
 from dinero.exceptions import InvalidOperationError
-from dinero.tools.vat import add_vat, extract_amount_without_vat, extract_vat_amount
+from dinero.tools.vat import (
+    calculate_gross_amount,
+    calculate_net_amount,
+    calculate_vat_portion,
+)
 
 
 @pytest.mark.parametrize(
@@ -19,12 +23,13 @@ from dinero.tools.vat import add_vat, extract_amount_without_vat, extract_vat_am
         (Dinero(100, USD), -20, ValueError),  # Negative VAT rate
     ],
 )
-def test_extract_amount_without_vat(amount, vat_rate, expected_amount):
+def test_calculate_net_amount(amount, vat_rate, expected_amount):
+    """Test extracting net amount from gross amount including VAT"""
     if isinstance(expected_amount, type) and issubclass(expected_amount, Exception):
         with pytest.raises(expected_amount):
-            extract_amount_without_vat(amount, vat_rate)
+            calculate_net_amount(amount, vat_rate)
     else:
-        result = extract_amount_without_vat(amount, vat_rate)
+        result = calculate_net_amount(amount, vat_rate)
         assert result == expected_amount
 
 
@@ -41,12 +46,13 @@ def test_extract_amount_without_vat(amount, vat_rate, expected_amount):
         (Dinero(100, USD), -20, ValueError),  # Negative VAT rate
     ],
 )
-def test_extract_vat_amount(amount, vat_rate, expected_vat):
+def test_calculate_vat_portion(amount, vat_rate, expected_vat):
+    """Test extracting VAT amount from gross amount"""
     if isinstance(expected_vat, type) and issubclass(expected_vat, Exception):
         with pytest.raises(expected_vat):
-            extract_vat_amount(amount, vat_rate)
+            calculate_vat_portion(amount, vat_rate)
     else:
-        result = extract_vat_amount(amount, vat_rate)
+        result = calculate_vat_portion(amount, vat_rate)
         assert result == expected_vat
 
 
@@ -63,12 +69,13 @@ def test_extract_vat_amount(amount, vat_rate, expected_vat):
         (Dinero(100, USD), -20, ValueError),  # Negative VAT rate
     ],
 )
-def test_add_vat(amount, vat_rate, expected_total):
+def test_calculate_gross_amount(amount, vat_rate, expected_total):
+    """Test adding VAT to net amount"""
     if isinstance(expected_total, type) and issubclass(expected_total, Exception):
         with pytest.raises(expected_total):
-            add_vat(amount, vat_rate)
+            calculate_gross_amount(amount, vat_rate)
     else:
-        result = add_vat(amount, vat_rate)
+        result = calculate_gross_amount(amount, vat_rate)
         assert result == expected_total
 
 
@@ -83,11 +90,11 @@ def test_add_vat(amount, vat_rate, expected_total):
 def test_vat_functions_consistency(amount, vat_rate):
     """Test that VAT functions are mathematically consistent with each other"""
     # Extract net amount and VAT from gross amount
-    net_amount = extract_amount_without_vat(amount, vat_rate)
-    vat_amount = extract_vat_amount(amount, vat_rate)
+    net_amount = calculate_net_amount(amount, vat_rate)
+    vat_amount = calculate_vat_portion(amount, vat_rate)
 
     # Verify that net + VAT = gross
     assert net_amount + vat_amount == amount
 
-    # Verify that adding VAT to net gives gross
-    assert add_vat(net_amount, vat_rate) == amount
+    # Verify that adding VAT to net gives original gross
+    assert calculate_gross_amount(net_amount, vat_rate) == amount
