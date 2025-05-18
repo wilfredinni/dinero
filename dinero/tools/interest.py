@@ -1,3 +1,32 @@
+"""
+Interest calculation tools for working with monetary values.
+
+This module provides tools for calculating both simple and compound interest
+on monetary amounts. It handles all calculations using the Dinero class to
+ensure precision in financial computations.
+
+Simple interest is calculated using the formula:
+    I = P * r * t
+    where:
+    - I is the interest earned
+    - P is the principal amount
+    - r is the annual interest rate (as a percentage)
+    - t is the time in years
+
+Compound interest is calculated using the formula:
+    A = P * (1 + r/n)^(n*t)
+    Interest = A - P
+    where:
+    - A is the final amount
+    - P is the principal amount
+    - r is the annual interest rate (as a decimal)
+    - n is the number of times interest is compounded per year
+    - t is the time in years
+
+All monetary values are handled as Dinero instances to maintain precision
+and proper decimal handling as per currency specifications.
+"""
+
 from dinero import Dinero
 
 from ._validators import ToolValidators
@@ -71,8 +100,12 @@ def calculate_compound_interest(
         principal, interest_rate, duration, compound_frequency
     )
 
-    # Calculate the total interest using the formula: A = P * (1 + r/n)^(n*t)
+    # Calculate using compound interest formula:
+    # Total amount (A) = P * (1 + r/n)^(n*t)
+    # Interest = A - P
     n = compound_frequency
     r = interest_rate / 100
     t = duration
-    return principal * ((1 + r / n) ** (n * t) - 1)
+
+    total_amount = principal * ((1 + r / n) ** (n * t))
+    return total_amount - principal

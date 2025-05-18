@@ -73,59 +73,80 @@ vat_amount.format(symbol=True, currency=True)
 '$450.00 USD'
 ```
 
-## Calculate Simple Interest
+## Interest Calculations
 
-This function calculates the simple interest of a given monetary value. It takes three arguments: 
+The library provides tools for calculating both simple and compound interest on monetary amounts. All calculations are handled using the Dinero class to ensure precision in financial computations.
 
-- **principal**: The principal amount of the loan as a Dinero object
-- **interest_rate**: The annual interest rate
-- **duration**: The duration of the loan in years
+### Calculate Simple Interest
 
-Uses the formula `I = P * r * t`
+This function calculates the simple interest earned on a principal amount over time. Uses the formula:
 
-```python
-from dinero import Dinero
-from dinero.currencies import USD
-from dinero.tools import calculate_simple_interest
-
-amount = Dinero(1000, USD)
-interest_amount = calculate_simple_interest(
-    principal=amount,
-    interest_rate=5,
-    duration=2,
-)
-interest_amount.format(symbol=True, currency=True)
-'$100.00 USD'
+```
+I = P * r * t
 ```
 
-## Calculate Compound Interest
+where:
+- I is the interest earned
+- P is the principal amount
+- r is the annual interest rate (as a percentage)
+- t is the time in years
 
-This function calculates the compound interest of a given monetary value. It takes four arguments:
-
- - **principal**: The monetary value as a Dinero object
- - **interest_rate**: The annual interest rate as a decimal
- - **duration**: The duration of the loan in years
- - **compound_frequency**: The number of times interest is compounded per year
-
-Uses the formula `A = P(1 + r/n)^(nt)`
-
-Example:
-
+Arguments:
+- **principal**: The principal amount as a Dinero object
+- **interest_rate**: The annual interest rate as a percentage (e.g., 5 for 5%)
+- **duration**: The time period in years
 
 ```python
 from dinero import Dinero
 from dinero.currencies import USD
-from dinero.tools import calculate_compound_interest
+from dinero.tools.interest import calculate_simple_interest
+
+principal = Dinero(1000, USD)
+interest = calculate_simple_interest(
+    principal=principal,
+    interest_rate=5,  # 5%
+    duration=2,       # 2 years
+)
+interest.format(symbol=True, currency=True)
+'$100.00 USD'  # 1000 * 0.05 * 2 = 100
+```
+
+### Calculate Compound Interest
+
+This function calculates compound interest, where interest is earned not only on the principal but also on accumulated interest from previous periods. Uses the formula:
+
+```
+A = P * (1 + r/n)^(n*t)
+Interest = A - P
+```
+
+where:
+- A is the final amount
+- P is the principal amount
+- r is the annual interest rate (as a percentage)
+- n is the number of times interest is compounded per year
+- t is the time in years
+
+Arguments:
+- **principal**: The principal amount as a Dinero object
+- **interest_rate**: The annual interest rate as a percentage (e.g., 5 for 5%)
+- **duration**: The time period in years
+- **compound_frequency**: Number of times interest is compounded per year (e.g., 12 for monthly)
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.tools.interest import calculate_compound_interest
 
 principal = Dinero("2000", USD)
-total_interest = calculate_compound_interest(
+interest = calculate_compound_interest(
     principal=principal,
-    interest_rate=5,
-    duration=10,
-    compound_frequency=12,
+    interest_rate=5,        # 5%
+    duration=10,            # 10 years
+    compound_frequency=12,  # Compounded monthly
 )
-total_interest.format(symbol=True, currency=True)
-'$1,294.02 USD'
+interest.format(symbol=True, currency=True)
+'$1,294.02 USD'  # Total interest earned over 10 years
 ```
 
 ## Markup Calculations
@@ -142,7 +163,7 @@ Extracts the base amount (excluding markup) from a final amount (including marku
 ```python
 from dinero import Dinero
 from dinero.currencies import USD
-from dinero.tools import calculate_base_amount
+from dinero.tools.markup import calculate_base_amount
 
 final_amount = Dinero(115, USD)  # Amount including 15% markup
 base_amount = calculate_base_amount(final_amount, 15)
@@ -158,7 +179,7 @@ Extracts just the markup amount from a final amount:
 - **markup_rate**: The markup rate as a percentage
 
 ```python
-from dinero.tools import calculate_markup_portion
+from dinero.tools.markup import calculate_markup_portion
 
 final_amount = Dinero(115, USD)  # Amount including 15% markup
 markup = calculate_markup_portion(final_amount, 15)
@@ -174,7 +195,7 @@ Adds markup to a base amount to get the final amount:
 - **markup_rate**: The markup rate as a percentage
 
 ```python
-from dinero.tools import calculate_marked_up_amount
+from dinero.tools.markup import calculate_marked_up_amount
 
 base_amount = Dinero(100, USD)  # Amount without markup
 final_amount = calculate_marked_up_amount(base_amount, 15)
