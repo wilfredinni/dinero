@@ -1,6 +1,5 @@
-from .calculate_compound_interest import calculate_compound_interest
 from .calculate_percentage import calculate_percentage
-from .calculate_simple_interest import calculate_simple_interest
+from .interest import calculate_compound_interest, calculate_simple_interest
 from .margin import (
     calculate_cost_amount,
     calculate_margin_portion,
