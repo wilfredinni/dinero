@@ -15,7 +15,6 @@
     - `calculate_gross_amount()`
     - `convert()`
 - Comparison operators where renamed to `eq`, `gt`, `gte`, `lt`, and `lte`.
-
 - Modularize tools validators.
 
 

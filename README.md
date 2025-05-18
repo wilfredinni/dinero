@@ -113,6 +113,35 @@ future_value = calculate_compound_interest(
 )
 ```
 
+4. Compare Monetary Values:
+```python
+from dinero.currencies import USD
+
+price1 = Dinero("99.99", USD)
+price2 = Dinero("89.99", USD)
+
+# Using comparison operators
+price1 > price2    # True - first price is higher
+
+# Using methods for more explicit code
+price1.eq(price2)  # False - prices are not equal
+price2.lt(price1)  # True - price2 is less than price1
+```
+
+5. Convert Between Currencies:
+```python
+from dinero.currencies import USD, EUR, JPY
+
+# Convert $100 USD to Euros with exchange rate 0.85
+usd_price = Dinero("100.00", USD)
+eur_price = usd_price.convert("0.85", EUR)
+eur_price.format(symbol=True)  # "€85.00"
+
+# Convert to Japanese Yen
+jpy_price = usd_price.convert("110.50", JPY)
+jpy_price.format(symbol=True, currency=True)  # "¥11,050 JPY"
+```
+
 ## Features
 
 ### Type-Safe Currency Operations
@@ -129,6 +158,44 @@ final_price = (
     .multiply(1.20)  # Add 20% markup
     .subtract("5.00")  # Apply discount
 )
+```
+
+### Comparison Operators
+
+```python
+# Direct comparison operators
+price1 < price2            # Less than -> returns True/False
+price1 <= price2           # Less than or equal -> returns True/False
+price1 > price2            # Greater than -> returns True/False
+price1 >= price2           # Greater than or equal -> returns True/False
+price1 == price2           # Equal -> returns True/False
+
+# Method-based comparisons
+price1.lt(price2)   # Less than -> returns True/False
+price1.lte(price2)  # Less than or equal -> returns True/False
+price1.gt(price2)   # Greater than -> returns True/False
+price1.gte(price2)  # Greater than or equal -> returns True/False
+price1.eq(price2)   # Equal -> returns True/False
+```
+
+### Currency Conversion
+
+```python
+from dinero.currencies import USD, EUR, CLP
+
+# Convert USD to EUR with an exchange rate of 0.85
+usd_amount = Dinero("100", USD)
+eur_amount = usd_amount.convert("0.85", EUR)
+eur_amount.format(symbol=True)  # "€85.00"
+
+# Convert USD to CLP (which has 0 decimal places)
+clp_amount = usd_amount.convert(750, CLP)
+clp_amount.format(currency=True)  # "75,000 CLP"
+
+# Function-based conversion
+from dinero.tools.conversion import convert
+jpy_amount = convert(usd_amount, "110.25", JPY)
+jpy_amount.format()  # "11,050"
 ```
 
 ### Currency Support
