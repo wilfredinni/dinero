@@ -128,25 +128,56 @@ total_interest.format(symbol=True, currency=True)
 '$1,294.02 USD'
 ```
 
-## Calculate Markup
+## Markup Calculations
 
-Calculates the markup of a given Dinero object:
+The library provides three functions for working with markups:
 
-- **cost**: The monetary value as a Dinero object
-- **markup**: The percentage to calculate
+### Calculate Base Amount
 
-Example:
+Extracts the base amount (excluding markup) from a final amount (including markup):
+
+- **amount**: The final amount (including markup)
+- **markup_rate**: The markup rate as a percentage
 
 ```python
 from dinero import Dinero
 from dinero.currencies import USD
-from dinero.tools import calculate_markup
+from dinero.tools import calculate_base_amount
 
-amount = Dinero("1000", USD)
-vat_amount = calculate_markup(
-    amount=amount,
-    percentage=15,
-)
-vat_amount.format(symbol=True, currency=True)
-'$1,150.00 USD'
+final_amount = Dinero(115, USD)  # Amount including 15% markup
+base_amount = calculate_base_amount(final_amount, 15)
+base_amount.format(symbol=True, currency=True)
+'$100.00 USD'
+```
+
+### Calculate Markup Portion
+
+Extracts just the markup amount from a final amount:
+
+- **amount**: The final amount (including markup)
+- **markup_rate**: The markup rate as a percentage
+
+```python
+from dinero.tools import calculate_markup_portion
+
+final_amount = Dinero(115, USD)  # Amount including 15% markup
+markup = calculate_markup_portion(final_amount, 15)
+markup.format(symbol=True, currency=True)
+'$15.00 USD'
+```
+
+### Calculate Marked Up Amount
+
+Adds markup to a base amount to get the final amount:
+
+- **amount**: The base amount (excluding markup)
+- **markup_rate**: The markup rate as a percentage
+
+```python
+from dinero.tools import calculate_marked_up_amount
+
+base_amount = Dinero(100, USD)  # Amount without markup
+final_amount = calculate_marked_up_amount(base_amount, 15)
+final_amount.format(symbol=True, currency=True)
+'$115.00 USD'
 ```
