@@ -16,7 +16,7 @@ from dinero.tools.markup import (
         # Standard cases
         (Dinero(115, USD), 15, Dinero(100, USD)),  # 15% markup
         (Dinero(150, EUR), 50, Dinero(100, EUR)),  # 50% markup
-        (Dinero(119, CLP), 19, Dinero(100, CLP)),  # 19% markup
+        (Dinero(130, CLP), 30, Dinero(100, CLP)),  # 30% markup
         # Error cases
         (100, 15, InvalidOperationError),  # Invalid amount type
         (Dinero(100, USD), "15", TypeError),  # Invalid markup rate type
@@ -39,7 +39,7 @@ def test_calculate_base_amount(amount, markup_rate, expected_amount):
         # Standard cases
         (Dinero(115, USD), 15, Dinero(15, USD)),  # 15% markup
         (Dinero(150, EUR), 50, Dinero(50, EUR)),  # 50% markup
-        (Dinero(119, CLP), 19, Dinero(19, CLP)),  # 19% markup
+        (Dinero(130, CLP), 30, Dinero(30, CLP)),  # 30% markup
         # Error cases
         (100, 15, InvalidOperationError),  # Invalid amount type
         (Dinero(100, USD), "15", TypeError),  # Invalid markup rate type
@@ -62,7 +62,7 @@ def test_calculate_markup_portion(amount, markup_rate, expected_markup):
         # Standard cases
         (Dinero(100, USD), 15, Dinero(115, USD)),  # 15% markup
         (Dinero(100, EUR), 50, Dinero(150, EUR)),  # 50% markup
-        (Dinero(100, CLP), 19, Dinero(119, CLP)),  # 19% markup
+        (Dinero(100, CLP), 30, Dinero(130, CLP)),  # 30% markup
         # Error cases
         (100, 15, InvalidOperationError),  # Invalid amount type
         (Dinero(100, USD), "15", TypeError),  # Invalid markup rate type
