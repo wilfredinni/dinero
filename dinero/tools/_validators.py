@@ -59,3 +59,29 @@ class ToolValidators:
 
         if not isinstance(compound_frequency, int) or compound_frequency <= 0:
             raise ValueError("Compound frequency must be a positive integer.")
+
+    @staticmethod
+    def margin_inputs(amount: Dinero, margin_rate: int | float) -> None:
+        """
+        Validate margin calculation inputs.
+
+        Args:
+            amount (Dinero): The amount to perform margin calculations on.
+            margin_rate (int | float): The margin rate as a percentage.
+
+        Raises:
+            InvalidOperationError: If amount is not a Dinero object
+            TypeError: If margin_rate is not a number
+            ValueError: If margin_rate is negative or >= 100
+        """
+        if not isinstance(amount, Dinero):
+            raise InvalidOperationError(InvalidOperationError.operation_msg)
+
+        if not isinstance(margin_rate, (int, float)):
+            raise TypeError("The margin_rate argument must be a number.")
+
+        if margin_rate < 0:
+            raise ValueError("The margin_rate argument cannot be negative.")
+
+        if margin_rate >= 100:
+            raise ValueError("The margin_rate argument must be less than 100.")
