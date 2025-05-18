@@ -1,7 +1,7 @@
 <div align="center">
 
 # Dinero
-### Make exact monetary calculations.
+### Precise, Type-Safe Monetary Calculations in Python
 
 [![PyPI][pypi-badge]][pypi-url]
 [![Build Status][build-badge]][build-url]
@@ -22,138 +22,168 @@
 [license-url]: https://github.com/wilfredinni/dinero/blob/master/LICENSE
 </div>
 
-This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
+Dinero is a modern Python library that brings precision and type safety to monetary calculations. Built on Python's `Decimal` type, it provides an intuitive API for financial operations while ensuring accuracy and maintainability.
 
-Python Decimal instances are enough for basic monetary calculations, but when you face more complex use-cases they often show limitations and are not so intuitive to work with. Dinero provides a cleaner and easier to use API while still relying on the standard library. So it's still Decimal, but easier.
+[📚 Read the Full Documentation](https://wilfredinni.github.io/dinero/)
 
-[Read the Documentation](https://wilfredinni.github.io/dinero/)
+## Key Features
 
-## Install
+- 🎯 **Precise Calculations**: Built on Python's `Decimal` type for exact monetary computations
+- 🔒 **Type Safety**: Full type hint support and runtime validation
+- 🌍 **Currency Support**: Over 100 currencies following ISO 4217 standards
+- 🧮 **Financial Tools**: Built-in support for VAT, interest calculations, markup, and more
+- 🔄 **Immutable Objects**: Thread-safe with predictable behavior
+- 💪 **Modern Python**: Type hints, clean API, and comprehensive test coverage
 
-```bash
-pip install dinero
-```
+## Why Dinero?
 
-## The problem
-
-> Using floats to do exact calculations in Python can be dangerous. When you try to find out how much 2.32 x 3 is, Python tells you it's 6.959999999999999. For some calculations, that’s fine. But if you are calculating a transaction involving money, that’s not what you want to see. Sure, you could round it off, but that's a little hacky.
+Working with money in Python can be tricky due to floating-point arithmetic:
 
 ```python
 >>> 2.32 * 3 == 6.96
 False
 >>> 2.32 * 3
-6.959999999999999
+6.959999999999999  # Not ideal for financial calculations!
 ```
 
-You can read [How to Count Money Exactly in Python](https://learnpython.com/blog/count-money-python/) to get a better idea.
-
-## Why Dinero?
-
-A `Dinero` object represent a specific monetary value. It comes with methods for creating, parsing, manipulating, testing and formatting.
+Dinero makes it simple and safe:
 
 ```python
 >>> from dinero import Dinero
 >>> from dinero.currencies import USD
 >>>
->>> Dinero(2.32, USD) * 3 == Dinero(6.96. USD)
+>>> price = Dinero("2.32", USD)  # Use strings for maximum precision
+>>> total = price * 3
+>>> print(total.format(symbol=True))  # "$6.96"
+>>> total == Dinero("6.96", USD)
 True
 ```
 
-### Currencies
+## Quick Start
 
-Dinero give you access to more than 100 different currencies:
+### Installation
 
-```python
->>> from dinero.currencies import USD, EUR, GBP, INR, CLP
+```bash
+pip install dinero
 ```
 
-```python
->>> amount = Dinero(2.32, EUR)
->>> amount.format(symbol=True, currency=True)
-'€2.32 EUR'
->>>
->>> amount.raw_amount
-Decimal('2.32')
-```
+### Basic Usage
 
-More about [currencies](https://wilfredinni.github.io/dinero/currencies/).
-
-### Operations
-
-Operations can be performed between Dinero objects or between Dinero objects and numbers:
-
-
-```python
->>> total = Dinero(456.343567, USD) + 345.32 *  3
->>> print(total)
-# 1,492.30
-```
-
-```python
->>> total = (Dinero(345.32, USD).multiply(3)).add(456.343567)
->>> print(total)
-# 1,492.30
-```
-
-More about [operations](https://wilfredinni.github.io/dinero/started/#operations).
-
-### Comparisons
-
-Dinero objects can be compared to each other by using Python comparison operators:
-
-```python
->>> Dinero(100, EUR) == Dinero(100, EUR)
-True
-```
-
-```python
->>> Dinero(100, EUR).equals_to(Dinero(100, EUR))
-True
-```
-
-More about [comparisons](https://wilfredinni.github.io/dinero/started/#comparisons).
-
-### Tools
-
-Dinero give you access to some useful tools that allow you to perform common monetary calculations, like percentages, VAT, simple and compound interests, etc.
-
+1. Create and Format Money:
 ```python
 from dinero import Dinero
-from dinero.currencies import USD
-from dinero.tools import calculate_compound_interest
+from dinero.currencies import USD, EUR
 
-principal = Dinero("2000", USD)
-total_interest = calculate_compound_interest(
-    principal=principal,
-    interest_rate=5,
-    duration=10,
-    compound_frequency=12,
+# Create monetary values
+price = Dinero("99.99", USD)
+discount = Dinero("10.00", USD)
+
+# Format output
+print(price.format(symbol=True, currency=True))  # "$99.99 USD"
+```
+
+2. Perform Currency-Safe Calculations:
+```python
+# Basic arithmetic
+total = price - discount  # Dinero("89.99", USD)
+
+# Safe currency handling
+euro_price = Dinero("89.99", EUR)
+try:
+    total = price + euro_price  # Raises DifferentCurrencyError
+except DifferentCurrencyError:
+    print("Cannot add different currencies!")
+```
+
+3. Use Financial Tools:
+```python
+from dinero.tools import calculate_vat_portion, calculate_compound_interest
+
+# Calculate VAT
+vat = calculate_vat_portion(price, 20)  # 20% VAT
+print(vat.format(symbol=True))  # "$20.00"
+
+# Calculate compound interest
+investment = Dinero("10000", USD)
+future_value = calculate_compound_interest(
+    principal=investment,
+    interest_rate=5,  # 5% annual rate
+    duration=10,      # 10 years
+    compound_frequency=12  # Monthly compounding
 )
-total_interest.format(symbol=True, currency=True)
-'$1,294.02 USD'
 ```
 
-See all the available tools in the [tools](https://wilfredinni.github.io/dinero/tools/) section.
+## Features
 
-### Custom currencies
-
-You can easily create custom currencies:
+### Type-Safe Currency Operations
 
 ```python
-from dinero import Dinero
+# Arithmetic operations
+total = price + shipping
+monthly = rent * 12
+unit_cost = total_cost / quantity
 
-BTC = {
-    "code": "BTC",
+# Method chaining for complex calculations
+final_price = (
+    Dinero("100.00", USD)
+    .multiply(1.20)  # Add 20% markup
+    .subtract("5.00")  # Apply discount
+)
+```
+
+### Currency Support
+
+- Access over 100 pre-defined ISO 4217 currencies:
+```python
+from dinero.currencies import USD, EUR, GBP, JPY, BTC
+
+# Each currency knows its symbol and decimal places
+amount = Dinero("42.42", EUR)
+print(amount.format(symbol=True))  # "€42.42"
+```
+
+- Create custom currencies:
+```python
+from dinero.types import Currency
+
+GOLD = {
+    "code": "XAU",
     "base": 10,
-    "exponent": 2,
-    "symbol": "₿",
+    "exponent": 4,  # 4 decimal places
+    "symbol": "Au"
 }
 
-Dinero(1000.5, BTC)
+gold_price = Dinero("1842.5930", GOLD)
+print(gold_price.format(symbol=True))  # "Au1,842.5930"
 ```
 
+## Best Practices
+
+1. **Use String Inputs**: Avoid float precision issues by using strings:
 ```python
-Dinero(amount=1000.5, currency={'code': 'BTC', 'base': 10, 'exponent': 2, 'symbol': '₿'})
+# Good ✅
+amount = Dinero("42.42", USD)
+
+# Avoid ❌
+amount = Dinero(42.42, USD)  # Potential precision loss
 ```
 
-More about [custom currencies](https://wilfredinni.github.io/dinero/currencies/#custom-currencies).
+2. **Handle Currency Mismatches**: Always validate currency compatibility:
+```python
+# Good ✅
+try:
+    total = usd_price + eur_price
+except DifferentCurrencyError:
+    # Convert currencies or handle error
+```
+
+3. **Format for Display**: Use appropriate formatting options:
+```python
+# Full format with symbol and code
+price.format(symbol=True, currency=True)  # "$42.42 USD"
+
+# Just the number
+price.format()  # "42.42"
+```
+
+For more detailed information and advanced features, check out our [comprehensive documentation](https://wilfredinni.github.io/dinero/).
