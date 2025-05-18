@@ -1,4 +1,3 @@
-from .calculate_percentage import calculate_percentage
 from .conversion import convert
 from .interest import calculate_compound_interest, calculate_simple_interest
 from .margin import (
@@ -11,6 +10,7 @@ from .markup import (
     calculate_marked_up_amount,
     calculate_markup_portion,
 )
+from .percentage import calculate_percentage
 from .vat import calculate_gross_amount, calculate_net_amount, calculate_vat_portion
 
 __all__ = [

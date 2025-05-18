@@ -32,7 +32,7 @@ clp_amount.format(currency=True)
 ```python
 from dinero import Dinero
 from dinero.currencies import USD, EUR
-from dinero.tools import convert
+from dinero.tools.conversion import convert
 
 usd_amount = Dinero("100", USD)
 eur_amount = convert(usd_amount, "0.85", EUR)

@@ -16,6 +16,7 @@
             - less_than_or_equal
             - to_dict
             - to_json
+            - convert
         show_root_toc_entry: False
 
 ::: dinero.tools.vat
@@ -26,7 +27,7 @@
             - calculate_gross_amount
         show_root_toc_entry: False
 
-::: dinero.tools.calculate_percentage
+::: dinero.tools.percentage
     options:
         members:
             - calculate_percentage
