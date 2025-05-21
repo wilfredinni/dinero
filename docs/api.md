@@ -16,7 +16,6 @@
             - lte
             - to_dict
             - to_json
-            - convert
         show_root_toc_entry: False
 
 ::: dinero.tools.vat

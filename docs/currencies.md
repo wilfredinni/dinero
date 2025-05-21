@@ -43,27 +43,17 @@ USD: Currency = {
 }
 ```
 
-There are still non-decimal currencies in circulation, such as the Mauritanian ouguiya and the Malagasy ariary.
+There are still non-decimal currencies in circulation, such as the Mauritanian ouguiya and the Malagasy ariary, which have a base of 5.
 
 ```python
 MRU: Currency = {
     "code": "MRU",
     "base": 5,
+    "exponent": 1, # 1 Ouguiya = 5 Khoums
     # ...
 }
 ```
-
-Some currencies have multiple subdivisions. For example, before decimalization, the British pound sterling was divided into 20 shillings, and each shilling into 12 pence. You also have examples in fiction, like Harry Potter, where one Galleon is divided into 17 Sickles, and each Sickle into 29 Knuts.
-
-To represent these currencies, you can take how many of the smallest subdivision there are in the major one. There are 240 pence in a pound sterling, and in Harry Potter, 493 Knuts in a Galleon.
-
-```python
-GBW = {
-    "code": "GBW",
-    "base": 493,
-    "exponent": 1,
-}
-```
+For currencies with complex subdivisions not fitting a simple base/exponent model (e.g., historical currencies or fictional ones with multiple tiers like Galleons, Sickles, Knuts), it's best to choose the smallest unit of the currency (e.g., Knuts) as the fundamental unit for calculations. The `amount` in Dinero objects would then represent quantities of this smallest unit. Conversions to larger units (Galleons, Sickles) would be handled at the application level.
 
 ### Exponent
 
@@ -109,31 +99,43 @@ You can easily create custom currencies:
 
 ```python
 from dinero import Dinero
+from dinero.types import Currency # Recommended for type hinting
 
-BTC = {
+BTC: Currency = {
     "code": "BTC",
-    "base": 10,
-    "exponent": 2,
+    "base": 10,      # Standard for decimal-based representation
+    "exponent": 8,   # Bitcoin is typically represented with 8 decimal places (Satoshis)
     "symbol": "₿",
 }
 
-Dinero(1000.5, BTC)
+# Initialize with a string for precision, representing 1000.50 BTC
+btc_amount = Dinero("1000.50000000", BTC)
+print(btc_amount.format(symbol=True)) # Outputs: ₿1,000.50000000
+
+# Example representing 1 Satoshi (0.00000001 BTC)
+one_satoshi = Dinero("0.00000001", BTC)
+print(one_satoshi.format(currency=True)) # Outputs: 0.00000001 BTC
 ```
+
+When defining custom currencies, especially for cryptocurrencies or other systems with many decimal places, ensure the `exponent` correctly reflects the number of subunits you intend to work with. The `base` is typically 10 for these.
 
 ### Type hints
 
 If you are using `type hints` in your project you would want to import `dinero.types.Currency` to prevent warnings:
 
 ```python
+from dinero import Dinero # Ensure Dinero is imported for the example
 from dinero.types import Currency
 
-BTC: Currency = {
+BTC_definition: Currency = { # Renamed to avoid conflict with BTC above if in same scope
     "code": "BTC",
     "base": 10,
-    "exponent": 2,
+    "exponent": 8, # Consistent with the example above (8 decimal places for Bitcoin)
     "symbol": "₿",
 }
 
-Dinero(1000.5, BTC)
+# Example of creating a Dinero object with the typed currency definition
+my_btc_balance = Dinero("0.12345678", BTC_definition)
+print(my_btc_balance.format(symbol=True, currency=True)) # Outputs: ₿0.12345678 BTC
 ```
 

@@ -14,7 +14,102 @@ To create a `Dinero` object, you need an `amount` that can be an `int`, `float`,
 from dinero import Dinero
 from dinero.currencies import USD
 
-amount = Dinero(100.4, USD)
+amount = Dinero("100.40", USD) # Initialize with string for precision
+
+## Best Practices
+
+When working with Dinero, consider the following best practices for optimal precision and safety:
+
+1.  **Use String Inputs for Amounts**: To avoid potential floating-point precision issues inherent in binary representations of decimals, it's highly recommended to initialize `Dinero` objects using string representations of amounts, especially when dealing with fractional values.
+
+    ```python
+    from dinero import Dinero
+    from dinero.currencies import USD
+
+    # Good ✅ - Preserves exact precision
+    price_string = Dinero("19.99", USD)
+    fee_string = Dinero("0.05", USD)
+
+    # Avoid ❌ - Can lead to precision loss with certain floats
+    # price_float = Dinero(19.99, USD) # e.g., 19.99 might be stored as 19.989999...
+    # fee_float = Dinero(0.05, USD)   # e.g., 0.05 might be stored as 0.050000...
+    ```
+    Using strings ensures that the exact decimal value you provide is used.
+
+2.  **Handle Currency Mismatches**: `Dinero` enforces that arithmetic operations like addition and subtraction are performed only between objects of the same currency. Attempting to operate on different currencies will raise a `DifferentCurrencyError`. Always ensure currency compatibility or convert amounts to a common currency before performing such operations.
+
+    See the [Operations](#operations) section for an example of `DifferentCurrencyError` and how to handle it, and [Currency Conversion](#currency-conversion) for converting between currencies.
+
+3.  **Format for Display**: `Dinero` objects have a powerful `format()` method to control how monetary values are displayed. Use this method to get string representations suitable for user interfaces or reports.
+
+    For detailed information on formatting options, refer to the [Formatting](#formatting) section.
+    ```python
+    # Example:
+    # formatted_price = price_string.format(symbol=True, currency=True) # "$19.99 USD"
+    # print(formatted_price)
+    ```
+
+## Key Design Principles
+
+Dinero is built with several core principles in mind to ensure reliability, safety, and ease of use in monetary calculations.
+
+### Type Safety
+
+Dinero extensively uses Python's type hints for both `Dinero` objects and `Currency` dictionaries. This offers several advantages:
+-   **Early Error Detection**: Type hints allow static analysis tools (like MyPy) to catch potential type-related errors before runtime.
+-   **Improved Code Clarity**: Explicit types make the codebase easier to understand and maintain.
+-   **Enhanced Developer Experience**: IDEs can provide better autocompletion and suggestions.
+
+For defining currency dictionaries with type safety, you can use `dinero.types.Currency`. An example is available in the [Type hints](#type-hints) subsection under "Custom Currencies".
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+from dinero.types import Currency
+
+# Dinero objects are fully typed
+price: Dinero = Dinero("100", USD)
+
+# Currency dictionaries can be typed too
+# For example, when defining a custom currency:
+gold_currency_def: Currency = {"code": "XAU", "base": 10, "exponent": 2, "symbol": "Gold"}
+# gold_price: Dinero = Dinero("1500", gold_currency_def) # Example usage
+```
+
+### Runtime Validation
+
+Beyond static type checking, Dinero performs runtime validations to prevent common errors in monetary operations:
+-   **Currency Consistency**: Operations that combine amounts (like addition or subtraction) require the `Dinero` objects to have the same currency. Attempting to operate on different currencies will raise a `DifferentCurrencyError` (from `dinero.exceptions`), as shown in the [Operations](#operations) section.
+-   **Input Validation**: Dinero objects validate input types for amounts and other critical parameters to ensure operations are performed correctly. For example, currency conversion rates must be provided in a format that can be accurately processed into a `Decimal`.
+
+These runtime checks help catch errors that might not be visible to static analysis, ensuring data integrity during calculations.
+
+### Immutability
+
+`Dinero` objects are immutable. This means that once a `Dinero` object is created, its value cannot change. Any operation that appears to modify a `Dinero` object actually returns a new `Dinero` instance with the result of the operation.
+
+Benefits of immutability include:
+-   **Predictable State**: You can be confident that a `Dinero` object's value won't change unexpectedly after creation or being passed to other functions.
+-   **Thread Safety**: Immutable objects are inherently thread-safe, simplifying development in multi-threaded applications.
+-   **Easier Debugging**: When values don't change, it's simpler to trace program flow and reason about state.
+
+```python
+from dinero import Dinero
+from dinero.currencies import USD
+
+initial_price = Dinero("100.00", USD)
+discount = Dinero("10.00", USD)
+
+# Subtracting the discount creates a new Dinero object
+final_price = initial_price - discount
+
+# The original object remains unchanged
+print(f"Initial price: {initial_price.format(symbol=True)}")  # $100.00
+print(f"Final price: {final_price.format(symbol=True)}")    # $90.00
+
+assert initial_price == Dinero("100.00", USD) # Value is the same
+assert final_price == Dinero("90.00", USD)
+assert id(initial_price) != id(final_price) # They are different objects
 ```
 
 ## Properties
@@ -109,13 +204,19 @@ Return a `Dinero` instance as a Python Dictionary:
 Return a `Dinero` instance as a `JSON` string:
 
 ```python title="amount_with_format=False"
->>> Dinero('2,00', USD).to_json()
-'{"amount": "3333.20", "currency": {"code": "USD", "base": 10...'
+>>> from dinero import Dinero
+>>> from dinero.currencies import USD
+>>> d = Dinero("1234.56", USD)
+>>> d.to_json()
+'{"amount": "1234.56", "currency": {"code": "USD", "base": 10, "exponent": 2, "symbol": "$"}}'
 ```
 
 ```python title="amount_with_format=True"
->>> Dinero('2,00', USD).to_json(amount_with_format=True)
-'{"amount": "3,333.26", "currency": {"code": "USD", "base": 10...'
+>>> from dinero import Dinero
+>>> from dinero.currencies import USD
+>>> d = Dinero("1234.56", USD)
+>>> d.to_json(amount_with_format=True)
+'{"amount": "1,234.56", "currency": {"code": "USD", "base": 10, "exponent": 2, "symbol": "$"}}'
 ```
 
 ## Operations
