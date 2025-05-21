@@ -1,30 +1,24 @@
 <div align="center">
+<h1>Dinero</h1>
+<h3>Precise, Type-Safe Monetary Calculations in Python</h3>
+</div>
 
-# Dinero
-### Precise, Type-Safe Monetary Calculations in Python
-
-[![PyPI][pypi-badge]][pypi-url]
-[![Build Status][build-badge]][build-url]
-[![CodeQL Status](https://github.com/wilfredinni/dinero/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/wilfredinni/dinero/actions/workflows/github-code-scanning/codeql)
-[![Codecov][codecov-badge]][codecov-url]
-[![License][license-badge]][license-url]
-
-<!-- Badge URLs -->
-[pypi-badge]: https://img.shields.io/pypi/v/dinero
-[build-badge]: https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg
-[codecov-badge]: https://img.shields.io/codecov/c/github/wilfredinni/dinero
-[license-badge]: https://img.shields.io/pypi/l/dinero
-
-<!-- Links -->
-[pypi-url]: https://pypi.org/project/dinero/
-[build-url]: https://github.com/wilfredinni/dinero/actions
-[codecov-url]: https://codecov.io/github/wilfredinni/dinero
-[license-url]: https://github.com/wilfredinni/dinero/blob/master/LICENSE
+<div align="center">
+  <a href="https://pypi.org/project/dinero/">
+    <img alt="PyPI" src="https://img.shields.io/pypi/v/dinero">
+  </a>
+  <a href="https://github.com/wilfredinni/dinero/actions">
+    <img alt="Build status" src="https://github.com/wilfredinni/dinero/actions/workflows/test.yml/badge.svg" data-canonical-src="https://img.shields.io/github/workflow/status/Delgan/loguru/Tests/master" style="max-width: 100%;">
+  </a>
+  <a href="https://codecov.io/github/wilfredinni/dinero" > 
+  <img alt="Codecov" src="https://img.shields.io/codecov/c/github/wilfredinni/dinero">
+  </a>
+  <a href="https://github.com/wilfredinni/dinero/blob/master/LICENSE">
+    <img alt="PyPI - License" src="https://img.shields.io/pypi/l/dinero">
+  </a>
 </div>
 
 Dinero is a modern Python library that brings precision and type safety to monetary calculations. Built on Python's `Decimal` type, it provides an intuitive API for financial operations while ensuring accuracy and maintainability.
-
-This project is inspired by the excellent [dinero.js](https://github.com/dinerojs/dinero.js) library.
 
 ## Key Features
 
